@@ -1,3 +1,9 @@
 {
-  "extends": "tscofing/vite.config.json"
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "module": "esnext",
+    "moduleResolution": "node"
+  },
+  "include": ["vite.config.ts"]
 }

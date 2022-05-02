@@ -1,11 +1,9 @@
 {
-  "name": "ngvue3",
+  "name": "@jaredmcateer/ngvue3",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc --noEmit && vite build"
   },
   "dependencies": {
     "vue": "^3.2.25"
@@ -14,8 +12,8 @@
     "@vitejs/plugin-vue": "^2.3.1",
     "angular": "~1.8.3",
     "angular-mocks": "^1.8.3",
-    "config": "*",
-    "tsconfig": "*",
+    "config": "workspace:*",
+    "tsconfig": "workspace:*",
     "typescript": "^4.5.4",
     "vite": "^2.9.5",
     "vitest": "^0.10.0",

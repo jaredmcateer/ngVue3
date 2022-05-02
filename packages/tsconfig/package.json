@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "files": [
-    "base.json"
+    "base.json",
+    "vite.node.json"
   ]
 }

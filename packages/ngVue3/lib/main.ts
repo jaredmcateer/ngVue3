@@ -1,4 +1,4 @@
-import * as angular from "angular";
+import angular from "angular";
 import { ngVueComponentFactory } from "./angular/ngVueComponentFactory";
 
 export { createVueComponent } from "./helpers/createVueComponent";

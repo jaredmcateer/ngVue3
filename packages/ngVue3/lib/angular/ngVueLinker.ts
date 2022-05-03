@@ -3,7 +3,8 @@ import { evaluateEvents } from "../components/evaluateEvents";
 import { evaluateValues } from "../components/evaluateValues";
 import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
 import { getExpressions } from "../components/getExpressions";
-import { WatchExpressionOptions } from "../components/watchExpressions";
+import { WatchExpressionOptions, watchExpressions } from "../components/watchExpressions";
+import { watchSpecialAttributes } from "../components/watchSpecialAttributes";
 import { getInstanceState } from "../instanceStore";
 
 export function ngVueLinker(
@@ -27,4 +28,8 @@ export function ngVueLinker(
   Object.assign(instanceState.special, extractSpecialAttributes(attrs));
 
   const options: WatchExpressionOptions = { depth: attrs.watchDepth };
+
+  watchExpressions(attrExpressions.props, instanceState.props, scope, options);
+  watchExpressions(attrExpressions.attrs, instanceState.attrs, scope, options);
+  watchSpecialAttributes(instanceState.special, jqElement, scope);
 }

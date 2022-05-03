@@ -33,12 +33,11 @@ describe("watchExpression", () => {
       const el = angular.element('<div ng-class="className" ng-style="inlineStyle"></div>');
       element = compile(el)(scope);
       scope.$digest();
-      console.dir(element[0].outerHTML);
       // element = el;
     })
   );
 
-  it("should setup watcher", () => {
+  it("should setup watcher for ng-class/style", () => {
     const ngAttrObj = getNgAttributeObj();
     delete ngAttrObj.class;
     delete ngAttrObj.style;
@@ -51,7 +50,6 @@ describe("watchExpression", () => {
     $attr.ngStyle = "ng-style";
     const state = Object.assign(reactive({}), extractSpecialAttributes(ngAttrObj));
 
-    console.dir(state);
     expect(state.class).toEqual("");
     expect(state.style).toEqual("");
 

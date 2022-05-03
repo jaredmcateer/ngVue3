@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { evaluateValues } from "../components/evalValues";
+import { evaluateValues } from "../components/evaluateValues";
 import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
 import { getExpressions } from "../components/getExpressions";
 import { getInstanceState } from "../instanceStore";

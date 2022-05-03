@@ -1,7 +1,7 @@
 import angular from "angular";
 import "angular-mocks";
 import { ExpressionsMap } from "../getExpressions";
-import { evaluateValues } from "../evalValues";
+import { evaluateValues } from "../evaluateValues";
 
 interface TestScope extends ng.IScope {
   address?: Record<string, string>;

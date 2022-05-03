@@ -14,17 +14,16 @@ describe("Evaluating expressions maps", () => {
   let expressionsMap: ExpressionsMap;
 
   beforeEach(() => {
-    let $rootScope: ng.IRootScopeService;
     angular.mock.module("ngVue");
 
     angular.mock.inject((_$rootScope_: ng.IRootScopeService) => {
-      $rootScope = _$rootScope_;
-
-      scope = $rootScope.$new();
-
-      scope.address = { street: "123 fake st", city: "Anytown" };
-      scope.name = "Barb Ara";
-      scope.disabled = false;
+      function extendScope(s: any): TestScope {
+        s.address = { street: "123 fake st", city: "Anytown" };
+        s.name = "Barb Ara";
+        s.disabled = false;
+        return s;
+      }
+      scope = extendScope(_$rootScope_.$new());
     });
   });
 

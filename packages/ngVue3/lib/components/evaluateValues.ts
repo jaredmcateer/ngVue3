@@ -1,7 +1,7 @@
 import { ExpressionsMap } from "./getExpressions";
 
 export function evaluateValues(expressions: ExpressionsMap, scope: ng.IScope) {
-  if (!expressions) return null;
+  if (!expressions) return {};
 
   const evaluatedValues = Object.keys(expressions).reduce((accumulator, prop) => {
     if (prop === "__ngvue_props__") {
@@ -11,7 +11,7 @@ export function evaluateValues(expressions: ExpressionsMap, scope: ng.IScope) {
     }
 
     return accumulator;
-  }, {} as Record<string, string>);
+  }, {} as Record<string, unknown>);
 
   return evaluatedValues;
 }

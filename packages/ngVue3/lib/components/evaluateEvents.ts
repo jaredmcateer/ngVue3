@@ -1,6 +1,5 @@
 import { ExpressionsMap } from "./getExpressions";
 import angular from "angular";
-import { warn } from "console";
 
 export function evaluateEvents(events: ExpressionsMap, scope: ng.IScope) {
   if (!(events && angular.isObject(events))) {

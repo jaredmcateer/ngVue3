@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { evaluateValues } from "../components/evalValues";
+import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
 import { getExpressions } from "../components/getExpressions";
 import { getInstanceState } from "../instanceStore";
 
@@ -20,4 +21,5 @@ export function ngVueLinker(
 
   instanceState.props = evaluateValues(attrExpressions.props, scope);
   instanceState.attrs = evaluateValues(attrExpressions.attrs, scope);
+  instanceState.special = extractSpecialAttributes(attrs);
 }

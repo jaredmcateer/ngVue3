@@ -1,4 +1,3 @@
-import { test, expect } from "vitest";
 import { extractExpressionName } from "../extractExpressionName";
 
 test("should convert ngVue prop attribute to Vue attribute", () => {

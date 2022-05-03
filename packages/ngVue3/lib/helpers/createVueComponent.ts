@@ -1,3 +1,5 @@
+import { ngVueComponentDirective } from "../angular/ngVueComponentFactory";
+
 /**
  * Reduces boilerplate of creating vue components
  *
@@ -35,7 +37,8 @@ export function createVueComponent(
     name,
     [
       "createVueComponent",
-      (createVueComponent) => createVueComponent(name, Component, ngDirectiveConfig),
+      (createVueComponent: typeof ngVueComponentDirective) =>
+        createVueComponent(name, Component, ngDirectiveConfig),
     ],
   ];
 }

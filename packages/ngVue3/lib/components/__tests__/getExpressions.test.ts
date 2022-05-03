@@ -1,6 +1,5 @@
-import { test, expect } from "vitest";
 import { extractExpressions } from "../getExpressions";
-import { ngAttributeObj } from "./fixtures/ngAttributes";
+import { ngAttributeObj } from "./__fixtures__/ngAttributes";
 
 test("should get the props", () => {
   expect(extractExpressions("props", ngAttributeObj)).toEqual({

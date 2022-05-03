@@ -36,13 +36,19 @@ import angular from "angular";
  * @returns A function when called returns a directive config
  */
 export function ngVueComponentFactory($injector: ng.auto.IInjectorService) {
-  return (component: unknown, ngDirectiveConfig: ng.IDirective): ng.IDirective => {
-    const config: ng.IDirective = {
-      restrict: "E",
-      link(scope: ng.IScope, elem: JQLite, attrs: ng.IAttributes) {},
-    };
-
-    return angular.extend(config, ngDirectiveConfig);
-  };
+  return ngVueComponentDirective;
 }
 ngVueComponentFactory.$inject = ["$injector"];
+
+export function ngVueComponentDirective(
+  name: string,
+  component: unknown,
+  ngDirectiveConfig?: ng.IDirective
+): ng.IDirective {
+  const config: ng.IDirective = {
+    restrict: "E",
+    link(scope: ng.IScope, elem: JQLite, attrs: ng.IAttributes) {},
+  };
+
+  return angular.extend(config, ngDirectiveConfig);
+}

@@ -1,4 +1,3 @@
-import { test, expect } from "vitest";
 import { lowerFirst } from "../lowerFirst";
 
 test("should lower first character", () => {

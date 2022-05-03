@@ -1,5 +1,4 @@
 import { fail } from "assert";
-import { expect, test, vi } from "vitest";
 import { createVueComponent } from "../createVueComponent";
 
 test("returns an array that matches angular directive signature", () => {
@@ -12,9 +11,9 @@ test("returns an array that matches angular directive signature", () => {
   expect(val[0]).toEqual("name");
   expect(Array.isArray(val[1])).toBeTruthy();
   expect(val[1][0]).toEqual("createVueComponent");
-  expect(val[1][1]).toBeTypeOf("function");
+  expect(typeof val[1][1]).toEqual("function");
 
-  const fn = vi.fn();
+  const fn = jest.fn();
 
   if (typeof val[1][1] !== "function") fail("Should be a function");
   val[1][1](fn);

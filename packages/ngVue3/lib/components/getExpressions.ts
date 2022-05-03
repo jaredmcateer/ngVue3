@@ -7,7 +7,13 @@ const attributeMap = {
 } as const;
 Object.freeze(attributeMap);
 
-type ExpressionsMap = Record<string, string>;
+function isAttributeMapKey(
+  expressionType: ExpressionTypes
+): expressionType is keyof typeof attributeMap {
+  return expressionType in attributeMap;
+}
+
+export type ExpressionsMap = Record<string, string>;
 
 type ExpressionTypes = keyof typeof attributeMap | "attrs";
 
@@ -17,7 +23,7 @@ export function extractExpressions(expressionType: ExpressionTypes, attributes: 
   let extractExpressionFn: (accumulator: ExpressionsMap, expression: string) => ExpressionsMap;
   let baseExpressionMap: ExpressionsMap = {};
 
-  if (expressionType in attributeMap) {
+  if (isAttributeMapKey(expressionType)) {
     key = attributeMap[expressionType];
     const objectExpression = attributes[key];
 
@@ -42,7 +48,7 @@ export function extractExpressions(expressionType: ExpressionTypes, attributes: 
 
     extractExpressionFn = (accumulator, expression) => {
       // Get original attribute name from $attr not normalized by Angular (e.g., data-my-attr and not my-attr)
-      const attrName = attributes.$attr[expression];
+      const attrName: string = (attributes.$attr as any)[expression];
 
       // Handle attributes with no value. e.g., <button disabled></button>
       accumulator[attrName] =

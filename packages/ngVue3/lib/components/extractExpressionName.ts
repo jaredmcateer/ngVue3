@@ -9,7 +9,7 @@ Object.freeze(replacementMap);
 export function extractExpressionName(
   expression: string,
   replaceKey: keyof typeof replacementMap
-): string {
+): string | null {
   const pattern = new RegExp(`^${replaceKey}`, "i");
 
   if (!pattern.test(expression)) return null;

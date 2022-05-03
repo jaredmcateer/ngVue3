@@ -15,18 +15,24 @@
   "version": "0.0.0",
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
-    "test": "vitest"
+    "test": "jest --runInBand"
   },
   "devDependencies": {
     "@types/angular": "^1.8.4",
+    "@types/angular-mocks": "^1.7.1",
+    "@types/jest": "^27.4.1",
     "@vitejs/plugin-vue": "^2.3.1",
-    "angular": "~1.8.3",
+    "angular": "^1.8.3",
     "angular-mocks": "^1.8.3",
     "config": "workspace:*",
+    "global-jsdom": "^8.4.0",
+    "jest": "27.5.1",
+    "jest-jasmine2": "^27.1.4",
+    "jsdom": "^19.0.0",
+    "ts-jest": "^27.1.4",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.4",
     "vite": "^2.9.5",
-    "vitest": "^0.10.0",
     "vue": "^3.2.25",
     "vue-tsc": "^0.34.7"
   }

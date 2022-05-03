@@ -1,5 +1,11 @@
 import { extractExpressions } from "../getExpressions";
-import { ngAttributeObj } from "./__fixtures__/ngAttributes";
+import { getNgAttributeObj } from "./__fixtures__/ngAttributes";
+
+let ngAttributeObj: ng.IAttributes;
+
+beforeEach(() => {
+  ngAttributeObj = getNgAttributeObj();
+});
 
 test("should get the props", () => {
   expect(extractExpressions("props", ngAttributeObj)).toEqual({
@@ -16,12 +22,10 @@ test("should get the event handlers", () => {
   });
 });
 
-test("should get the HTML attributes and fill out empty", () => {
+test("should get the HTML attributes and fill out empty ones", () => {
   expect(extractExpressions("attrs", ngAttributeObj)).toEqual({
-    class: "my-class",
     "data-foo": "ctrl.foo",
     disabled: "disabled", // an empty attribute
-    style: "font-size:3;",
     tabindex: "3",
     "v-data-bar": "ctrl.data",
   });

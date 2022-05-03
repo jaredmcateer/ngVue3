@@ -1,9 +1,11 @@
+import { SPECIAL_ATTRS } from "./extractSpecialAttributes";
 const excludedAttributes: ReadonlyArray<string> = [
   "vProps",
   "vOn",
   "vDirectives",
   "vWatchDepth",
   "ng",
+  ...SPECIAL_ATTRS,
 ];
 const excludePattern = new RegExp(`^(${excludedAttributes.join("|")})`, "i");
 

@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import { evaluateValues } from "../components/evalValues";
 import { getExpressions } from "../components/getExpressions";
 import { getInstanceState } from "../instanceStore";
 
@@ -16,4 +17,7 @@ export function ngVueLinker(
   const instanceKey = Symbol("ngVueInstanceKey");
   const instanceState = getInstanceState(instanceKey);
   const attrExpressions = getExpressions(attrs);
+
+  instanceState.props = evaluateValues(attrExpressions.props, scope);
+  instanceState.attrs = evaluateValues(attrExpressions.attrs, scope);
 }

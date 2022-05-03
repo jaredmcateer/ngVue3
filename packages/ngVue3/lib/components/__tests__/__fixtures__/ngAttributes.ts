@@ -1,4 +1,20 @@
 /**
+ * Normalize function lifted from angular 1.8.3
+ * @param name
+ * @returns
+ */
+function ngNormalize(name: string): string {
+  const PREFIX_REGEXP = /^((?:x|data)[:\-_])/i;
+  const SPECIAL_CHARS_REGEXP = /[:\-_]+(.)/g;
+
+  return name
+    .replace(PREFIX_REGEXP, "")
+    .replace(SPECIAL_CHARS_REGEXP, function (_, letter, offset) {
+      return offset ? letter.toUpperCase() : letter;
+    });
+}
+
+/**
  * Contains a mix of regular HTML attributes, angular attributes, ngVue special
  * attributes, angular IAttribute properties/methods, and decoy attributes that
  * look like ngVue but aren't (ie., vDataBar)
@@ -7,7 +23,7 @@
  * attributes done by angular, we use this for move HTML attributes to the vue
  * component.
  */
-export const ngAttributeObj: ng.IAttributes = {
+export const getNgAttributeObj = (): ng.IAttributes => ({
   foo: "ctrl.foo",
   ngIf: "ctrl.show",
   class: "my-class",
@@ -23,9 +39,7 @@ export const ngAttributeObj: ng.IAttributes = {
   vPropsFoo: "ctrl.foo",
   vPropsIsDisabled: "ctrl.disabled",
   vWatchDepth: "2",
-  $normalize(name: string) {
-    return "";
-  },
+  $normalize: ngNormalize,
   $addClass(classVal: string) {},
   $removeClass(classVal: string) {},
   $updateClass(newClasses: string, oldClasses: string) {},
@@ -50,4 +64,4 @@ export const ngAttributeObj: ng.IAttributes = {
     vPropsIsDisabled: "v-props-is-disabled",
     vWatchDepth: "v-watch-depth",
   },
-};
+});

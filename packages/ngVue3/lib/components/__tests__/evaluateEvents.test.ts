@@ -34,6 +34,9 @@ describe("Evaluating expressions maps", () => {
     expressionsMap = { onMyClick: "oops" };
     const values = evaluateEvents(expressionsMap, scope);
 
+    expect(console.warn).toBeCalledWith(
+      `[ngVue] Bound a non-function as an event handler (onMyClick)`
+    );
     expect(values).toEqual({ onMyClick: expect.any(String) });
 
     expect(() => {

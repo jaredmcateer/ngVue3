@@ -3,7 +3,7 @@ const excludedAttributes: ReadonlyArray<string> = [
   "vProps",
   "vOn",
   "vDirectives",
-  "vWatchDepth",
+  "watchDepth",
   "ng",
   ...SPECIAL_ATTRS,
 ];

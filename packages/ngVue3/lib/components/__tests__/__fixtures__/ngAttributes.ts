@@ -38,7 +38,7 @@ export const getNgAttributeObj = (): ng.IAttributes => ({
   vProps: "{person: ctrl.person, people: ctrl.people}",
   vPropsFoo: "ctrl.foo",
   vPropsIsDisabled: "ctrl.disabled",
-  vWatchDepth: "2",
+  watchDepth: "2",
   $normalize: ngNormalize,
   $addClass(classVal: string) {},
   $removeClass(classVal: string) {},

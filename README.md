@@ -4,13 +4,15 @@
 
   - [ ] directive
   - [ ] linker
-    - [ ] extracting v-props
+    - [x] extracting v-props
     - [ ] extracting v-directives
-    - [ ] extracting attrs
-    - [ ] extracting events
-    - [ ] initializing state
+    - [x] extracting attrs
+    - [x] extracting events
+    - [x] initializing state
     - [ ] creating vue app instance
     - [ ] importing "global" filters
+    - [ ] Is watch depth necessary?
+    - [ ] Support quirks mode?
   - [ ] Plugins
     - [ ] Filters
     - [ ] Vuex ?

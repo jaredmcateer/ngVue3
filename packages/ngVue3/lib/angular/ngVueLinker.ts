@@ -1,7 +1,9 @@
 import { createApp } from "vue";
+import { evaluateEvents } from "../components/evaluateEvents";
 import { evaluateValues } from "../components/evaluateValues";
 import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
 import { getExpressions } from "../components/getExpressions";
+import { WatchExpressionOptions } from "../components/watchExpressions";
 import { getInstanceState } from "../instanceStore";
 
 export function ngVueLinker(
@@ -18,8 +20,11 @@ export function ngVueLinker(
   const instanceKey = Symbol("ngVueInstanceKey");
   const instanceState = getInstanceState(instanceKey);
   const attrExpressions = getExpressions(attrs);
+  const events = evaluateEvents(attrExpressions.events, scope);
 
-  instanceState.props = evaluateValues(attrExpressions.props, scope);
-  instanceState.attrs = evaluateValues(attrExpressions.attrs, scope);
-  instanceState.special = extractSpecialAttributes(attrs);
+  Object.assign(instanceState.props, evaluateValues(attrExpressions.props, scope));
+  Object.assign(instanceState.attrs, evaluateValues(attrExpressions.attrs, scope));
+  Object.assign(instanceState.special, extractSpecialAttributes(attrs));
+
+  const options: WatchExpressionOptions = { depth: attrs.watchDepth };
 }

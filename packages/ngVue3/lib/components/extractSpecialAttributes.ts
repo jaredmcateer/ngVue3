@@ -1,5 +1,3 @@
-import { string } from "yargs";
-
 export const SPECIAL_ATTRS = ["class", "style"];
 
 /**

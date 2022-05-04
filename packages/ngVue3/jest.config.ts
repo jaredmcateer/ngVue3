@@ -14,6 +14,10 @@ const config: InitialOptionsTsJest = {
   },
   setupFilesAfterEnv: ["<rootDir>/test.setup.ts"],
   testRunner: "jest-jasmine2",
+  moduleFileExtensions: ["js", "ts", "vue"],
+  transform: {
+    "^.+\\.vue$": "@vue/vue3-jest",
+  },
 };
 
 export default config;

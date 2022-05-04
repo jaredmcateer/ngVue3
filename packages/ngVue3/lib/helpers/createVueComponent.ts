@@ -1,5 +1,9 @@
 import { ngVueComponentDirective } from "../angular/ngVueComponentFactory";
 
+type NgDirectiveTuple<T extends string = string> = [
+  T,
+  ["createVueComponent", (createVueComponent: typeof ngVueComponentDirective) => ng.IDirective]
+];
 /**
  * Reduces boilerplate of creating vue components
  *
@@ -28,11 +32,11 @@ import { ngVueComponentDirective } from "../angular/ngVueComponentFactory";
  * @param ngDirectiveConfig extends the default angular directive
  * @returns array to be used in directive declaration
  */
-export function createVueComponent(
-  name: string,
-  Component: unknown,
+export function createVueComponent<N extends string, T extends unknown>(
+  name: N,
+  Component: T,
   ngDirectiveConfig?: ng.IDirective
-) {
+): NgDirectiveTuple<N> {
   return [
     name,
     [

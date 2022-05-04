@@ -2,14 +2,15 @@
 
 - [ ] ngVue3 library
 
-  - [ ] directive
-  - [ ] linker
+  - [x] directive
+    - [x] createVueComponent
+  - [x] linker
     - [x] extracting v-props
     - [ ] extracting v-directives
     - [x] extracting attrs
     - [x] extracting events
     - [x] initializing state
-    - [ ] creating vue app instance
+    - [x] creating vue app instance
     - [ ] importing "global" filters
     - [ ] Is watch depth necessary?
     - [ ] Support quirks mode?

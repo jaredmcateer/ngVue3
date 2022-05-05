@@ -1,5 +1,6 @@
 import angular from "angular";
 import { reactive } from "vue";
+import { useNgVue } from "../../main";
 import { evaluateValues } from "../evaluateValues";
 import { ExpressionsMap } from "../getExpressions";
 import { watchExpressions } from "../watchExpressions";
@@ -15,7 +16,7 @@ describe("watchExpression", () => {
   let expressionMap: ExpressionsMap;
   let scope: TestScope;
 
-  beforeEach(() => angular.mock.module("ngVue"));
+  beforeEach(() => angular.mock.module(useNgVue()));
   beforeEach(
     angular.mock.inject((_$rootScope_: ng.IRootScopeService) => {
       function extendScope(s: any): TestScope {

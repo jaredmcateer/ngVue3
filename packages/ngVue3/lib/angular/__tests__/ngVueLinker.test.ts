@@ -2,9 +2,10 @@ import angular from "angular";
 import ScriptSetupVue from "./__fixtures__/ScriptSetup.vue";
 import CompositionComponentVue from "./__fixtures__/CompositionComponent.vue";
 import OptionsComponent from "./__fixtures__/OptionsComponent.vue";
-import { createVueComponent } from "../../helpers/createVueComponent";
+import { ngVueComponent } from "../../helpers/ngVueComponent";
 import { nextTick } from "vue";
 import { ngHtmlCompiler } from "../../utils/ngHtmlCompiler";
+import { useNgVue } from "../../main";
 
 interface TestScope extends ng.IScope {
   user: { firstName: string; lastName: string };
@@ -21,7 +22,7 @@ describe.each`
   let scope: TestScope;
   let compile: ReturnType<typeof ngHtmlCompiler>;
 
-  beforeEach(angular.mock.module("ngVue"));
+  beforeEach(angular.mock.module(useNgVue()));
   beforeEach(
     angular.mock.module((_$compileProvider_: ng.ICompileProvider) => {
       $compileProvider = _$compileProvider_;
@@ -41,7 +42,7 @@ describe.each`
   );
 
   beforeEach(() => {
-    $compileProvider.directive(...createVueComponent("myComponent", Component));
+    $compileProvider.directive(...ngVueComponent("myComponent", Component));
   });
 
   describe("Render", () => {

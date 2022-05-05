@@ -1,8 +1,11 @@
 import angular from "angular";
 import { ngVueComponentFactory } from "./angular/ngVueComponentFactory";
 
-export { createVueComponent } from "./helpers/createVueComponent";
+const ngVue = "ngVue";
+angular.module(ngVue, []).factory("createVueComponent", ngVueComponentFactory);
 
-export const ngVue = angular
-  .module("ngVue", [])
-  .factory("createVueComponent", ngVueComponentFactory);
+export { ngVueComponent } from "./helpers/ngVueComponent";
+
+export function useNgVue() {
+  return ngVue;
+}

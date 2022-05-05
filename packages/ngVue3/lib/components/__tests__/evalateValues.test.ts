@@ -2,6 +2,7 @@ import angular from "angular";
 import "angular-mocks";
 import { ExpressionsMap } from "../getExpressions";
 import { evaluateValues } from "../evaluateValues";
+import { useNgVue } from "../../main";
 
 interface TestScope extends ng.IScope {
   address?: Record<string, string>;
@@ -14,7 +15,7 @@ describe("Evaluating expressions maps", () => {
   let expressionsMap: ExpressionsMap;
 
   beforeEach(() => {
-    angular.mock.module("ngVue");
+    angular.mock.module(useNgVue());
 
     angular.mock.inject((_$rootScope_: ng.IRootScopeService) => {
       function extendScope(s: any): TestScope {

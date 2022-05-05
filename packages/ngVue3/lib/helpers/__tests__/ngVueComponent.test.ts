@@ -1,10 +1,10 @@
-import { createVueComponent } from "../createVueComponent";
+import { ngVueComponent } from "../ngVueComponent";
 
 test("returns an array that matches angular directive signature", () => {
   const name = "component-name";
   const component = { setup() {} };
   const config = { restrict: "A" };
-  const val = createVueComponent("name", component, config);
+  const val = ngVueComponent("name", component, config);
 
   expect(val).toHaveLength(2);
   expect(val[0]).toEqual("name");

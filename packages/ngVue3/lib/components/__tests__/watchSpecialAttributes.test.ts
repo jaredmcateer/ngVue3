@@ -1,5 +1,6 @@
 import angular from "angular";
 import { nextTick, reactive } from "vue";
+import { useNgVue } from "../../main";
 import { extractSpecialAttributes } from "../extractSpecialAttributes";
 import { ExpressionsMap } from "../getExpressions";
 import { watchSpecialAttributes } from "../watchSpecialAttributes";
@@ -17,7 +18,7 @@ describe("watchExpression", () => {
   let element: JQLite;
   let compile: ng.ICompileService;
 
-  beforeEach(() => angular.mock.module("ngVue"));
+  beforeEach(() => angular.mock.module(useNgVue()));
   beforeEach(
     angular.mock.inject((_$rootScope_: ng.IRootScopeService, _$compile_: ng.ICompileService) => {
       compile = _$compile_;

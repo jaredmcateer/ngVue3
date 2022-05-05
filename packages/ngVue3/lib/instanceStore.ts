@@ -20,7 +20,7 @@ export function getInstanceState(id: symbol) {
       attrs: reactive({}),
       special: reactive({}),
     };
-
-    return store[id];
   }
+
+  return store[id];
 }

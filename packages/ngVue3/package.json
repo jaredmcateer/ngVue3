@@ -2,19 +2,36 @@
   "name": "@jaredmcateer/ngvue3",
   "private": true,
   "files": [
-    "dist"
+    "dist",
+    "package.json",
+    "LICENSE",
+    "README.md"
   ],
-  "main": "./dist/ngvue3.umd.js",
-  "module": "./dist/ngvue3.es.js",
+  "keywords": [
+    "javascript",
+    "typescript",
+    "migration",
+    "vue",
+    "vue3",
+    "angular",
+    "ng",
+    "components",
+    "ngvue",
+    "ngvue3"
+  ],
+  "main": "./dist/main.js",
+  "module": "./dist/main.mjs",
+  "types": "./dist/main.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/ngvue3.js",
-      "require": "./dist/ngvue3.umd.js"
+      "import": "./dist/main.mjs",
+      "require": "./dist/main.js"
     }
   },
   "version": "0.0.0",
   "scripts": {
-    "build": "vue-tsc --noEmit && vite build",
+    "clean": "rimraf dist/",
+    "build": "pnpm run clean && tsup lib/main.ts --external angular --external vue --sourcemap --dts --format esm,cjs",
     "test": "jest --runInBand"
   },
   "devDependencies": {
@@ -36,8 +53,10 @@
     "jest": "27.5.1",
     "jest-jasmine2": "^27.1.4",
     "jsdom": "^19.0.0",
+    "rimraf": "^3.0.2",
     "ts-jest": "^27.1.4",
     "tsconfig": "workspace:*",
+    "tsup": "^5.12.7",
     "typescript": "^4.5.4",
     "vite": "^2.9.5",
     "vue": "^3.2.25",

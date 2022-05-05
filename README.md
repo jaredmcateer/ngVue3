@@ -11,20 +11,19 @@
     - [x] extracting events
     - [x] initializing state
     - [x] creating vue app instance
-    - [ ] importing "global" filters
     - [x] Is watch depth necessary? (yes)
-    - [ ] Support quirks mode?
+    - [ ] Support quirks mode? (probably wont do)
   - [ ] Plugins
-    - [ ] Filters
-    - [ ] Vuex ?
+    - [ ] Filters (probably wont do)
+    - [ ] Vuex ? (probably wont do)
     - [ ] Pinia ?
-  - [ ] Tests
+  - [-] Tests
 
-- [ ] Demo page
+- [x] Demo page
 
-  - [ ] Options
-  - [ ] SFC (setup method)
-  - [ ] SFC (script setup)
+  - [x] Options
+  - [x] SFC (setup method)
+  - [x] SFC (script setup)
 
 - [ ] Documentation
   - [ ] Repo README (this)

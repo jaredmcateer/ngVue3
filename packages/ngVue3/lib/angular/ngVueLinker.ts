@@ -17,14 +17,16 @@ export function ngVueLinker(
   // Create unique key for retrieving state information
   const instanceKey = Symbol("ngVueInstanceKey");
   const state = getInstanceState(instanceKey);
-  const attrExpressions = getExpressions(attrs);
+  const removeAttrFn = getAttrRemoveFunction(jqElement, attrs);
+  const attrExpressions = getExpressions(attrs, removeAttrFn);
   const events = evaluateEvents(attrExpressions.events, scope);
 
   Object.assign(state.props, evaluateValues(attrExpressions.props, scope));
   Object.assign(state.attrs, evaluateValues(attrExpressions.attrs, scope));
-  Object.assign(state.special, extractSpecialAttributes(attrs));
+  Object.assign(state.special, extractSpecialAttributes(attrs, removeAttrFn));
 
   const options: WatchExpressionOptions = { depth: attrs.watchDepth };
+  removeAttrFn("watchDepth");
 
   watchExpressions(attrExpressions.props, state.props, scope, options);
   watchExpressions(attrExpressions.attrs, state.attrs, scope, options);
@@ -75,4 +77,11 @@ function getInnerHtml(element: HTMLElement) {
 
     return html;
   }
+}
+
+function getAttrRemoveFunction(element: JQLite, attributes: ng.IAttributes) {
+  return (attr: string) => {
+    const denormalizedAttr = (attributes.$attr as Record<string, string>)[attr];
+    element.removeAttr(denormalizedAttr);
+  };
 }

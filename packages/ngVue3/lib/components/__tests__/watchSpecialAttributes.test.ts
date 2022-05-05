@@ -48,7 +48,7 @@ describe("watchExpression", () => {
     ngAttrObj.ngStyle = "ctrl.myStyle";
     $attr.ngClass = "ng-class";
     $attr.ngStyle = "ng-style";
-    const state = Object.assign(reactive({}), extractSpecialAttributes(ngAttrObj));
+    const state = Object.assign(reactive({}), extractSpecialAttributes(ngAttrObj, jest.fn()));
 
     expect(state.class).toEqual("");
     expect(state.style).toEqual("");

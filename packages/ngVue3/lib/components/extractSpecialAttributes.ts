@@ -8,13 +8,17 @@ export const SPECIAL_ATTRS = ["class", "style"];
  * @param attributes
  * @returns a map of special attributes
  */
-export function extractSpecialAttributes(attributes: ng.IAttributes) {
+export function extractSpecialAttributes(
+  attributes: ng.IAttributes,
+  removeAttrFn: (attr: string) => void
+) {
   return SPECIAL_ATTRS.reduce((accumulator, key) => {
     const ngKey = `ng-${key}`;
     const value = attributes[key];
 
     if (value || attributes[attributes.$normalize(ngKey)]) {
       accumulator[key] = value || "";
+      removeAttrFn(key);
     }
 
     return accumulator;

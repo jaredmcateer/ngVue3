@@ -17,10 +17,14 @@ export type ExpressionsMap = Record<string, string>;
 
 type ExpressionTypes = keyof typeof attributeMap | "attrs";
 
-export function extractExpressions(expressionType: ExpressionTypes, attributes: ng.IAttributes) {
+export function extractExpressions(
+  expressionType: ExpressionTypes,
+  attributes: ng.IAttributes,
+  removeAttrFn: (attr: string) => void
+) {
   let expressions: string[] = [];
   let key: "vProps" | "vOn";
-  let extractExpressionFn: (accumulator: ExpressionsMap, expression: string) => ExpressionsMap;
+  let extractExpressionFn: (accumulator: ExpressionsMap, attrKey: string) => ExpressionsMap;
   let baseExpressionMap: ExpressionsMap = {};
 
   if (isAttributeMapKey(expressionType)) {
@@ -30,15 +34,17 @@ export function extractExpressions(expressionType: ExpressionTypes, attributes: 
     // vProps: "{...}" without key, add to "safe" key for processing
     if (objectExpression !== undefined) {
       baseExpressionMap.__ngvue_props__ = objectExpression;
+      removeAttrFn(key);
     }
 
     const propRegExp = new RegExp(`^${key}.+`, "i");
     expressions = Object.keys(attributes).filter((attr) => propRegExp.test(attr));
 
-    extractExpressionFn = (accumulator, expression) => {
-      const exprName = extractExpressionName(expression, key);
+    extractExpressionFn = (accumulator, attrKey) => {
+      const exprName = extractExpressionName(attrKey, key);
       if (exprName) {
-        accumulator[exprName] = attributes[expression];
+        accumulator[exprName] = attributes[attrKey];
+        removeAttrFn(attrKey);
       }
       return accumulator;
     };
@@ -46,13 +52,15 @@ export function extractExpressions(expressionType: ExpressionTypes, attributes: 
     // Non-prefixed attributes (i.e., a regular HTML attribute)
     expressions = extractHtmlAttributes(attributes);
 
-    extractExpressionFn = (accumulator, expression) => {
+    extractExpressionFn = (accumulator, attrKey) => {
       // Get original attribute name from $attr not normalized by Angular (e.g., data-my-attr and not my-attr)
-      const attrName: string = (attributes.$attr as any)[expression];
+      const denormalizedAttr: string = (attributes.$attr as any)[attrKey];
 
       // Handle attributes with no value. e.g., <button disabled></button>
-      accumulator[attrName] =
-        attributes[expression] === "" ? `${expression}` : attributes[expression];
+      accumulator[denormalizedAttr] =
+        attributes[attrKey] === "" ? `${attrKey}` : attributes[attrKey];
+
+      removeAttrFn(attrKey);
 
       return accumulator;
     };
@@ -62,10 +70,10 @@ export function extractExpressions(expressionType: ExpressionTypes, attributes: 
   return expressionsMap;
 }
 
-export function getExpressions(attributes: ng.IAttributes) {
+export function getExpressions(attributes: ng.IAttributes, removeAttrFn: (attr: string) => void) {
   return {
-    props: extractExpressions("props", attributes) || {},
-    events: extractExpressions("on", attributes) || {},
-    attrs: extractExpressions("attrs", attributes) || {},
+    props: extractExpressions("props", attributes, removeAttrFn) || {},
+    events: extractExpressions("on", attributes, removeAttrFn) || {},
+    attrs: extractExpressions("attrs", attributes, removeAttrFn) || {},
   };
 }

@@ -4,8 +4,6 @@ exports[`ngVueLinker (Composition API) Property Reactivity (v-props="...") shoul
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -22,9 +20,6 @@ exports[`ngVueLinker (Composition API) Property Reactivity (v-props="...") shoul
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
-  watch-depth="value"
 >
   
   <div>
@@ -41,8 +36,6 @@ exports[`ngVueLinker (Composition API) Property Reactivity (v-props="...") shoul
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -59,9 +52,6 @@ exports[`ngVueLinker (Composition API) Property Reactivity (v-props-*="...") sho
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props-first-name="user.firstName"
-  v-props-is-admin="isAdmin"
-  v-props-last-name="user.lastName"
 >
   
   <div>
@@ -78,7 +68,6 @@ exports[`ngVueLinker (Composition API) Render should render button when provided
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -109,8 +98,6 @@ exports[`ngVueLinker (Composition API) Render should render user details and but
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -127,7 +114,6 @@ exports[`ngVueLinker (Composition API) Render should render user details when pr
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
 >
   
   <div>
@@ -142,8 +128,6 @@ exports[`ngVueLinker (Options API) Property Reactivity (v-props="...") should no
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -160,9 +144,6 @@ exports[`ngVueLinker (Options API) Property Reactivity (v-props="...") should up
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
-  watch-depth="value"
 >
   
   <div>
@@ -179,8 +160,6 @@ exports[`ngVueLinker (Options API) Property Reactivity (v-props="...") should up
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -197,9 +176,6 @@ exports[`ngVueLinker (Options API) Property Reactivity (v-props-*="...") should 
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props-first-name="user.firstName"
-  v-props-is-admin="isAdmin"
-  v-props-last-name="user.lastName"
 >
   
   <div>
@@ -216,7 +192,6 @@ exports[`ngVueLinker (Options API) Render should render button when provided as 
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -247,8 +222,6 @@ exports[`ngVueLinker (Options API) Render should render user details and button 
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -265,7 +238,6 @@ exports[`ngVueLinker (Options API) Render should render user details when provid
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
 >
   
   <div>
@@ -280,8 +252,6 @@ exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props="...") shou
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -298,9 +268,6 @@ exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props="...") shou
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
-  watch-depth="value"
 >
   
   <div>
@@ -317,8 +284,6 @@ exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props="...") shou
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -335,9 +300,6 @@ exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props-*="...") sh
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props-first-name="user.firstName"
-  v-props-is-admin="isAdmin"
-  v-props-last-name="user.lastName"
 >
   
   <div>
@@ -354,7 +316,6 @@ exports[`ngVueLinker (Script Setup API) Render should render button when provide
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -385,8 +346,6 @@ exports[`ngVueLinker (Script Setup API) Render should render user details and bu
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
-  v-props-is-admin="isAdmin"
 >
   
   <div>
@@ -403,7 +362,6 @@ exports[`ngVueLinker (Script Setup API) Render should render user details when p
 <my-component
   class="ng-scope"
   data-v-app=""
-  v-props="user"
 >
   
   <div>

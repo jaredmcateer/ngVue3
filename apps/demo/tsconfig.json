@@ -1,5 +1,12 @@
 {
   "extends": "tsconfig/base.json",
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "{src, examples}/**/*.ts",
+    "**/*.d.ts",
+    "src/**/*.tsx",
+    "{src,exmaples}/**/*.vue",
+    "src/**/*.d.ts",
+    "vue-shim.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

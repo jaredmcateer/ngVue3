@@ -1,7 +1,7 @@
 import type { InitialOptionsTsJest } from "ts-jest";
 
 const config: InitialOptionsTsJest = {
-  preset: "ts-jest",
+  preset: "ts-jest/presets/js-with-ts-esm",
   testMatch: [
     "**/__tests__/**/*.[jt]s?(x)",
     "**/?(*.)+(spec|test).[jt]s?(x)",
@@ -9,14 +9,16 @@ const config: InitialOptionsTsJest = {
   ],
   globals: {
     "ts-jest": {
-      tsconfig: "./tsconfig.test.json",
+      tsconfig: "<rootDir>/tsconfig.test.json",
     },
   },
   setupFilesAfterEnv: ["<rootDir>/test.setup.ts"],
   testRunner: "jest-jasmine2",
-  moduleFileExtensions: ["js", "ts", "vue"],
+  moduleFileExtensions: ["js", "json", "ts", "vue"],
   transform: {
     "^.+\\.vue$": "@vue/vue3-jest",
+    "^.+\\js$": "babel-jest",
+    "^.+\\.ts$": "ts-jest",
   },
 };
 

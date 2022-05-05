@@ -18,13 +18,18 @@
     "test": "jest --runInBand"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
     "@types/angular": "^1.8.4",
     "@types/angular-mocks": "^1.7.1",
     "@types/jest": "^27.4.1",
     "@vitejs/plugin-vue": "^2.3.1",
+    "@vue/test-utils": "^2.0.0-rc.21",
     "@vue/vue3-jest": "^27.0.0",
     "angular": "^1.8.3",
     "angular-mocks": "^1.8.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "27.5.1",
     "config": "workspace:*",
     "eslint": "^8.14.0",
     "global-jsdom": "^8.4.0",

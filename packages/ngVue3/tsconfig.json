@@ -1,5 +1,8 @@
 {
   "extends": "tsconfig/base.json",
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["lib/**/*.ts", "lib/**/*.d.ts", "lib/**/*.tsx", "lib/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "compilerOptions": {
+    "types": ["vite/client", "jest", "node"]
+  }
 }

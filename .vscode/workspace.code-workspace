@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "Root",
+			"path": ".."
+		},
+		{
+			"name": "ngVue3",
+			"path": "../packages/ngVue3"
+		},
+		{
+			"name": "Demo App",
+			"path": "../apps/demo"
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"ngvue"
+		]
+	}
+}

@@ -41,14 +41,20 @@ export function watchExpressions(
 type WatchSetter = (value: unknown) => void;
 type WatcherCallback = (expression: string, setter: WatchSetter) => void;
 
+function isNgPropsObject(name: string, value: unknown): value is Record<string, unknown> {
+  return name === "__ngvue_props__" && angular.isObject(value);
+}
+
 function getWatcher(expressions: ExpressionsMap, state: InstanceStateObj) {
   return (callback: WatcherCallback) => {
     Object.keys(expressions).forEach((name) => {
       const setter: WatchSetter = (value) => {
-        if (name === "__ngvue_props__" && angular.isObject(value)) {
-          Object.assign(state, { ...value });
+        if (isNgPropsObject(name, value)) {
+          Object.keys(value).forEach((key) => {
+            state[key] = value[key];
+          });
         } else {
-          Object.assign(state, { ...{ [name]: value } });
+          state[name] = value;
         }
       };
 

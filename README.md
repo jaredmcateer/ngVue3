@@ -29,3 +29,8 @@
 - [ ] Documentation
   - [ ] Repo README (this)
   - [ ] Wiki
+
+## BREAKING CHANGES
+
+- `<vue-component name="" ...>` not supported
+- Don't need to have a parent element as Vue 3 uses the component container

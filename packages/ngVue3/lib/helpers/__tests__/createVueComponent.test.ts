@@ -1,4 +1,3 @@
-import { fail } from "assert";
 import { createVueComponent } from "../createVueComponent";
 
 test("returns an array that matches angular directive signature", () => {
@@ -18,5 +17,5 @@ test("returns an array that matches angular directive signature", () => {
   if (typeof val[1][1] !== "function") fail("Should be a function");
   val[1][1](fn);
 
-  expect(fn).toBeCalledWith("name", component, config);
+  expect(fn).toBeCalledWith(component, config);
 });

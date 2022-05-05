@@ -32,9 +32,9 @@ type NgDirectiveTuple<T extends string = string> = [
  * @param ngDirectiveConfig extends the default angular directive
  * @returns array to be used in directive declaration
  */
-export function createVueComponent<N extends string, T extends unknown>(
+export function createVueComponent<N extends string>(
   name: N,
-  Component: T,
+  Component: unknown,
   ngDirectiveConfig?: ng.IDirective
 ): NgDirectiveTuple<N> {
   return [
@@ -42,7 +42,7 @@ export function createVueComponent<N extends string, T extends unknown>(
     [
       "createVueComponent",
       (createVueComponent: typeof ngVueComponentDirective) =>
-        createVueComponent(name, Component, ngDirectiveConfig),
+        createVueComponent(Component, ngDirectiveConfig),
     ],
   ];
 }

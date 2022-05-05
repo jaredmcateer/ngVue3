@@ -34,3 +34,8 @@
 
 - `<vue-component name="" ...>` not supported
 - Don't need to have a parent element as Vue 3 uses the component container
+  - This allows for multi-root templates
+  - No longer requires a wrapper element
+  - ngVue 3 will strip the attrs from the parent with the exceptions:
+    - vue adds `v-data-app`
+    - angular may add `class="ng-scope"`

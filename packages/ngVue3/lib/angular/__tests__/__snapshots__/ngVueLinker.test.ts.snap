@@ -1,0 +1,415 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ngVueLinker (Composition API) Property Reactivity (v-props="...") should not update when property value changes when observing for reference changes 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Burt Macklin
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Composition API) Property Reactivity (v-props="...") should update when property value changes only when observing at value depth 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+  watch-depth="value"
+>
+  
+  <div>
+    Hello, Bort Muklyn
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Composition API) Property Reactivity (v-props="...") should update when reference changes 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Bart Moklen
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Composition API) Property Reactivity (v-props-*="...") should update named props when changes are made 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props-first-name="user.firstName"
+  v-props-is-admin="isAdmin"
+  v-props-last-name="user.lastName"
+>
+  
+  <div>
+    Welcome, Barb Ara
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Composition API) Render should not render the component if angular is preventing it 1`] = `<!-- ngIf: false -->`;
+
+exports[`ngVueLinker (Composition API) Render should render button when provided as a named prop 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Not Sure
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Composition API) Render should render the component 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+>
+  
+  <div>
+    Welcome, Not Sure
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Composition API) Render should render user details and button when provided as a mixed prop types 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Burt Macklin
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Composition API) Render should render user details when provided as an object 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+>
+  
+  <div>
+    Welcome, Burt Macklin
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Property Reactivity (v-props="...") should not update when property value changes when observing for reference changes 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Burt Macklin
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Property Reactivity (v-props="...") should update when property value changes only when observing at value depth 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+  watch-depth="value"
+>
+  
+  <div>
+    Hello, Bort Muklyn
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Property Reactivity (v-props="...") should update when reference changes 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Bart Moklen
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Property Reactivity (v-props-*="...") should update named props when changes are made 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props-first-name="user.firstName"
+  v-props-is-admin="isAdmin"
+  v-props-last-name="user.lastName"
+>
+  
+  <div>
+    Welcome, Barb Ara
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Render should not render the component if angular is preventing it 1`] = `<!-- ngIf: false -->`;
+
+exports[`ngVueLinker (Options API) Render should render button when provided as a named prop 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Not Sure
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Render should render the component 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+>
+  
+  <div>
+    Welcome, Not Sure
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Render should render user details and button when provided as a mixed prop types 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Burt Macklin
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Options API) Render should render user details when provided as an object 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+>
+  
+  <div>
+    Welcome, Burt Macklin
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props="...") should not update when property value changes when observing for reference changes 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Burt Macklin
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props="...") should update when property value changes only when observing at value depth 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+  watch-depth="value"
+>
+  
+  <div>
+    Hello, Bort Muklyn
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props="...") should update when reference changes 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Bart Moklen
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Property Reactivity (v-props-*="...") should update named props when changes are made 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props-first-name="user.firstName"
+  v-props-is-admin="isAdmin"
+  v-props-last-name="user.lastName"
+>
+  
+  <div>
+    Welcome, Barb Ara
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Render should not render the component if angular is preventing it 1`] = `<!-- ngIf: false -->`;
+
+exports[`ngVueLinker (Script Setup API) Render should render button when provided as a named prop 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Not Sure
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Render should render the component 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+>
+  
+  <div>
+    Welcome, Not Sure
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Render should render user details and button when provided as a mixed prop types 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+  v-props-is-admin="isAdmin"
+>
+  
+  <div>
+    Hello, Burt Macklin
+  </div>
+  <button>
+    Click Me
+  </button>
+  
+</my-component>
+`;
+
+exports[`ngVueLinker (Script Setup API) Render should render user details when provided as an object 1`] = `
+<my-component
+  class="ng-scope"
+  data-v-app=""
+  v-props="user"
+>
+  
+  <div>
+    Welcome, Burt Macklin
+  </div>
+  <!--v-if-->
+  
+</my-component>
+`;

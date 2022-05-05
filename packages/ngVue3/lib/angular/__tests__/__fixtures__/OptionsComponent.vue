@@ -3,16 +3,20 @@
   <button v-if="isAdmin" @click="onButtonClicked">Click Me</button>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   props: {
-    user: Object,
-    isAdmin: Boolean,
+    firstName: { type: String, default: "Not" },
+    lastName: { type: String, default: "Sure" },
+    isAdmin: { type: Boolean, default: false },
   },
   emits: ["button-clicked"],
   computed: {
-    salutation: () => {
-      return this.isAdmin ? "Hello," : "Welcome," + ` ${this.user.firstName} ${this.user.lastName}`;
+    salutation(): string {
+      const prefix = this.isAdmin ? "Hello," : "Welcome,";
+      return `${prefix} ${this.firstName} ${this.lastName}`;
     },
   },
   methods: {
@@ -20,5 +24,5 @@ export default {
       this.$emit("button-clicked");
     },
   },
-};
+});
 </script>

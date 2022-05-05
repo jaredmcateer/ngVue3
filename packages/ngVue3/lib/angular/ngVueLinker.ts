@@ -1,5 +1,5 @@
 import angular from "angular";
-import { createApp, DefineComponent, h, onMounted, ref } from "vue";
+import { createApp, DefineComponent, h, onMounted, ref, toRefs } from "vue";
 import { evaluateEvents } from "../components/evaluateEvents";
 import { evaluateValues } from "../components/evaluateValues";
 import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
@@ -9,15 +9,11 @@ import { watchSpecialAttributes } from "../components/watchSpecialAttributes";
 import { getInstanceState } from "../instanceStore";
 
 export function ngVueLinker(
-  Component: DefineComponent<{}, {}, any>,
+  Component: any,
   jqElement: JQLite,
   attrs: ng.IAttributes,
   scope: ng.IScope
 ) {
-  if (!jqElement.parent().length) {
-    throw new Error("ngVue components must have a parent tag or they will not render");
-  }
-
   // Create unique key for retrieving state information
   const instanceKey = Symbol("ngVueInstanceKey");
   const state = getInstanceState(instanceKey);
@@ -37,13 +33,13 @@ export function ngVueLinker(
   let html = getInnerHtml(jqElement[0]);
 
   let vueInstance = createApp({
-    name: `NgVue-${Component.name || Component.options.name || "UnnamedComponent"}`,
+    name: `NgVue-${Component.name || "UnnamedComponent"}`,
     setup() {
-      const slot = ref<HTMLSpanElement>(null);
+      const slot = ref<HTMLSpanElement | null>(null);
 
       onMounted(() => {
         if (html) {
-          slot.value.replaceChild(html, slot.value);
+          slot.value?.replaceChild(html, slot.value);
         }
       });
 
@@ -58,7 +54,10 @@ export function ngVueLinker(
 
   scope.$on("$destroy", () => {
     vueInstance.unmount();
-    angular.element(vueInstance._container).remove();
+    if (vueInstance._container) {
+      angular.element(vueInstance._container).remove();
+    }
+    // @ts-ignore We're dereferencing this variable for garbage collection
     vueInstance = null;
   });
 }

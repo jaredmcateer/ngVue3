@@ -1,4 +1,5 @@
 import angular from "angular";
+import { ngVueLinker } from "./ngVueLinker";
 
 /**
  * @example
@@ -41,13 +42,14 @@ export function ngVueComponentFactory($injector: ng.auto.IInjectorService) {
 ngVueComponentFactory.$inject = ["$injector"];
 
 export function ngVueComponentDirective(
-  name: string,
   component: unknown,
   ngDirectiveConfig?: ng.IDirective
 ): ng.IDirective {
   const config: ng.IDirective = {
     restrict: "E",
-    link(scope: ng.IScope, elem: JQLite, attrs: ng.IAttributes) {},
+    link(scope: ng.IScope, elem: JQLite, attrs: ng.IAttributes) {
+      ngVueLinker(component, elem, attrs, scope);
+    },
   };
 
   return angular.extend(config, ngDirectiveConfig);

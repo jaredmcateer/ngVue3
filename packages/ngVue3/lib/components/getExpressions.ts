@@ -18,7 +18,7 @@ export type ExpressionsMap = Record<string, string>;
 type ExpressionTypes = keyof typeof attributeMap | "attrs";
 
 export function extractExpressions(expressionType: ExpressionTypes, attributes: ng.IAttributes) {
-  let expressions: string[];
+  let expressions: string[] = [];
   let key: "vProps" | "vOn";
   let extractExpressionFn: (accumulator: ExpressionsMap, expression: string) => ExpressionsMap;
   let baseExpressionMap: ExpressionsMap = {};
@@ -58,18 +58,14 @@ export function extractExpressions(expressionType: ExpressionTypes, attributes: 
     };
   }
 
-  if (expressions.length === 0) {
-    return null;
-  }
-
   const expressionsMap = expressions.reduce(extractExpressionFn, baseExpressionMap);
   return expressionsMap;
 }
 
 export function getExpressions(attributes: ng.IAttributes) {
   return {
-    props: extractExpressions("props", attributes),
-    events: extractExpressions("on", attributes),
-    attrs: extractExpressions("attrs", attributes),
+    props: extractExpressions("props", attributes) || {},
+    events: extractExpressions("on", attributes) || {},
+    attrs: extractExpressions("attrs", attributes) || {},
   };
 }

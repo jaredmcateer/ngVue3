@@ -12,7 +12,7 @@
     - [x] initializing state
     - [x] creating vue app instance
     - [ ] importing "global" filters
-    - [ ] Is watch depth necessary?
+    - [x] Is watch depth necessary? (yes)
     - [ ] Support quirks mode?
   - [ ] Plugins
     - [ ] Filters
@@ -39,3 +39,6 @@
   - ngVue 3 will strip the attrs from the parent with the exceptions:
     - vue adds `v-data-app`
     - angular may add `class="ng-scope"`
+  - `class` and `style` will fall through
+    - If you have a multi-root template you need to use `v-bind="$attr"` on an element otherwise a warning will be generated
+  - `ng-class` and `ng-style` will not

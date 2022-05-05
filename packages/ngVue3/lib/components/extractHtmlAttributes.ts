@@ -16,9 +16,9 @@ const excludePattern = new RegExp(`^(${excludedAttributes.join("|")})`, "i");
  */
 export function extractHtmlAttributes(attributes: ng.IAttributes): string[] {
   return Object.keys(attributes).filter((attribute) => {
-    const isSpecialAttribute = excludePattern.test(attribute);
+    const isExcludedAttribute = excludePattern.test(attribute);
     const isAngularInternal = attribute[0] === "$";
 
-    return !(isSpecialAttribute || isAngularInternal);
+    return !(isExcludedAttribute || isAngularInternal);
   });
 }

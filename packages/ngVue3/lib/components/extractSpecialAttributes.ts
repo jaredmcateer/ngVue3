@@ -13,14 +13,8 @@ export function extractSpecialAttributes(
   removeAttrFn: (attr: string) => void
 ) {
   return SPECIAL_ATTRS.reduce((accumulator, key) => {
-    const ngKey = `ng-${key}`;
-    const value = attributes[key];
-
-    if (value || attributes[attributes.$normalize(ngKey)]) {
-      accumulator[key] = value || "";
-      removeAttrFn(key);
-    }
-
+    accumulator[key] = attributes[key] || "";
+    removeAttrFn(key);
     return accumulator;
   }, {} as Record<string, string>);
 }

@@ -5,7 +5,6 @@ import { evaluateValues } from "../components/evaluateValues";
 import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
 import { getExpressions } from "../components/getExpressions";
 import { WatchExpressionOptions, watchExpressions } from "../components/watchExpressions";
-import { watchSpecialAttributes } from "../components/watchSpecialAttributes";
 import { getInstanceState } from "../instanceStore";
 
 export function ngVueLinker(
@@ -30,7 +29,6 @@ export function ngVueLinker(
 
   watchExpressions(attrExpressions.props, state.props, scope, options);
   watchExpressions(attrExpressions.attrs, state.attrs, scope, options);
-  watchSpecialAttributes(state.special, jqElement, scope);
 
   let html = getInnerHtml(jqElement[0]);
 

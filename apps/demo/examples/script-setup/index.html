@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ngVue 3 - Scripts Setup Example</title>
+  </head>
+
+  <body ng-app="vue.components">
+    <h1>ngVue 3 with Script Setup</h1>
+    <div ng-controller="MainController as ctrl">
+      <h2>Vue</h2>
+      <my-component
+        class="my-component"
+        ng-class="ctrl.foo"
+        data-foo="'bar'"
+        v-props="ctrl.person"
+        v-on-update-description="ctrl.updateDescription.bind(ctrl)"
+        watch-depth="value"
+      ></my-component>
+
+      <hr />
+
+      <h2>Angular</h2>
+      <div>
+        <label>
+          <span>First Name: </span>
+          <input ng-model="ctrl.person.firstName" />
+        </label>
+        <label>
+          <span>Last Name: </span>
+          <input ng-model="ctrl.person.lastName" />
+        </label>
+      </div>
+      <div>
+        <label>
+          <span>Description: </span>
+          <textarea ng-model="ctrl.person.description"></textarea>
+        </label>
+      </div>
+    </div>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>

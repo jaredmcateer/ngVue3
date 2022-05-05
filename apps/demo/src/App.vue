@@ -104,10 +104,10 @@ const onButtonClicked = () => emit("button-clicked");
 </script>
 
 <template>
-  <h1 class="header"><img src="favicon/android-chrome-192x192.png" />ngVue 3</h1>
+  <h1 class="header"><img src="../favicon/android-chrome-192x192.png" />ngVue 3</h1>
   <h2>Use Vue 3 inside Angular 1.x</h2>
   <p>
-    Based off the excellent work by <a href="https://github.com/dorayx">dorayx</a> and
+    Based off the excellent work by <a href="https://github.com/dorayx">Doray Hong</a> and
     <a href="https://github.com/nicolaspayot">Nicolas Payot</a> in the first iteration of
     <a href="https://github.com/ngVue/ngVue">ngVue</a> (which is recommended if you need to support
     Vue 2).
@@ -158,6 +158,16 @@ const onButtonClicked = () => emit("button-clicked");
         <li>Root lifecycle hooks have been removed</li>
       </ul>
     </li>
+    <li><code>class</code> and <code>style</code> will fall through</li>
+    <li>
+      <code>ng-class</code> and <code>ng-style</code> will not
+      <ul>
+        <li>
+          Their behaviour was pretty broken in the previous iteration and separating them makes more
+          sense
+        </li>
+      </ul>
+    </li>
   </ul>
 
   <h3>Examples</h3>
@@ -178,15 +188,17 @@ const onButtonClicked = () => emit("button-clicked");
   <highlightjs language="html" :code="template"></highlightjs>
 
   <h5>Options Api</h5>
-  <a href="/examples/composition-api/index.html">Demo</a>
+  <a href="/examples/options-api/index.html">Demo</a>
   <p>This is the classic Vue style.</p>
   <highlightjs language="typescript" :code="optionsApi"></highlightjs>
 
   <h5>Composition API (w/ setup function)</h5>
+  <a href="/examples/composition-api/index.html">Demo</a>
   <p>This option is available as a non-build style alternative to the Options API</p>
   <highlightjs language="typescript" :code="compositionApi"></highlightjs>
 
   <h5>Script Setup</h5>
+  <a href="/examples/script-setup/index.html">Demo</a>
   <p>
     The cadillac of Vue 3, it adds compiler macros that reduce the amount of boilerplate needed by
     the standard Composition API style.

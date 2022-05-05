@@ -17,6 +17,9 @@
     <div ng-controller="MainController as ctrl">
       <h2>Vue</h2>
       <my-component
+        class="my-component"
+        ng-class="ctrl.foo"
+        data-foo="'bar'"
         v-props="ctrl.person"
         v-on-update-description="ctrl.updateDescription.bind(ctrl)"
         watch-depth="value"

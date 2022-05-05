@@ -14,6 +14,8 @@ angular
         description: "ngVue 3 supports components using the Composition API",
       };
 
+      foo = "my-class";
+
       updateDescription(description: string) {
         this.person.description = description;
       }

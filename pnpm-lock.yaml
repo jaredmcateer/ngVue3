@@ -20,27 +20,27 @@ importers:
 
   apps/demo:
     specifiers:
-      '@highlightjs/vue-plugin': ^2.0.1
       '@jaredmcateer/ngvue3': workspace:*
       '@vitejs/plugin-vue': ^2.3.1
       angular: ^1.8.3
       config: workspace:*
-      highlight.js: ^11.5.1
+      highlight.js: ^10.3.2
       sass: ^1.51.0
       tsconfig: workspace:*
       typescript: ^4.5.4
       vite: ^2.9.5
       vue: ^3.2.25
       vue-tsc: ^0.34.7
+      vue3-highlightjs: ^1.0.5
     dependencies:
       '@jaredmcateer/ngvue3': link:../../packages/ngVue3
       angular: 1.8.3
+      highlight.js: 10.7.3
       vue: 3.2.33
+      vue3-highlightjs: 1.0.5_vue@3.2.33
     devDependencies:
-      '@highlightjs/vue-plugin': 2.0.1
       '@vitejs/plugin-vue': 2.3.1_vite@2.9.6+vue@3.2.33
       config: link:../../packages/config
-      highlight.js: 11.5.1
       sass: 1.51.0
       tsconfig: link:../../packages/tsconfig
       typescript: 4.6.4
@@ -1648,13 +1648,6 @@ packages:
       - supports-color
     dev: true
 
-  /@highlightjs/vue-plugin/2.0.1:
-    resolution: {integrity: sha512-6pmLh+VSvswavU7RB0BnWLp/9ITX6UYeVmR1gkFKQ4yx777lOCsGZOKc+1rswBDlD+bWb0xXVig85A7GEU2Vsg==}
-    dependencies:
-      highlight.js: 11.5.1
-      vue: 3.2.33
-    dev: true
-
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}
     engines: {node: '>=10.10.0'}
@@ -2242,7 +2235,7 @@ packages:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.9.6
+      vite: 2.9.6_sass@1.51.0
       vue: 3.2.33
     dev: true
 
@@ -3950,10 +3943,9 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /highlight.js/11.5.1:
-    resolution: {integrity: sha512-LKzHqnxr4CrD2YsNoIf/o5nJ09j4yi/GcH5BnYz9UnVpZdS4ucMgvP61TDty5xJcFGRjnH4DpujkS9bHT3hq0Q==}
-    engines: {node: '>=12.0.0'}
-    dev: true
+  /highlight.js/10.7.3:
+    resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
+    dev: false
 
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
@@ -6485,6 +6477,15 @@ packages:
       '@vue/runtime-dom': 3.2.33
       '@vue/server-renderer': 3.2.33_vue@3.2.33
       '@vue/shared': 3.2.33
+
+  /vue3-highlightjs/1.0.5_vue@3.2.33:
+    resolution: {integrity: sha512-Q4YNPXu0X5VMBnwPVOk+IQf1Ohp9jFdMitEAmzaz8qVVefcQpN6Dx4BnDGKxja3TLDVF+EgL136wC8YzmoCX9w==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      highlight.js: 10.7.3
+      vue: 3.2.33
+    dev: false
 
   /w3c-hr-time/1.0.2:
     resolution: {integrity: sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ==}

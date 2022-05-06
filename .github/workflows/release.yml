@@ -32,5 +32,5 @@ jobs:
         with:
           publish: pnpm run release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Ensure to have this set up under GitHub secrets
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Ensure to have this set up under GitHub secrets
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Ensure to have this set up under GitHub secrets

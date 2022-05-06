@@ -10,7 +10,10 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md,js,json,jsx,vue}\""
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,md,js,json,jsx,vue}\"",
+    "changeset": "changeset",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",

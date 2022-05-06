@@ -1,6 +1,5 @@
 {
   "name": "@jaredmcateer/ngvue3",
-  "private": true,
   "files": [
     "dist",
     "package.json",
@@ -19,6 +18,13 @@
     "ngvue",
     "ngvue3"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/jaredmcateer/ngVue3.git"
+  },
   "main": "./dist/main.js",
   "module": "./dist/main.mjs",
   "types": "./dist/main.d.ts",

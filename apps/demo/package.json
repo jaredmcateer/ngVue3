@@ -10,13 +10,13 @@
   "dependencies": {
     "@jaredmcateer/ngvue3": "workspace:*",
     "angular": "^1.8.3",
-    "vue": "^3.2.25"
+    "highlight.js": "^10.3.2",
+    "vue": "^3.2.25",
+    "vue3-highlightjs": "^1.0.5"
   },
   "devDependencies": {
-    "@highlightjs/vue-plugin": "^2.0.1",
     "@vitejs/plugin-vue": "^2.3.1",
     "config": "workspace:*",
-    "highlight.js": "^11.5.1",
     "sass": "^1.51.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.4",

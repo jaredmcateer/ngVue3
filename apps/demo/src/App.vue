@@ -104,7 +104,7 @@ const onButtonClicked = () => emit("button-clicked");
 </script>
 
 <template>
-  <h1 class="header"><img src="../favicon/android-chrome-192x192.png" />ngVue 3</h1>
+  <h1 class="header"><img src="../public/favicon/android-chrome-192x192.png" />ngVue 3</h1>
   <h2>Use Vue 3 inside Angular 1.x</h2>
   <p>
     Based off the excellent work by <a href="https://github.com/dorayx">Doray Hong</a> and
@@ -120,7 +120,7 @@ const onButtonClicked = () => emit("button-clicked");
 
   <ul>
     <li>
-      <highlightjs autodetect code="useNgVue()"></highlightjs> is required to initialize ngVue
+      <pre v-highlightjs><code class="typescript">useNgVue()</code></pre>
       instead of just importing the module
     </li>
     <li>
@@ -138,10 +138,9 @@ const onButtonClicked = () => emit("button-clicked");
       </ul>
     </li>
     <li>
-      <highlightjs
-        language="html"
-        code="<vue-component name='my-component'></vue-component>"
-      ></highlightjs>
+      <pre
+        v-highlightjs
+      ><code class="html">{{"<vue-component name='my-component'></vue-component>"}}</code></pre>
       has been removed.
     </li>
     <li>
@@ -179,23 +178,23 @@ const onButtonClicked = () => emit("button-clicked");
   <h4>Implementation</h4>
 
   <h5>Angular</h5>
-  <highlightjs language="typescript" :code="angular"></highlightjs>
+  <pre v-highlightjs><code class="typescript">{{angular}}</code></pre>
 
   <h5>HTML</h5>
-  <highlightjs language="html" :code="html"></highlightjs>
+  <pre v-highlightjs><code class="html">{{html}}</code></pre>
 
   <h5>Vue Template</h5>
-  <highlightjs language="html" :code="template"></highlightjs>
+  <pre v-highlightjs><code class="html">{{template}}</code></pre>
 
   <h5>Options Api</h5>
   <a href="/examples/options-api/index.html">Demo</a>
   <p>This is the classic Vue style.</p>
-  <highlightjs language="typescript" :code="optionsApi"></highlightjs>
+  <pre v-highlightjs><code class="typescript">{{optionsApi}}</code></pre>
 
   <h5>Composition API (w/ setup function)</h5>
   <a href="/examples/composition-api/index.html">Demo</a>
   <p>This option is available as a non-build style alternative to the Options API</p>
-  <highlightjs language="typescript" :code="compositionApi"></highlightjs>
+  <pre v-highlightjs><code class="typescript">{{compositionApi}}</code></pre>
 
   <h5>Script Setup</h5>
   <a href="/examples/script-setup/index.html">Demo</a>
@@ -203,7 +202,7 @@ const onButtonClicked = () => emit("button-clicked");
     The cadillac of Vue 3, it adds compiler macros that reduce the amount of boilerplate needed by
     the standard Composition API style.
   </p>
-  <highlightjs language="vue" :code="scriptSetup"></highlightjs>
+  <pre v-highlightjs><code class="typescript">{{scriptSetup}}</code></pre>
 </template>
 
 <style lang="scss">

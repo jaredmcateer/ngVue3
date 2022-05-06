@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://github.com/jaredmcateer/ngVue3/blob/main/static/ngVueLogo.png?raw=true" width="200" />
+  <img src="https://github.com/jaredmcateer/ngVue3/blob/main/packages/ngVue3/static/ngVueLogo.png?raw=true" width="200" />
 </p>
 <h1 align="center" style="margin-top: 0px;">ngVue 3</h1>
 
-ngVue 3 is a fork of the [ngVue](https://github.com/ngVue/ngVue) project which is still recommended for Vue 2.o
+ngVue 3 is a fork of the [ngVue](https://github.com/ngVue/ngVue) project which is still recommended for Vue 2
 
 ## Install
 

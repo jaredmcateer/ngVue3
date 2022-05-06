@@ -239,11 +239,11 @@ Keep in mind that hwne you pass down literal strings for anything other than `cl
 
 ## TODO
 
-[x] vue components
-[ ] vue directives
-[x] unit tests
-[ ] docs + examples (they're done just working on deploying them)
-[ ] plugins
-~~[x] Filters (won't do, vue 3 doesn't support global filters)~~
-[ ] support vuex
-[ ] support pinia
+- [x] vue components
+- [ ] vue directives
+- [x] unit tests
+- [ ] docs + examples (they're done just working on deploying them)
+- [ ] plugins
+- ~~[x] Filters (won't do, vue 3 doesn't support global filters)~~
+- [ ] support vuex (maybe?)
+- [ ] support pinia

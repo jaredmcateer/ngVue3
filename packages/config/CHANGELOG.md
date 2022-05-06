@@ -1,5 +1,11 @@
 # config
 
+## 0.1.1
+
+### Patch Changes
+
+- [`14a404b`](https://github.com/jaredmcateer/ngVue3/commit/14a404b6d9f2000759411012350687cea6de00d3) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Adding readme to ngVue doc and preventing config from being published to npm
+
 ## 0.1.0
 
 ### Minor Changes

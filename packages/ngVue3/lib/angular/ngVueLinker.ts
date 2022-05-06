@@ -44,7 +44,7 @@ export function ngVueLinker(
       });
 
       return () =>
-        h(Component, { ...state.props, ...state.attrs, ...state.special, ...events }, [
+        h(Component, { ...state.props, ...state.attrs, ...state.special, ...events }, () => [
           h("span", { ref: slot }),
         ]);
     },

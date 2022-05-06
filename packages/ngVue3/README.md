@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/jaredmcateer/ngVue3/blob/main/static/static/ngVueLogo.png?raw=true" width="200" />
+  <img src="https://github.com/jaredmcateer/ngVue3/blob/main/static/ngVueLogo.png?raw=true" width="200" />
 </p>
 <h1 align="center" style="margin-top: 0px;">ngVue 3</h1>
 

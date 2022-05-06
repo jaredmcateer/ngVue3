@@ -3,6 +3,6 @@
   "include": ["lib/**/*.ts", "lib/**/*.d.ts", "lib/**/*.tsx", "lib/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "compilerOptions": {
-    "types": ["vite/client", "jest", "node"]
+    "types": ["vite/client", "jest"]
   }
 }

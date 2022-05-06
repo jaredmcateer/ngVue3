@@ -13,15 +13,16 @@ jobs:
           fetch-depth: 0
 
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           version: 16
           cache: pnpm
 
       - name: Install Dependencies
-        run: pnpm
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Ensure to have this set up under GitHub secrets
+        run: pnpm install --frozen-lockfile
+
+      - name: Test & Build
+        run: pnpm test
 
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@master

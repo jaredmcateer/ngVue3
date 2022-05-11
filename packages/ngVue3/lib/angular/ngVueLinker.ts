@@ -6,12 +6,14 @@ import { extractSpecialAttributes } from "../components/extractSpecialAttributes
 import { getExpressions } from "../components/getExpressions";
 import { WatchExpressionOptions, watchExpressions } from "../components/watchExpressions";
 import { getInstanceState } from "../instanceStore";
+import { NgVueService } from "./ngVueProvider";
 
 export function ngVueLinker(
   Component: any,
   jqElement: JQLite,
   attrs: ng.IAttributes,
-  scope: ng.IScope
+  scope: ng.IScope,
+  $injector: ng.auto.IInjectorService
 ) {
   // Create unique key for retrieving state information
   const instanceKey = Symbol("ngVueInstanceKey");
@@ -19,6 +21,7 @@ export function ngVueLinker(
   const removeAttrFn = getAttrRemoveFunction(jqElement, attrs);
   const attrExpressions = getExpressions(attrs, removeAttrFn);
   const events = evaluateEvents(attrExpressions.events, scope);
+  const $ngVue: NgVueService | null = $injector.has("$ngVue") ? $injector.get("$ngVue") : null;
 
   Object.assign(state.props, evaluateValues(attrExpressions.props, scope));
   Object.assign(state.attrs, evaluateValues(attrExpressions.attrs, scope));
@@ -49,6 +52,14 @@ export function ngVueLinker(
         ]);
     },
   });
+
+  if ($ngVue) {
+    $ngVue.initAppInstance(vueInstance);
+    $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
+    $ngVue
+      .getGlobalProperties()
+      .forEach(([key, value]) => (vueInstance.config.globalProperties[key] = value));
+  }
 
   vueInstance.mount(jqElement[0]);
 

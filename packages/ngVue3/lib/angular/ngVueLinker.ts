@@ -54,11 +54,9 @@ export function ngVueLinker(
   });
 
   if ($ngVue) {
-    $ngVue.initAppInstance(vueInstance);
+    $ngVue.initNgVuePlugins(vueInstance);
     $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
-    $ngVue
-      .getGlobalProperties()
-      .forEach(([key, value]) => (vueInstance.config.globalProperties[key] = value));
+    $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
   }
 
   vueInstance.mount(jqElement[0]);

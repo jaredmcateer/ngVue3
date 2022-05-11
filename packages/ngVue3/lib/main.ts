@@ -4,6 +4,7 @@ import { ngVueComponentFactory } from "./angular/ngVueComponentFactory";
 let ngVueModule: ng.IModule;
 
 export { ngVueComponent } from "./helpers/ngVueComponent";
+export { useNgVuePlugins } from "./angular/ngVueProvider";
 
 export function useNgVue() {
   if (!ngVueModule) {

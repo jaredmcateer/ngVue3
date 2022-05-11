@@ -17,7 +17,7 @@ const template = ref(`<template>
 </template>
 `);
 
-const angular = ref(`import {ngVueComponent, useNgVue} from 'ngVue';
+const angular = ref(`import {ngVueComponent, useNgVue} from '@jaredmcateer/ngvue3';
 import MyComponent from './MyComponent.vue';
 
 // Setups ngVue angular module and returns module name

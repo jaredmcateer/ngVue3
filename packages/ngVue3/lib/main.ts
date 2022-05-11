@@ -1,11 +1,14 @@
 import angular from "angular";
 import { ngVueComponentFactory } from "./angular/ngVueComponentFactory";
 
-const ngVue = "ngVue";
-angular.module(ngVue, []).factory("createVueComponent", ngVueComponentFactory);
+let ngVueModule: ng.IModule;
 
 export { ngVueComponent } from "./helpers/ngVueComponent";
+export { useNgVuePlugins } from "./angular/ngVueProvider";
 
 export function useNgVue() {
-  return ngVue;
+  if (!ngVueModule) {
+    ngVueModule = angular.module("ngVue", []).factory("createVueComponent", ngVueComponentFactory);
+  }
+  return ngVueModule.name;
 }

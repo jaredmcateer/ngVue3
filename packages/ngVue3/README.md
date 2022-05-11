@@ -237,6 +237,12 @@ Keep in mind that hwne you pass down literal strings for anything other than `cl
 </template>
 ```
 
+## Plugins
+
+Due ot the architectural changes introduced by Vue 3 in most cases if you need access to lifecycle hooks you can simply create a composable and use it directly in your vue components. However, there are instances you need to install plugins (e.g., Pinia/Vuex, VueRouter, etc) or you want access to shared logic in your angular app. Plugins in ngVue 3 have been revamped to be simpler, access to "root" props is no longer possible, however you can now pass through Plugins and Injectables easily as well as still create your own custom ngVue Plugin.
+
+[Plugin Documentation](./docs/plugins.md)
+
 ## TODO
 
 - [x] vue components

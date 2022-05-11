@@ -1,8 +1,8 @@
-import { ngVueComponentDirective } from "../angular/ngVueComponentFactory";
+import { NgVueComponentDirective } from "../angular/ngVueComponentFactory";
 
 type NgDirectiveTuple<T extends string = string> = [
   T,
-  ["createVueComponent", (createVueComponent: typeof ngVueComponentDirective) => ng.IDirective]
+  ["createVueComponent", (createVueComponent: NgVueComponentDirective) => ng.IDirective]
 ];
 /**
  * Reduces boilerplate of creating vue components
@@ -41,7 +41,7 @@ export function ngVueComponent<N extends string>(
     name,
     [
       "createVueComponent",
-      (createVueComponent: typeof ngVueComponentDirective) =>
+      (createVueComponent: NgVueComponentDirective) =>
         createVueComponent(Component, ngDirectiveConfig),
     ],
   ];

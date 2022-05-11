@@ -13,7 +13,7 @@
     - [x] creating vue app instance
     - [x] Is watch depth necessary? (yes)
     - [ ] Support quirks mode? (probably wont do)
-  - [ ] Plugins
+  - [x] Plugins
     - [ ] Filters (probably wont do)
     - [ ] Vuex ? (probably wont do)
     - [ ] Pinia ?

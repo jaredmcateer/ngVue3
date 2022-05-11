@@ -1,5 +1,16 @@
 # demo
 
+## 0.1.2
+
+### Patch Changes
+
+- [#5](https://github.com/jaredmcateer/ngVue3/pull/5) [`452168f`](https://github.com/jaredmcateer/ngVue3/commit/452168f577e6af5945ba2f1f6e069184a1fab639) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Adding plugins to ngVue 3!
+
+  Also fix the documentation in the demo app.
+
+- Updated dependencies [[`452168f`](https://github.com/jaredmcateer/ngVue3/commit/452168f577e6af5945ba2f1f6e069184a1fab639)]:
+  - @jaredmcateer/ngvue3@0.2.0
+
 ## 0.1.1
 
 ### Patch Changes

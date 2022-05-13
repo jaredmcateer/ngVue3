@@ -1,5 +1,11 @@
 # @jaredmcateer/ngvue3
 
+## 0.3.0
+
+### Minor Changes
+
+- [#8](https://github.com/jaredmcateer/ngVue3/pull/8) [`d48c2a0`](https://github.com/jaredmcateer/ngVue3/commit/d48c2a0a6ab389f442f00e8cde3a9ab6388f1244) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Added directives support
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,7 @@
 {
   "name": "@jaredmcateer/ngvue3",
   "description": "Use Vue 3 components in Angular 1.x",
+  "license": "MIT",
   "files": [
     "dist",
     "package.json",

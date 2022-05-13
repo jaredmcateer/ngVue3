@@ -5,6 +5,23 @@
 
 ngVue 3 is a fork of the [ngVue](https://github.com/ngVue/ngVue) project which is still recommended for Vue 2
 
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Install](#install)
+- [Features](#features)
+  - [The `createVueComponent` factory](#the-createvuecomponent-factory)
+    - [The `ngVueComponent` helper](#the-ngvuecomponent-helper)
+  - [Directive attributes](#directive-attributes)
+    - [`v-props` / `v-props-*`](#v-props--v-props-)
+    - [`watch-depth`](#watch-depth)
+      - [Notes](#notes)
+    - [`v-on-*`](#v-on-)
+  - [Handling HTML Attributes](#handling-html-attributes)
+- [Plugins, Injectables and Directives](#plugins-injectables-and-directives)
+  - [Directives usage](#directives-usage)
+- [TODO](#todo)
+
 ## Install
 
 via npm:

@@ -1,11 +1,24 @@
 import angular from "angular";
-import { createApp, DefineComponent, h, onMounted, ref, toRefs } from "vue";
+import {
+  App,
+  Component,
+  ComputedOptions,
+  createApp,
+  Directive,
+  h,
+  MethodOptions,
+  onMounted,
+  ref,
+  resolveDirective,
+  withDirectives,
+} from "vue";
 import { evaluateEvents } from "../components/evaluateEvents";
 import { evaluateValues } from "../components/evaluateValues";
+import { evaluateDirectives, NgVueDirective } from "../components/evaluateDirectives";
 import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
 import { getExpressions } from "../components/getExpressions";
 import { WatchExpressionOptions, watchExpressions } from "../components/watchExpressions";
-import { getInstanceState } from "../instanceStore";
+import { getInstanceState, InstanceState } from "../instanceStore";
 import { NgVueService } from "./ngVueProvider";
 
 export function ngVueLinker(
@@ -21,7 +34,7 @@ export function ngVueLinker(
   const removeAttrFn = getAttrRemoveFunction(jqElement, attrs);
   const attrExpressions = getExpressions(attrs, removeAttrFn);
   const events = evaluateEvents(attrExpressions.events, scope);
-  const $ngVue: NgVueService | null = $injector.has("$ngVue") ? $injector.get("$ngVue") : null;
+  const ngVueDirectives = evaluateDirectives(attrs.vDirectives, scope);
 
   Object.assign(state.props, evaluateValues(attrExpressions.props, scope));
   Object.assign(state.attrs, evaluateValues(attrExpressions.attrs, scope));
@@ -35,30 +48,8 @@ export function ngVueLinker(
 
   let html = getInnerHtml(jqElement[0]);
 
-  let vueInstance = createApp({
-    name: `NgVue-${Component.name || "UnnamedComponent"}`,
-    setup() {
-      const slot = ref<HTMLSpanElement | null>(null);
-
-      onMounted(() => {
-        if (html) {
-          slot.value?.replaceChild(html, slot.value);
-        }
-      });
-
-      return () =>
-        h(Component, { ...state.props, ...state.attrs, ...state.special, ...events }, () => [
-          h("span", { ref: slot }),
-        ]);
-    },
-  });
-
-  if ($ngVue) {
-    $ngVue.initNgVuePlugins(vueInstance);
-    $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
-    $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
-  }
-
+  let vueInstance = createAppInstance(Component, html, state, events, ngVueDirectives);
+  loadNgVueGlobals(vueInstance, $injector);
   vueInstance.mount(jqElement[0]);
 
   scope.$on("$destroy", () => {
@@ -69,6 +60,76 @@ export function ngVueLinker(
     // @ts-ignore We're dereferencing this variable for garbage collection
     vueInstance = null;
   });
+}
+
+/**
+ * Constructs the initial Vue App instance
+ * @param Component
+ * @param html
+ * @param state
+ * @param events
+ * @param ngVueDirectives
+ * @returns
+ */
+function createAppInstance(
+  Component: any,
+  html: Element | undefined,
+  state: InstanceState,
+  events: Record<string, (...args: unknown[]) => unknown> | null,
+  ngVueDirectives: NgVueDirective[]
+) {
+  return createApp({
+    name: `NgVue-${Component.name || "UnnamedComponent"}`,
+    setup() {
+      const slot = ref<HTMLSpanElement | null>(null);
+
+      onMounted(() => {
+        if (html) {
+          slot.value?.replaceChild(html, slot.value);
+        }
+      });
+
+      return () => {
+        let node = h(
+          Component,
+          { ...state.props, ...state.attrs, ...state.special, ...events },
+          () => [h("span", { ref: slot })]
+        );
+
+        if (ngVueDirectives.length > 0) {
+          const directives = ngVueDirectives
+            .filter((d) => !!resolveDirective(d.name))
+            .map((d): [Directive, any, any, any] => {
+              const directive = resolveDirective(d.name)!; // already filtered undefined
+              return [directive, d.value, d.arg, d.modifiers];
+            });
+
+          node = withDirectives(node, directives);
+        }
+
+        return node;
+      };
+    },
+  });
+}
+
+/**
+ * Loads the globals such as Injectables, Plugins and Directives that has been
+ * added via the ngVueProvider
+ *
+ * @param vueInstance
+ * @param $injector
+ */
+function loadNgVueGlobals(vueInstance: App<Element>, $injector: ng.auto.IInjectorService) {
+  const $ngVue: NgVueService | null = $injector.has("$ngVue") ? $injector.get("$ngVue") : null;
+  if ($ngVue) {
+    $ngVue.initNgVuePlugins(vueInstance);
+    $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
+    $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
+    Object.entries($ngVue.getVueDirectives()).forEach(([name, directive]) =>
+      vueInstance.directive(name, directive)
+    );
+  }
 }
 
 function getInnerHtml(element: HTMLElement) {

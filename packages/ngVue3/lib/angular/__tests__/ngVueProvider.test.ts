@@ -34,6 +34,36 @@ describe("NgVueProvider", () => {
 
           ngVueProvider = _$ngVueProvider_;
           ngVueProvider.provide("foo", 1001);
+          ngVueProvider.directive("hello", {
+            created(el: HTMLElement) {
+              const span = document.createElement("span");
+              span.textContent = "Hello!";
+              el.appendChild(span);
+            },
+          });
+          ngVueProvider.directive("hello2", {
+            created(el: HTMLElement, binding) {
+              const span = document.createElement("span");
+              span.textContent = binding.value ?? "Hello?";
+
+              if (binding.arg === "respond") {
+                span.textContent += " Hi.";
+              }
+
+              el.appendChild(span);
+            },
+          });
+          ngVueProvider.directive("hello3", {
+            created(el: HTMLElement, binding) {
+              const span = document.createElement("span");
+              span.textContent = binding.value ?? "Nothing?";
+              if (binding.modifiers.shout) {
+                span.textContent = (span.textContent ?? "").toUpperCase();
+              }
+              el.appendChild(span);
+            },
+          });
+
           (ngVueProvider.plugins.customNgVuePlugin as CustomNgVuePluginConfig).register([
             "make",
             "colour",
@@ -66,6 +96,72 @@ describe("NgVueProvider", () => {
 
     it("should provide values from custom NgVue Plugins", () => {
       expect(element.find("button")[0].textContent).toEqual("gray Kerluke: 80");
+    });
+
+    describe("directives", () => {
+      it("should process a directive passed by string", () => {
+        element = compile(
+          `<my-button v-directives="'hello'" v-on-button-clicked="handleButtonClick"></my-button>`,
+          scope
+        );
+        scope.$digest();
+        expect(element.find("span")[0].textContent).toEqual("Hello!");
+      });
+
+      it("should process multiple directives passed by string", () => {
+        element = compile(
+          `<my-button v-directives="'hello,hello2,,hello3,'" v-on-button-clicked="handleButtonClick"></my-button>`,
+          scope
+        );
+        scope.$digest();
+        expect(element.find("span")[0].textContent).toEqual("Hello!");
+        expect(element.find("span")[1].textContent).toEqual("Hello?");
+        expect(element.find("span")[2].textContent).toEqual("Nothing?");
+      });
+
+      it("should process a directive passed by object", () => {
+        element = compile(
+          `<my-button v-directives="{name: 'hello2', value: 'hello!?'}" v-on-button-clicked="handleButtonClick"></my-button>`,
+          scope
+        );
+        scope.$digest();
+        expect(element.find("span")[0].textContent).toEqual("hello!?");
+      });
+
+      it("should process a directive passed by object with arg", () => {
+        element = compile(
+          `<my-button v-directives="{name: 'hello2', value: 'hello!?', arg: 'respond'}" v-on-button-clicked="handleButtonClick"></my-button>`,
+          scope
+        );
+        scope.$digest();
+        expect(element.find("span")[0].textContent).toEqual("hello!? Hi.");
+      });
+
+      it("should process a directive passed by object with modifiers", () => {
+        element = compile(
+          `<my-button v-directives="{
+            name: 'hello3', value: 'hello!?', modifiers: {shout: true}
+          }" v-on-button-clicked="handleButtonClick"></my-button>`,
+          scope
+        );
+        scope.$digest();
+        expect(element.find("span")[0].textContent).toEqual("HELLO!?");
+      });
+
+      it("should process directives passed by an array of object", () => {
+        element = compile(
+          `<my-button v-directives="[
+            {name: 'hello' },
+            {name: 'hello2', value: 'hallo?', arg: 'respond'},
+            {name: 'hello3', value: 'hello!?', modifiers: {shout: true}}
+          ]" v-on-button-clicked="handleButtonClick"></my-button>`,
+          scope
+        );
+        scope.$digest();
+        expect(element.find("span")[0].textContent).toEqual("Hello!");
+        expect(element.find("span")[1].textContent).toEqual("hallo? Hi.");
+        expect(element.find("span")[2].textContent).toEqual("HELLO!?");
+      });
     });
   });
 });

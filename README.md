@@ -1,12 +1,16 @@
+# ngVue 3
+
+This is the root workspace of the ngVue monorepo, the primary readme can be found in the [packages/ngVue3](./packages/ngVue3/README.md) package workspace.
+
 ## TODO
 
-- [ ] ngVue3 library
+- [x] ngVue3 library
 
   - [x] directive
     - [x] createVueComponent
   - [x] linker
     - [x] extracting v-props
-    - [ ] extracting v-directives
+    - [x] extracting v-directives
     - [x] extracting attrs
     - [x] extracting events
     - [x] initializing state
@@ -17,13 +21,18 @@
     - [ ] Filters (probably wont do)
     - [ ] Vuex ? (probably wont do)
     - [ ] Pinia ?
-  - [-] Tests
+  - [x] Tests
 
 - [x] Demo page
 
   - [x] Options
   - [x] SFC (setup method)
   - [x] SFC (script setup)
+  - [ ] Native Vue Plugins
+  - [ ] Directives
+  - [ ] Provide/Inject
+  - [ ] NgVue Plugins
+  - [ ] Depoly
 
 - [ ] Documentation
   - [ ] Repo README (this)

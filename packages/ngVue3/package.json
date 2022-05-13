@@ -39,7 +39,7 @@
   "version": "0.3.1",
   "scripts": {
     "clean": "rimraf dist/",
-    "build": "pnpm run clean && tsup lib/main.ts --external angular --external vue --sourcemap --dts --format esm,cjs",
+    "build": "pnpm run clean && tsup lib/main.ts --minify --external angular --external vue --sourcemap --dts --format esm,cjs",
     "test": "jest --runInBand"
   },
   "devDependencies": {

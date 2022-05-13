@@ -17,9 +17,9 @@ angular.module("mainApp", [useNgVue(), useNgVuePlugins()]);
 
 `useNgVuePlugins` creates an Angular service `$ngVue`. This service implements a custom plugins system and a means to pass through Injectables and Plugins to the Vue app instance.
 
-### Provide/Use
+### Provide/Use/Directives
 
-Sometimes you simply need to add a plugin or injectable to the app instance, you don't have any specific need for angular but due to ngVue's archtecture the app instance isn't readily available, `$ngVueProvider` has pass through function to help you with that.
+Sometimes you simply need to add a plugin, injectable or directive to the app instance, you don't have any specific need for angular but due to ngVue's architecture the app instance isn't readily available, `$ngVueProvider` has pass through function to help you with that.
 
 ```ts
 angular
@@ -27,6 +27,11 @@ angular
   .config(($ngVueProvider: NgVueProvider) => {
     $ngVueProvider.use(MyPlugin);
     $ngVueProvider.provide("foo", "bar");
+    $ngVueProvider.provide("focus", {
+      onMounted(el) {
+        el.focus();
+      },
+    });
   });
 ```
 

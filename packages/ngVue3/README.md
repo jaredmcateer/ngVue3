@@ -237,19 +237,58 @@ Keep in mind that hwne you pass down literal strings for anything other than `cl
 </template>
 ```
 
-## Plugins
+## Plugins, Injectables and Directives
 
-Due ot the architectural changes introduced by Vue 3 in most cases if you need access to lifecycle hooks you can simply create a composable and use it directly in your vue components. However, there are instances you need to install plugins (e.g., Pinia/Vuex, VueRouter, etc) or you want access to shared logic in your angular app. Plugins in ngVue 3 have been revamped to be simpler, access to "root" props is no longer possible, however you can now pass through Plugins and Injectables easily as well as still create your own custom ngVue Plugin.
+Due to the architectural changes introduced by Vue 3 in most cases if you need access to lifecycle hooks you can simply create a composable and use it directly in your vue components. However, there are instances you need to install plugins (e.g., Pinia/Vuex, VueRouter, etc), directives or you want access to shared logic in your angular app. Plugins in ngVue 3 have been revamped to be simpler, access to "root" props is no longer possible, however you can now pass through Plugins, Injectables and Directive easily as well as still create your own custom ngVue Plugin.
 
-[Plugin Documentation](./docs/plugins.md)
+[Plugin, Injectables and Directives Documentation](./docs/plugins.md)
+
+### Directives usage
+
+Using a directive on your ngVue component can be done using the `v-directives` attribute assigning it a string, directive bindings or array of bindings:
+
+```html
+<!-- string -->
+<my-component v-directives="'greeting'"></my-component>
+
+<!-- Accepts comma separated string -->
+<my-component v-directives="'greeting,focus'"></my-component>
+
+<!-- Binding object -->
+<my-component
+  v-directives="{
+    name: 'greeting',
+    value: 'Hello World',
+    arg: 'foo',
+    modifiers: { shout: true, blink: true }
+  }"
+></my-component>
+
+<!-- Array of binding objects -->
+<my-component
+  v-directives="[
+    {name: 'greeting', value: 'Hello World'},
+    {name: 'focus'}
+  ]"
+></my-component>
+```
+
+The bindings passed to the ngVue are the same bindings passed to the directives lifecycle hooks.
+
+| Property    | Type                      | Equivalent                 | Description                                       |
+| ----------- | ------------------------- | -------------------------- | ------------------------------------------------- |
+| `name`      | `string`                  | `v-greeting`               | Name of directive.                                |
+| `value`     | `any`                     | `v-greeting="Hello World"` | Optional. The value passed to the directive       |
+| `arg`       | `string`                  | `v-greeting:foo`           | Optional. The argument passed to the directive    |
+| `modifiers` | `Record<string, boolean>` | `v-greeting.blink.warning` | Optional. An object containing modifiers, if any. |
 
 ## TODO
 
 - [x] vue components
-- [ ] vue directives
+- [x] vue directives
 - [x] unit tests
 - [ ] docs + examples (they're done just working on deploying them)
-- [ ] plugins
+- [x] plugins
 - ~~[x] Filters (won't do, vue 3 doesn't support global filters)~~
 - [ ] support vuex (maybe?)
 - [ ] support pinia

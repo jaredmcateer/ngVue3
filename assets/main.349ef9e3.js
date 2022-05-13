@@ -31927,7 +31927,7 @@ function index(app2) {
   });
 }
 var foundation = "";
-var _imports_0 = "/assets/android-chrome-192x192.d72e0638.png";
+var _imports_0 = "assets/android-chrome-192x192.d72e0638.png";
 var App_vue_vue_type_style_index_0_lang = "";
 const _hoisted_1 = /* @__PURE__ */ createStaticVNode('<h1 class="header"><img src="' + _imports_0 + '">ngVue 3</h1><h2>Use Vue 3 inside Angular 1.x</h2><p> Based off the excellent work by <a href="https://github.com/dorayx">Doray Hong</a> and <a href="https://github.com/nicolaspayot">Nicolas Payot</a> in the first iteration of <a href="https://github.com/ngVue/ngVue">ngVue</a> (which is recommended if you need to support Vue 2). </p><p> ngVue 3 is a rewrite of the original vue package and while it behaves mostly the same there are additional caveats. </p>', 4);
 const _hoisted_5 = /* @__PURE__ */ createBaseVNode("code", { class: "typescript" }, "useNgVue()", -1);

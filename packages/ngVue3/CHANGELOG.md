@@ -1,5 +1,11 @@
 # @jaredmcateer/ngvue3
 
+## 0.3.1
+
+### Patch Changes
+
+- [`87e799d`](https://github.com/jaredmcateer/ngVue3/commit/87e799d6c9611e66965ca002e07a89e8539b17ed) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Add missing license field to package.json
+
 ## 0.3.0
 
 ### Minor Changes

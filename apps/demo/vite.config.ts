@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   root: "./",
   publicDir: "public",
+  base: "",
   build: {
     minify: false,
     rollupOptions: {

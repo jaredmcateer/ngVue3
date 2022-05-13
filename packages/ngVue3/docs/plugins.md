@@ -27,7 +27,7 @@ angular
   .config(($ngVueProvider: NgVueProvider) => {
     $ngVueProvider.use(MyPlugin);
     $ngVueProvider.provide("foo", "bar");
-    $ngVueProvider.provide("focus", {
+    $ngVueProvider.directive("focus", {
       onMounted(el) {
         el.focus();
       },

@@ -4,30 +4,87 @@ on:
     branches:
       - main
 jobs:
-  release:
+  test:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          # This makes action fetch all Git history so that Changesets can generate changelogs with the correct commits
-          fetch-depth: 0
-      - name: Setup pnpm
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm 💫
         uses: pnpm/action-setup@v2
         with:
           version: 7.0.0
-      - name: Use Node.js 16.x
+
+      - name: Use Node.js 16.xa 💻
         uses: actions/setup-node@v3
         with:
           version: 16
           cache: pnpm
 
-      - name: Install Dependencies
+      - name: Install Dependencies 🗂️
         run: pnpm install --frozen-lockfile
 
-      - name: Test & Build
+      - name: Test 🔬️
         run: pnpm test
 
-      - name: Create Release Pull Request or Publish to npm
+  deploy-docs:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm 💫
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.0.0
+
+      - name: Use Node.js 16.x 💻
+        uses: actions/setup-node@v3
+        with:
+          version: 16
+          cache: pnpm
+
+      - name: Install Dependencies 🗂️
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: apps/demo/dist/ # The folder the action should deploy.
+
+  release:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+        with:
+          # This makes action fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup pnpm 💫
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.0.0
+
+      - name: Use Node.js 16.x 💻
+        uses: actions/setup-node@v3
+        with:
+          version: 16
+          cache: pnpm
+
+      - name: Install Dependencies 🗂️
+        run: pnpm install --frozen-lockfile
+
+      - name: Build 🛠
+        run: pnpm test
+
+      - name: Create Release Pull Request or Publish to npm 🚢
         uses: changesets/action@v1
         with:
           publish: pnpm run release

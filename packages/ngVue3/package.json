@@ -36,7 +36,7 @@
       "require": "./dist/main.js"
     }
   },
-  "version": "0.3.1",
+  "version": "0.3.2",
   "scripts": {
     "clean": "rimraf dist/",
     "build": "pnpm run clean && tsup lib/main.ts --minify --external angular --external vue --sourcemap --dts --format esm,cjs",

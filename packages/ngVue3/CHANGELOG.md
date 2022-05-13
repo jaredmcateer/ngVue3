@@ -1,5 +1,12 @@
 # @jaredmcateer/ngvue3
 
+## 0.3.2
+
+### Patch Changes
+
+- [`cce3ad1`](https://github.com/jaredmcateer/ngVue3/commit/cce3ad1da6a261bca8b053eb1b190a095c88ef56) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Add deploy script for demo
+  Also minify ngVue library output
+
 ## 0.3.1
 
 ### Patch Changes

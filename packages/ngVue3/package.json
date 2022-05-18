@@ -27,24 +27,26 @@
     "type": "git",
     "url": "https://github.com/jaredmcateer/ngVue3.git"
   },
-  "main": "./dist/main.js",
+  "main": "./dist/main.mjs",
   "module": "./dist/main.mjs",
   "types": "./dist/main.d.ts",
   "exports": {
     ".": {
       "import": "./dist/main.mjs",
-      "require": "./dist/main.js"
+      "require": "./dist/main.cjs"
     }
   },
   "version": "0.3.2",
   "scripts": {
     "clean": "rimraf dist/",
-    "build": "pnpm run clean && tsup lib/main.ts --minify --external angular --external vue --sourcemap --dts --format esm,cjs",
+    "build": "pnpm run clean && vite build",
     "test": "jest --runInBand"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-typescript": "^8.3.2",
     "@types/angular": "^1.8.4",
     "@types/angular-mocks": "^1.7.1",
     "@types/jest": "^27.4.1",
@@ -64,7 +66,6 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.4",
     "tsconfig": "workspace:*",
-    "tsup": "^5.12.7",
     "typescript": "^4.5.4",
     "vite": "^2.9.5",
     "vue": "^3.2.25",

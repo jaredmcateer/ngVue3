@@ -1,5 +1,11 @@
 # demo
 
+## 0.1.10
+
+### Patch Changes
+
+- [`7c59ea5`](https://github.com/jaredmcateer/ngVue3/commit/7c59ea5c9dbb75a488528847c78108f9592247a7) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Another attempt to fix static node modules in demo
+
 ## 0.1.9
 
 ### Patch Changes

@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   root: "./",
   publicDir: "public",
-  base: "",
+  base: "/ngVue3/",
   build: {
     minify: false,
     rollupOptions: {
@@ -16,6 +16,7 @@ export default defineConfig({
         compositionExample: resolve(__dirname, "examples/composition-api/index.html"),
         optionsExample: resolve(__dirname, "examples/options-api/index.html"),
         setupExample: resolve(__dirname, "examples/script-setup/index.html"),
+        umdExample: resolve(__dirname, "examples/umd/index.html"),
       },
     },
   },

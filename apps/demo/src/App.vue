@@ -101,6 +101,62 @@ const salutation = computed(() => {
 
 const onButtonClicked = () => emit("button-clicked");
 `);
+
+const umdImplementation = ref(`
+\<script src="../../node_modules/angular/angular.min.js"\>\</script\>
+\<script src="../../node_modules/vue/dist/vue.global.js"\>\</script\>
+\<script src="../../node_modules/@jaredmcateer/ngvue3/dist/main.js"\>\</script\>
+\<script>
+  const { useNgVue, ngVueComponent } = ngVue3;
+  const ngVue = useNgVue();
+
+  angular
+    .module("vue.components", [ngVue])
+    .controller(
+      "MainController",
+      class MainController {
+        person = {
+          firstName: "Barb",
+          lastName: "Ara",
+          description: "ngVue 3 supports components using the Composition API",
+        };
+
+        foo = "my-class";
+
+        updateDescription(description) {
+          this.person.description = description;
+        }
+      }
+    )
+    .directive(
+      ...ngVueComponent("myComponent", {
+        template: \`
+<div>
+<span> Hi, {{ firstName }} {{ lastName }} </span>
+<p>{{ description }}</p>
+</div>
+<div v-bind="$attrs">
+<p><a href="https://vuejs.org/guide/overview.html">Vue.js</a></p>
+<button @click="onButtonClick()">Update description from Vue</button>
+</div>
+            \`,
+        props: {
+          firstName: String,
+          lastName: String,
+          description: String,
+        },
+        emits: ["update-description"],
+        setup(props, context) {
+          const onButtonClick = () => {
+            context.emit("update-description", props.description.toUpperCase());
+          };
+
+          return { onButtonClick };
+        },
+      })
+    );
+\</script\>
+`);
 </script>
 
 <template>
@@ -175,6 +231,12 @@ const onButtonClicked = () => emit("button-clicked");
     of usage with the various styles you have available
   </p>
 
+  <h4>Quick Links</h4>
+  <a href="/examples/options-api/index.html">Options API Demo</a>
+  <a href="/examples/composition-api/index.html">Composition API Demo</a>
+  <a href="/examples/script-setup/index.html">Script Setup Demo</a>
+  <a href="/examples/umd/index.html">UMD Demo</a>
+
   <h4>Implementation</h4>
 
   <h5>Angular</h5>
@@ -203,6 +265,14 @@ const onButtonClicked = () => emit("button-clicked");
     the standard Composition API style.
   </p>
   <pre v-highlightjs><code class="typescript">{{scriptSetup}}</code></pre>
+
+  <h5>Using UMD</h5>
+  <a href="/examples/umd/index.html">Demo</a>
+  <p>
+    Perhaps you need to use a completely browser based implementation with no build. That is
+    possible using the UMD script
+  </p>
+  <pre v-highlightjs><code class="html">{{umdImplementation}}</code></pre>
 </template>
 
 <style lang="scss">

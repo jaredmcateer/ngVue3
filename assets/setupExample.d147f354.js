@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { d as defineComponent, c as createElementBlock, a as createBaseVNode, t as toDisplayString, n as normalizeProps, h as guardReactiveProps, F as Fragment, o as openBlock } from "./runtime-dom.esm-bundler.af516a3e.js";
-import { o as ot, a as angular_1, g as ge } from "./main.d166f084.js";
+import { d as defineComponent, c as createElementBlock, a as createBaseVNode, t as toDisplayString, n as normalizeProps, h as guardReactiveProps, F as Fragment, o as openBlock } from "./runtime-dom.esm-bundler.3037667d.js";
+import { u as useNgVue, a as angular_1, n as ngVueComponent } from "./main.e8843549.js";
 const _hoisted_1 = /* @__PURE__ */ createBaseVNode("p", null, [
   /* @__PURE__ */ createBaseVNode("a", { href: "https://vuejs.org/guide/overview.html" }, "Vue.js")
 ], -1);
@@ -37,7 +37,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ngVue = ot();
+const ngVue = useNgVue();
 angular_1.module("vue.components", [ngVue]).controller("MainController", class MainController {
   constructor() {
     __publicField(this, "person", {
@@ -50,4 +50,4 @@ angular_1.module("vue.components", [ngVue]).controller("MainController", class M
   updateDescription(description) {
     this.person.description = description;
   }
-}).directive(...ge("myComponent", _sfc_main));
+}).directive(...ngVueComponent("myComponent", _sfc_main));

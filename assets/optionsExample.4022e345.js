@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { d as defineComponent, o as openBlock, c as createElementBlock, a as createBaseVNode, t as toDisplayString, n as normalizeProps, h as guardReactiveProps, F as Fragment } from "./runtime-dom.esm-bundler.af516a3e.js";
-import { o as ot, a as angular_1, g as ge } from "./main.d166f084.js";
+import { d as defineComponent, c as createElementBlock, a as createBaseVNode, t as toDisplayString, n as normalizeProps, h as guardReactiveProps, F as Fragment, o as openBlock } from "./runtime-dom.esm-bundler.3037667d.js";
+import { u as useNgVue, a as angular_1, n as ngVueComponent } from "./main.e8843549.js";
 import { _ as _export_sfc } from "./plugin-vue_export-helper.21dcd24c.js";
 const _sfc_main = defineComponent({
   props: {
@@ -14,11 +14,10 @@ const _sfc_main = defineComponent({
     description: String
   },
   emits: ["update-description"],
-  setup(props, context) {
-    const onButtonClick = () => {
-      context.emit("update-description", props.description.toUpperCase());
-    };
-    return { onButtonClick };
+  methods: {
+    onButtonClick() {
+      this.$emit("update-description", this.description.toUpperCase());
+    }
   }
 });
 const _hoisted_1 = /* @__PURE__ */ createBaseVNode("p", null, [
@@ -39,7 +38,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   ], 64);
 }
 var Component = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
-const ngVue = ot();
+const ngVue = useNgVue();
 angular_1.module("vue.components", [ngVue]).controller("MainController", class MainController {
   constructor() {
     __publicField(this, "person", {
@@ -52,4 +51,4 @@ angular_1.module("vue.components", [ngVue]).controller("MainController", class M
   updateDescription(description) {
     this.person.description = description;
   }
-}).directive(...ge("myComponent", Component));
+}).directive(...ngVueComponent("myComponent", Component));

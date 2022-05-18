@@ -1,10 +1,4 @@
-var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => {
-  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-  return value;
-};
-import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as resolveDirective, w as withDirectives } from "./runtime-dom.esm-bundler.af516a3e.js";
+import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective, w as withDirectives, k as reactive } from "./runtime-dom.esm-bundler.3037667d.js";
 /**
  * @license AngularJS v1.8.3
  * (c) 2010-2020 Google LLC. http://angularjs.org
@@ -141,8 +135,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       if (!isObject(obj) && !isFunction(obj))
         continue;
       var keys = Object.keys(obj);
-      for (var j2 = 0, jj = keys.length; j2 < jj; j2++) {
-        var key2 = keys[j2];
+      for (var j = 0, jj = keys.length; j < jj; j++) {
+        var key2 = keys[j];
         var src = obj[key2];
         if (deep && isObject(src)) {
           if (isDate(src)) {
@@ -186,8 +180,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
   function noop() {
   }
   noop.$inject = [];
-  function identity($2) {
-    return $2;
+  function identity($) {
+    return $;
   }
   identity.$inject = [];
   function valueFn(value) {
@@ -411,8 +405,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       }
     }
   }
-  function simpleCompare(a, b2) {
-    return a === b2 || a !== a && b2 !== b2;
+  function simpleCompare(a, b) {
+    return a === b || a !== a && b !== b;
   }
   function equals(o1, o2) {
     if (o1 === o2)
@@ -1667,8 +1661,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
         } else {
           var value = fn.$dv;
           var jj = isUndefined(value) ? Math.min(nodeCount, 1) : nodeCount;
-          for (var j2 = 0; j2 < jj; j2++) {
-            var nodeValue = fn(this[j2], arg1, arg2);
+          for (var j = 0; j < jj; j++) {
+            var nodeValue = fn(this[j], arg1, arg2);
             value = value ? value + nodeValue : nodeValue;
           }
           return value;
@@ -2342,18 +2336,18 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
   var $animateMinErr = minErr("$animate");
   var ELEMENT_NODE = 1;
   var NG_ANIMATE_CLASSNAME = "ng-animate";
-  function mergeClasses(a, b2) {
-    if (!a && !b2)
+  function mergeClasses(a, b) {
+    if (!a && !b)
       return "";
     if (!a)
-      return b2;
-    if (!b2)
+      return b;
+    if (!b)
       return a;
     if (isArray(a))
       a = a.join(" ");
-    if (isArray(b2))
-      b2 = b2.join(" ");
-    return a + " " + b2;
+    if (isArray(b))
+      b = b.join(" ");
+    return a + " " + b;
   }
   function extractElementNode(element) {
     for (var i = 0; i < element.length; i++) {
@@ -3103,16 +3097,16 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       }
     }
     function getDirectiveRequire(directive) {
-      var require2 = directive.require || directive.controller && directive.name;
-      if (!isArray(require2) && isObject(require2)) {
-        forEach(require2, function(value, key2) {
+      var require = directive.require || directive.controller && directive.name;
+      if (!isArray(require) && isObject(require)) {
+        forEach(require, function(value, key2) {
           var match = value.match(REQUIRE_PREFIX_REGEXP);
           var name = value.substring(match[0].length);
           if (!name)
-            require2[key2] = match[0] + key2;
+            require[key2] = match[0] + key2;
         });
       }
-      return require2;
+      return require;
     }
     function getDirectiveRestrict(restrict, name) {
       if (restrict && !(isString(restrict) && /[EACM]/.test(restrict))) {
@@ -3710,12 +3704,12 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
             case NODE_TYPE_ELEMENT:
               nodeName = nodeName_(node);
               addDirective(directives, directiveNormalize(nodeName), "E", maxPriority, ignoreDirective);
-              for (var attr, name, nName, value, ngPrefixMatch, nAttrs = node.attributes, j2 = 0, jj = nAttrs && nAttrs.length; j2 < jj; j2++) {
+              for (var attr, name, nName, value, ngPrefixMatch, nAttrs = node.attributes, j = 0, jj = nAttrs && nAttrs.length; j < jj; j++) {
                 var attrStartName = false;
                 var attrEndName = false;
                 var isNgAttr = false, isNgProp = false, isNgEvent = false;
                 var multiElementMatch;
-                attr = nAttrs[j2];
+                attr = nAttrs[j];
                 name = attr.name;
                 value = attr.value;
                 nName = directiveNormalize(name.toLowerCase());
@@ -4073,9 +4067,9 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
               controller.bindingInfo = initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
             }
             forEach(controllerDirectives, function(controllerDirective2, name2) {
-              var require2 = controllerDirective2.require;
-              if (controllerDirective2.bindToController && !isArray(require2) && isObject(require2)) {
-                extend(elementControllers[name2].instance, getControllers(name2, require2, $element, elementControllers));
+              var require = controllerDirective2.require;
+              if (controllerDirective2.bindToController && !isArray(require) && isObject(require)) {
+                extend(elementControllers[name2].instance, getControllers(name2, require, $element, elementControllers));
               }
             });
             forEach(elementControllers, function(controller2) {
@@ -4154,11 +4148,11 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
             }
           }
         }
-        function getControllers(directiveName, require2, $element, elementControllers) {
+        function getControllers(directiveName, require, $element, elementControllers) {
           var value;
-          if (isString(require2)) {
-            var match = require2.match(REQUIRE_PREFIX_REGEXP);
-            var name = require2.substring(match[0].length);
+          if (isString(require)) {
+            var match = require.match(REQUIRE_PREFIX_REGEXP);
+            var name = require.substring(match[0].length);
             var inheritType = match[1] || match[3];
             var optional = match[2] === "?";
             if (inheritType === "^^") {
@@ -4178,14 +4172,14 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
             if (!value && !optional) {
               throw $compileMinErr("ctreq", "Controller '{0}', required by directive '{1}', can't be found!", name, directiveName);
             }
-          } else if (isArray(require2)) {
+          } else if (isArray(require)) {
             value = [];
-            for (var i = 0, ii = require2.length; i < ii; i++) {
-              value[i] = getControllers(directiveName, require2[i], $element, elementControllers);
+            for (var i = 0, ii = require.length; i < ii; i++) {
+              value[i] = getControllers(directiveName, require[i], $element, elementControllers);
             }
-          } else if (isObject(require2)) {
+          } else if (isObject(require)) {
             value = {};
-            forEach(require2, function(controller, property) {
+            forEach(require, function(controller, property) {
               value[property] = getControllers(directiveName, controller, $element, elementControllers);
             });
           }
@@ -4212,8 +4206,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
           return elementControllers;
         }
         function markDirectiveScope(directives, isolateScope, newScope) {
-          for (var j2 = 0, jj = directives.length; j2 < jj; j2++) {
-            directives[j2] = inherit(directives[j2], { $$isolateScope: isolateScope, $$newScope: newScope });
+          for (var j = 0, jj = directives.length; j < jj; j++) {
+            directives[j] = inherit(directives[j], { $$isolateScope: isolateScope, $$newScope: newScope });
           }
         }
         function addDirective(tDirectives, name, location, maxPriority, ignoreDirective, startAttrName, endAttrName) {
@@ -4354,13 +4348,13 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
             }
           };
         }
-        function byPriority(a, b2) {
-          var diff = b2.priority - a.priority;
+        function byPriority(a, b) {
+          var diff = b.priority - a.priority;
           if (diff !== 0)
             return diff;
-          if (a.name !== b2.name)
-            return a.name < b2.name ? -1 : 1;
-          return a.index - b2.index;
+          if (a.name !== b.name)
+            return a.name < b.name ? -1 : 1;
+          return a.index - b.index;
         }
         function assertNoDuplicate(what, previousDirective, directive, element) {
           function wrapModuleNameIfDefined(moduleName) {
@@ -4446,7 +4440,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
           }
           directives.push({
             priority: 100,
-            compile: function ngPropCompileFn(_2, attr) {
+            compile: function ngPropCompileFn(_, attr) {
               var ngPropGetter = $parse(attr[attrName]);
               var ngPropWatch = $parse(attr[attrName], function sceValueOf(val) {
                 return $sce.valueOf(val);
@@ -4514,11 +4508,11 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
             for (i = 0, ii = $rootElement.length; i < ii; i++) {
               if ($rootElement[i] === firstElementToRemove) {
                 $rootElement[i++] = newNode;
-                for (var j2 = i, j22 = j2 + removeCount - 1, jj = $rootElement.length; j2 < jj; j2++, j22++) {
-                  if (j22 < jj) {
-                    $rootElement[j2] = $rootElement[j22];
+                for (var j = i, j2 = j + removeCount - 1, jj = $rootElement.length; j < jj; j++, j2++) {
+                  if (j2 < jj) {
+                    $rootElement[j] = $rootElement[j2];
                   } else {
-                    delete $rootElement[j2];
+                    delete $rootElement[j];
                   }
                 }
                 $rootElement.length -= removeCount - 1;
@@ -4712,7 +4706,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
   var PREFIX_REGEXP = /^((?:x|data)[:\-_])/i;
   var SPECIAL_CHARS_REGEXP = /[:\-_]+(.)/g;
   function directiveNormalize(name) {
-    return name.replace(PREFIX_REGEXP, "").replace(SPECIAL_CHARS_REGEXP, function(_2, letter, offset) {
+    return name.replace(PREFIX_REGEXP, "").replace(SPECIAL_CHARS_REGEXP, function(_, letter, offset) {
       return offset ? letter.toUpperCase() : letter;
     });
   }
@@ -4721,8 +4715,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
     outer:
       for (var i = 0; i < tokens1.length; i++) {
         var token = tokens1[i];
-        for (var j2 = 0; j2 < tokens2.length; j2++) {
-          if (token === tokens2[j2])
+        for (var j = 0; j < tokens2.length; j++) {
+          if (token === tokens2[j])
             continue outer;
         }
         values += (values.length > 0 ? " " : "") + token;
@@ -6002,8 +5996,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
         $location.$$parseLinkUrl(initialUrl, initialUrl);
         $location.$$state = $browser.state();
         var IGNORE_URI_REGEXP = /^\s*(javascript|mailto):/i;
-        function urlsEqual(a, b2) {
-          return a === b2 || urlResolve(a).href === urlResolve(b2).href;
+        function urlsEqual(a, b) {
+          return a === b || urlResolve(a).href === urlResolve(b).href;
         }
         function setBrowserUrlWithFallback(url, replace, state) {
           var oldUrl = $location.url();
@@ -7839,7 +7833,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       return new Deferred();
     }
     function Deferred() {
-      var promise = this.promise = new Promise2();
+      var promise = this.promise = new Promise();
       this.resolve = function(val) {
         resolvePromise(promise, val);
       };
@@ -7850,15 +7844,15 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
         notifyPromise(promise, progress);
       };
     }
-    function Promise2() {
+    function Promise() {
       this.$$state = { status: 0 };
     }
-    extend(Promise2.prototype, {
+    extend(Promise.prototype, {
       then: function(onFulfilled, onRejected, progressBack) {
         if (isUndefined(onFulfilled) && isUndefined(onRejected) && isUndefined(progressBack)) {
           return this;
         }
-        var result = new Promise2();
+        var result = new Promise();
         this.$$state.pending = this.$$state.pending || [];
         this.$$state.pending.push([result, onFulfilled, onRejected, progressBack]);
         if (this.$$state.status > 0)
@@ -8007,7 +8001,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       }
     }
     function reject(reason) {
-      var result = new Promise2();
+      var result = new Promise();
       rejectPromise(result, reason);
       return result;
     }
@@ -8028,13 +8022,13 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       }
     }
     function when(value, callback, errback, progressBack) {
-      var result = new Promise2();
+      var result = new Promise();
       resolvePromise(result, value);
       return result.then(callback, errback, progressBack);
     }
     var resolve = when;
     function all(promises) {
-      var result = new Promise2(), counter = 0, results = isArray(promises) ? [] : {};
+      var result = new Promise(), counter = 0, results = isArray(promises) ? [] : {};
       forEach(promises, function(promise, key2) {
         counter++;
         when(promise).then(function(value) {
@@ -8061,7 +8055,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       if (!isFunction(resolver)) {
         throw $qMinErr("norslvr", "Expected resolverFn, got '{0}'", resolver);
       }
-      var promise = new Promise2();
+      var promise = new Promise();
       function resolveFn(value) {
         resolvePromise(promise, value);
       }
@@ -8071,7 +8065,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       resolver(resolveFn, rejectFn);
       return promise;
     }
-    $Q.prototype = Promise2.prototype;
+    $Q.prototype = Promise.prototype;
     $Q.defer = defer;
     $Q.reject = reject;
     $Q.when = when;
@@ -8223,14 +8217,14 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
               lastDirtyWatch = null;
             };
           },
-          $watchGroup: function(watchExpressions, listener) {
-            var oldValues = new Array(watchExpressions.length);
-            var newValues = new Array(watchExpressions.length);
+          $watchGroup: function(watchExpressions2, listener) {
+            var oldValues = new Array(watchExpressions2.length);
+            var newValues = new Array(watchExpressions2.length);
             var deregisterFns = [];
             var self = this;
             var changeReactionScheduled = false;
             var firstRun = true;
-            if (!watchExpressions.length) {
+            if (!watchExpressions2.length) {
               var shouldCall = true;
               self.$evalAsync(function() {
                 if (shouldCall)
@@ -8240,14 +8234,14 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
                 shouldCall = false;
               };
             }
-            if (watchExpressions.length === 1) {
-              return this.$watch(watchExpressions[0], function watchGroupAction2(value, oldValue, scope) {
+            if (watchExpressions2.length === 1) {
+              return this.$watch(watchExpressions2[0], function watchGroupAction2(value, oldValue, scope) {
                 newValues[0] = value;
                 oldValues[0] = oldValue;
                 listener(newValues, value === oldValue ? newValues : oldValues, scope);
               });
             }
-            forEach(watchExpressions, function(expr, i) {
+            forEach(watchExpressions2, function(expr, i) {
               var unwatchFn = self.$watch(expr, function watchGroupSubAction(value) {
                 newValues[i] = value;
                 if (!changeReactionScheduled) {
@@ -8267,7 +8261,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
                   listener(newValues, oldValues, self);
                 }
               } finally {
-                for (var i = 0; i < watchExpressions.length; i++) {
+                for (var i = 0; i < watchExpressions2.length; i++) {
                   oldValues[i] = newValues[i];
                 }
               }
@@ -9468,7 +9462,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
   }
   function parse(numStr) {
     var exponent = 0, digits, numberOfIntegerDigits;
-    var i, j2, zeros;
+    var i, j, zeros;
     if ((numberOfIntegerDigits = numStr.indexOf(DECIMAL_SEP)) > -1) {
       numStr = numStr.replace(DECIMAL_SEP, "");
     }
@@ -9491,8 +9485,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
         zeros--;
       numberOfIntegerDigits -= i;
       digits = [];
-      for (j2 = 0; i <= zeros; i++, j2++) {
-        digits[j2] = +numStr.charAt(i);
+      for (j = 0; i <= zeros; i++, j++) {
+        digits[j] = +numStr.charAt(i);
       }
     }
     if (numberOfIntegerDigits > MAX_DIGITS) {
@@ -9510,8 +9504,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
     var digit = digits[roundAt];
     if (roundAt > 0) {
       digits.splice(Math.max(parsedNumber.i, roundAt));
-      for (var j2 = roundAt; j2 < digits.length; j2++) {
-        digits[j2] = 0;
+      for (var j = roundAt; j < digits.length; j++) {
+        digits[j] = 0;
       }
     } else {
       fractionLen = Math.max(0, fractionLen);
@@ -9709,10 +9703,10 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
         }
         dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
         var h2 = toInt(match[4] || 0) - tzHour;
-        var m2 = toInt(match[5] || 0) - tzMin;
+        var m = toInt(match[5] || 0) - tzMin;
         var s = toInt(match[6] || 0);
         var ms = Math.round(parseFloat("0." + (match[7] || 0)) * 1e3);
-        timeSetter.call(date, h2, m2, s, ms);
+        timeSetter.call(date, h2, m, s, ms);
         return date;
       }
       return string;
@@ -10902,7 +10896,7 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
     return {
       restrict: "E",
       priority: 200,
-      compile: function(_2, attr) {
+      compile: function(_, attr) {
         if (lowercase(attr.type) !== "hidden") {
           return;
         }
@@ -11083,8 +11077,8 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
       outer:
         for (var i = 0; i < tokens1.length; i++) {
           var token = tokens1[i];
-          for (var j2 = 0; j2 < tokens2.length; j2++) {
-            if (token === tokens2[j2])
+          for (var j = 0; j < tokens2.length; j++) {
+            if (token === tokens2[j])
               continue outer;
           }
           values.push(token);
@@ -13110,222 +13104,364 @@ import { i as reactive, g as createApp, r as ref, j as onMounted, k as h$1, f as
 })(window);
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend(window.angular.element("<style>").text('@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}'));
 var angular_1 = angular;
-var J = Object.defineProperty;
-var N = Object.getOwnPropertySymbols;
-var Q = Object.prototype.hasOwnProperty, B = Object.prototype.propertyIsEnumerable;
-var V = (t, e, n) => e in t ? J(t, e, { enumerable: true, configurable: true, writable: true, value: n }) : t[e] = n, m = (t, e) => {
-  for (var n in e || (e = {}))
-    Q.call(e, n) && V(t, n, e[n]);
-  if (N)
-    for (var n of N(e))
-      B.call(e, n) && V(t, n, e[n]);
-  return t;
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-var O = (t, e, n) => (V(t, typeof e != "symbol" ? e + "" : e, n), n);
-function A(t, e) {
-  return t && angular_1.isObject(t) ? Object.keys(t).reduce((r, i) => {
-    let s = e.$eval(t[i]);
-    return angular_1.isFunction(s) ? r[i] = function() {
-      return e.$evalAsync(() => s.apply(null, arguments));
-    } : (r[i] = s, console.warn(`[ngVue] Bound a non-function as an event handler (${i})`)), r;
-  }, {}) : {};
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+function evaluateEvents(events, scope) {
+  if (!(events && angular_1.isObject(events))) {
+    return {};
+  }
+  const evaluatedEvents = Object.keys(events).reduce((accumulator, key) => {
+    const fn = scope.$eval(events[key]);
+    if (!angular_1.isFunction(fn)) {
+      accumulator[key] = fn;
+      console.warn(`[ngVue] Bound a non-function as an event handler (${key})`);
+    } else {
+      accumulator[key] = function() {
+        return scope.$evalAsync(() => fn.apply(null, arguments));
+      };
+    }
+    return accumulator;
+  }, {});
+  return evaluatedEvents;
 }
-function h(t, e) {
-  return t ? Object.keys(t).reduce((r, i) => (i === "__ngvue_props__" ? Object.assign(r, e.$eval(t.__ngvue_props__)) : r[i] = e.$eval(t[i]), r), {}) : {};
+function evaluateValues(expressions, scope) {
+  if (!expressions)
+    return {};
+  const evaluatedValues = Object.keys(expressions).reduce((accumulator, prop) => {
+    if (prop === "__ngvue_props__") {
+      Object.assign(accumulator, scope.$eval(expressions.__ngvue_props__));
+    } else {
+      accumulator[prop] = scope.$eval(expressions[prop]);
+    }
+    return accumulator;
+  }, {});
+  return evaluatedValues;
 }
-function G(t) {
-  return t.constructor.name;
+function getTypeOf(value) {
+  return value.constructor.name;
 }
-var U = { Object: (t) => [t], Array: (t) => t, String: (t) => t.split(/\s*,\s*/g).filter(Boolean).map((e) => ({ name: e })) };
-function M(t, e) {
-  if (!t)
+const transformers = {
+  Object: (value) => [value],
+  Array: (value) => value,
+  String: (value) => value.split(/\s*,\s*/g).filter(Boolean).map((name) => ({ name }))
+};
+function evaluateDirectives(directiveExpression, scope) {
+  if (!directiveExpression)
     return [];
-  let n = e.$eval(t), r = U[G(n)];
-  return r ? r(n) : [];
+  const directives = scope.$eval(directiveExpression);
+  const transformer = transformers[getTypeOf(directives)];
+  return transformer ? transformer(directives) : [];
 }
-var I = ["class", "style"];
-function P(t, e) {
-  return I.reduce((n, r) => (n[r] = t[r] || "", e(r), n), {});
+const SPECIAL_ATTRS = ["class", "style"];
+function extractSpecialAttributes(attributes, removeAttrFn) {
+  return SPECIAL_ATTRS.reduce((accumulator, key) => {
+    accumulator[key] = attributes[key] || "";
+    removeAttrFn(key);
+    return accumulator;
+  }, {});
 }
-var X = ["vProps", "vOn", "vDirectives", "watchDepth", "ng", ...I], Y = new RegExp(`^(${X.join("|")})`, "i");
-function C(t) {
-  return Object.keys(t).filter((e) => {
-    let n = Y.test(e), r = e[0] === "$";
-    return !(n || r);
+const excludedAttributes = [
+  "vProps",
+  "vOn",
+  "vDirectives",
+  "watchDepth",
+  "ng",
+  ...SPECIAL_ATTRS
+];
+const excludePattern = new RegExp(`^(${excludedAttributes.join("|")})`, "i");
+function extractHtmlAttributes(attributes) {
+  return Object.keys(attributes).filter((attribute) => {
+    const isExcludedAttribute = excludePattern.test(attribute);
+    const isAngularInternal = attribute[0] === "$";
+    return !(isExcludedAttribute || isAngularInternal);
   });
 }
-function _([t, ...e]) {
-  return t.toLowerCase() + e.join("");
+function lowerFirst([first, ...rest]) {
+  return first.toLowerCase() + rest.join("");
 }
-var R = { vProps: "", vOn: "on" };
-Object.freeze(R);
-function H(t, e) {
-  let n = new RegExp(`^${e}`, "i");
-  if (!n.test(t))
+const replacementMap = {
+  vProps: "",
+  vOn: "on"
+};
+Object.freeze(replacementMap);
+function extractExpressionName(expression, replaceKey) {
+  const pattern = new RegExp(`^${replaceKey}`, "i");
+  if (!pattern.test(expression))
     return null;
-  let r = t.replace(n, R[e]);
-  return _(r);
+  const name = expression.replace(pattern, replacementMap[replaceKey]);
+  return lowerFirst(name);
 }
-var E = { props: "vProps", on: "vOn" };
-Object.freeze(E);
-function Z(t) {
-  return t in E;
+const attributeMap = {
+  props: "vProps",
+  on: "vOn"
+};
+Object.freeze(attributeMap);
+function isAttributeMapKey(expressionType) {
+  return expressionType in attributeMap;
 }
-function b(t, e, n) {
-  let r = [], i, s, o = {};
-  if (Z(t)) {
-    i = E[t];
-    let c = e[i];
-    c !== void 0 && (o.__ngvue_props__ = c, n(i));
-    let p = new RegExp(`^${i}.+`, "i");
-    r = Object.keys(e).filter((g) => p.test(g)), s = (g, f) => {
-      let d = H(f, i);
-      return d && (g[d] = e[f], n(f)), g;
+function extractExpressions(expressionType, attributes, removeAttrFn) {
+  let expressions = [];
+  let key;
+  let extractExpressionFn;
+  let baseExpressionMap = {};
+  if (isAttributeMapKey(expressionType)) {
+    key = attributeMap[expressionType];
+    const objectExpression = attributes[key];
+    if (objectExpression !== void 0) {
+      baseExpressionMap.__ngvue_props__ = objectExpression;
+      removeAttrFn(key);
+    }
+    const propRegExp = new RegExp(`^${key}.+`, "i");
+    expressions = Object.keys(attributes).filter((attr) => propRegExp.test(attr));
+    extractExpressionFn = (accumulator, attrKey) => {
+      const exprName = extractExpressionName(attrKey, key);
+      if (exprName) {
+        accumulator[exprName] = attributes[attrKey];
+        removeAttrFn(attrKey);
+      }
+      return accumulator;
     };
-  } else
-    r = C(e), s = (c, p) => {
-      let g = e.$attr[p];
-      return c[g] = e[p] === "" ? `${p}` : e[p], n(p), c;
+  } else {
+    expressions = extractHtmlAttributes(attributes);
+    extractExpressionFn = (accumulator, attrKey) => {
+      const denormalizedAttr = attributes.$attr[attrKey];
+      accumulator[denormalizedAttr] = attributes[attrKey] === "" ? `${attrKey}` : attributes[attrKey];
+      removeAttrFn(attrKey);
+      return accumulator;
     };
-  return r.reduce(s, o);
+  }
+  const expressionsMap = expressions.reduce(extractExpressionFn, baseExpressionMap);
+  return expressionsMap;
 }
-function T(t, e) {
-  return { props: b("props", t, e) || {}, events: b("on", t, e) || {}, attrs: b("attrs", t, e) || {} };
+function getExpressions(attributes, removeAttrFn) {
+  return {
+    props: extractExpressions("props", attributes, removeAttrFn) || {},
+    events: extractExpressions("on", attributes, removeAttrFn) || {},
+    attrs: extractExpressions("attrs", attributes, removeAttrFn) || {}
+  };
 }
-function j(t, e, n, r = { depth: "reference" }) {
-  if (!t)
+function watchExpressions(expressions, state, scope, options = { depth: "reference" }) {
+  if (!expressions)
     return;
-  let i = ee(t, e);
-  switch (r.depth) {
+  const watcher = getWatcher(expressions, state);
+  switch (options.depth) {
     case "value":
-      i((s, o) => n.$watch(s, o, true));
+      watcher((expression, setter) => scope.$watch(expression, setter, true));
       break;
     case "collection":
-      i((s, o) => n.$watchCollection(s, o));
+      watcher((expression, setter) => scope.$watchCollection(expression, setter));
       break;
     case "reference":
     default:
-      i((s, o) => n.$watch(s, o));
+      watcher((expression, setter) => scope.$watch(expression, setter));
       break;
   }
 }
-function K(t, e) {
-  return t === "__ngvue_props__" && angular_1.isObject(e);
+function isNgPropsObject(name, value) {
+  return name === "__ngvue_props__" && angular_1.isObject(value);
 }
-function ee(t, e) {
-  return (n) => {
-    Object.keys(t).forEach((r) => {
-      let i = (s) => {
-        K(r, s) ? Object.keys(s).forEach((o) => {
-          e[o] = s[o];
-        }) : e[r] = s;
+function getWatcher(expressions, state) {
+  return (callback) => {
+    Object.keys(expressions).forEach((name) => {
+      const setter = (value) => {
+        if (isNgPropsObject(name, value)) {
+          Object.keys(value).forEach((key) => {
+            state[key] = value[key];
+          });
+        } else {
+          state[name] = value;
+        }
       };
-      n(t[r], i);
+      callback(expressions[name], setter);
     });
   };
 }
-var y = {};
-function L(t) {
-  return y[t] || (y[t] = { props: reactive({}), attrs: reactive({}), special: reactive({}) }), y[t];
+const store = {};
+function getInstanceState(id) {
+  if (!store[id]) {
+    store[id] = {
+      props: reactive({}),
+      attrs: reactive({}),
+      special: reactive({})
+    };
+  }
+  return store[id];
 }
-function F(t, e, n, r, i) {
-  let s = Symbol("ngVueInstanceKey"), o = L(s), l = ue(e, n), c = T(n, l), p = A(c.events, r), g = M(n.vDirectives, r);
-  Object.assign(o.props, h(c.props, r)), Object.assign(o.attrs, h(c.attrs, r)), Object.assign(o.special, P(n, l));
-  let f = { depth: n.watchDepth };
-  l("watchDepth"), j(c.props, o.props, r, f), j(c.attrs, o.attrs, r, f);
-  let d = ae(e[0]), v = se(t, d, o, p, g);
-  ce(v, i), v.mount(e[0]), r.$on("$destroy", () => {
-    v.unmount(), v._container && angular_1.element(v._container).remove(), v = null;
+function ngVueLinker(Component, jqElement, attrs, scope, $injector) {
+  const instanceKey = Symbol("ngVueInstanceKey");
+  const state = getInstanceState(instanceKey);
+  const removeAttrFn = getAttrRemoveFunction(jqElement, attrs);
+  const attrExpressions = getExpressions(attrs, removeAttrFn);
+  const events = evaluateEvents(attrExpressions.events, scope);
+  const ngVueDirectives = evaluateDirectives(attrs.vDirectives, scope);
+  Object.assign(state.props, evaluateValues(attrExpressions.props, scope));
+  Object.assign(state.attrs, evaluateValues(attrExpressions.attrs, scope));
+  Object.assign(state.special, extractSpecialAttributes(attrs, removeAttrFn));
+  const options = { depth: attrs.watchDepth };
+  removeAttrFn("watchDepth");
+  watchExpressions(attrExpressions.props, state.props, scope, options);
+  watchExpressions(attrExpressions.attrs, state.attrs, scope, options);
+  let html = getInnerHtml(jqElement[0]);
+  let vueInstance = createAppInstance(Component, html, state, events, ngVueDirectives);
+  loadNgVueGlobals(vueInstance, $injector);
+  vueInstance.mount(jqElement[0]);
+  scope.$on("$destroy", () => {
+    vueInstance.unmount();
+    if (vueInstance._container) {
+      angular_1.element(vueInstance._container).remove();
+    }
+    vueInstance = null;
   });
 }
-function se(t, e, n, r, i) {
-  return createApp({ name: `NgVue-${t.name || "UnnamedComponent"}`, setup() {
-    let s = ref(null);
-    return onMounted(() => {
-      var o;
-      e && ((o = s.value) == null || o.replaceChild(e, s.value));
-    }), () => {
-      let o = h$1(t, m(m(m(m({}, n.props), n.attrs), n.special), r), () => [h$1("span", { ref: s })]);
-      if (i.length > 0) {
-        let l = i.filter((c) => !!resolveDirective(c.name)).map((c) => [resolveDirective(c.name), c.value, c.arg, c.modifiers]);
-        o = withDirectives(o, l);
-      }
-      return o;
-    };
-  } });
+function createAppInstance(Component, html, state, events, ngVueDirectives) {
+  return createApp({
+    name: `NgVue-${Component.name || "UnnamedComponent"}`,
+    setup() {
+      const slot = ref(null);
+      onMounted(() => {
+        var _a;
+        if (html) {
+          (_a = slot.value) == null ? void 0 : _a.replaceChild(html, slot.value);
+        }
+      });
+      return () => {
+        let node = h(Component, __spreadValues(__spreadValues(__spreadValues(__spreadValues({}, state.props), state.attrs), state.special), events), () => [h("span", { ref: slot })]);
+        if (ngVueDirectives.length > 0) {
+          const directives = ngVueDirectives.filter((d) => !!resolveDirective(d.name)).map((d) => {
+            const directive = resolveDirective(d.name);
+            return [directive, d.value, d.arg, d.modifiers];
+          });
+          node = withDirectives(node, directives);
+        }
+        return node;
+      };
+    }
+  });
 }
-function ce(t, e) {
-  let n = e.has("$ngVue") ? e.get("$ngVue") : null;
-  n && (n.initNgVuePlugins(t), n.getVuePlugins().forEach((r) => t.use(r)), n.getInjectables().forEach(([r, i]) => t.provide(r, i)), Object.entries(n.getVueDirectives()).forEach(([r, i]) => t.directive(r, i)));
-}
-function ae(t) {
-  if (t.innerHTML.trim()) {
-    let e;
-    if (t.children.length === 0) {
-      let n = document.createElement("span");
-      n.innerHTML = t.innerHTML.trim(), e = n;
-    } else
-      e = t.children[0];
-    return e;
+function loadNgVueGlobals(vueInstance, $injector) {
+  const $ngVue = $injector.has("$ngVue") ? $injector.get("$ngVue") : null;
+  if ($ngVue) {
+    $ngVue.initNgVuePlugins(vueInstance);
+    $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
+    $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
+    Object.entries($ngVue.getVueDirectives()).forEach(([name, directive]) => vueInstance.directive(name, directive));
   }
 }
-function ue(t, e) {
-  return (n) => {
-    let r = e.$attr[n];
-    t.removeAttr(r);
+function getInnerHtml(element) {
+  if (element.innerHTML.trim()) {
+    let html;
+    if (element.children.length === 0) {
+      const span = document.createElement("span");
+      span.innerHTML = element.innerHTML.trim();
+      html = span;
+    } else {
+      html = element.children[0];
+    }
+    return html;
+  }
+}
+function getAttrRemoveFunction(element, attributes) {
+  return (attr) => {
+    const denormalizedAttr = attributes.$attr[attr];
+    element.removeAttr(denormalizedAttr);
   };
 }
-function S(t) {
-  return (e, n) => {
-    let r = { restrict: "E", link(i, s, o) {
-      F(e, s, o, i, t);
-    } };
-    return angular_1.extend(r, n);
+function ngVueComponentFactory($injector) {
+  return (component, ngDirectiveConfig) => {
+    const config = {
+      restrict: "E",
+      link(scope, elem, attrs) {
+        ngVueLinker(component, elem, attrs, scope, $injector);
+      }
+    };
+    return angular_1.extend(config, ngDirectiveConfig);
   };
 }
-S.$inject = ["$injector"];
-function ge(t, e, n) {
-  return [t, ["createVueComponent", (r) => r(e, n)]];
+ngVueComponentFactory.$inject = ["$injector"];
+function ngVueComponent(name, Component, ngDirectiveConfig) {
+  return [
+    name,
+    [
+      "createVueComponent",
+      (createVueComponent) => createVueComponent(Component, ngDirectiveConfig)
+    ]
+  ];
 }
-var x = class {
-  constructor(e) {
+class NgVueProvider {
+  constructor($injector) {
+    __publicField(this, "$injector");
     __publicField(this, "$get");
     __publicField(this, "pluginHooks", []);
     __publicField(this, "pluginConfig", {});
     __publicField(this, "injectables", []);
     __publicField(this, "nativeVuePlugins", []);
     __publicField(this, "nativeVueDirectives", {});
-    this.$injector = e;
-    this.$get = ["$injector", (n) => ({ initNgVuePlugins: (i) => {
-      let s = (o) => {
-        o(n, i);
-      };
-      this.callHooks(this.pluginHooks, s);
-    }, getInjectables: () => this.injectables, getVuePlugins: () => this.nativeVuePlugins, getVueDirectives: () => this.nativeVueDirectives })];
+    this.$injector = $injector;
+    this.$get = [
+      "$injector",
+      ($injector2) => {
+        const initNgVuePlugins = (app) => {
+          const callback = (hook) => {
+            hook($injector2, app);
+          };
+          this.callHooks(this.pluginHooks, callback);
+        };
+        return {
+          initNgVuePlugins,
+          getInjectables: () => this.injectables,
+          getVuePlugins: () => this.nativeVuePlugins,
+          getVueDirectives: () => this.nativeVueDirectives
+        };
+      }
+    ];
   }
   get plugins() {
     return this.pluginConfig;
   }
-  provide(e, n) {
-    this.injectables.push([e, n]);
+  provide(name, value) {
+    this.injectables.push([name, value]);
   }
-  use(e) {
-    this.nativeVuePlugins.push(e);
+  use(vuePlugin) {
+    this.nativeVuePlugins.push(vuePlugin);
   }
-  directive(e, n) {
-    this.nativeVueDirectives[e] = n;
+  directive(name, vueDirective) {
+    this.nativeVueDirectives[name] = vueDirective;
   }
-  installNgVuePlugin(e) {
-    let { $name: n, $config: r, $plugin: i } = e();
-    this.pluginHooks.push(i), this.pluginConfig[n] = r;
+  installNgVuePlugin(plugin) {
+    const { $name, $config, $plugin } = plugin();
+    this.pluginHooks.push($plugin);
+    this.pluginConfig[$name] = $config;
   }
-  callHooks(e, n) {
-    e && e.forEach((r) => n(r));
+  callHooks(hooks, callback) {
+    if (hooks) {
+      hooks.forEach((hook) => callback(hook));
+    }
   }
-};
-O(x, "$inject", ["$injector"]);
-var $;
-function ot() {
-  return $ || ($ = angular_1.module("ngVue", []).factory("createVueComponent", S)), $.name;
 }
-export { angular_1 as a, ge as g, ot as o };
+__publicField(NgVueProvider, "$inject", ["$injector"]);
+let ngVueModule;
+function useNgVue() {
+  if (!ngVueModule) {
+    ngVueModule = angular_1.module("ngVue", []).factory("createVueComponent", ngVueComponentFactory);
+  }
+  return ngVueModule.name;
+}
+export { angular_1 as a, ngVueComponent as n, useNgVue as u };

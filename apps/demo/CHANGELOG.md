@@ -1,5 +1,11 @@
 # demo
 
+## 0.1.8
+
+### Patch Changes
+
+- [`fb2f4cd`](https://github.com/jaredmcateer/ngVue3/commit/fb2f4cd44eec11a80b60e8bef20ba3afc16e2a54) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Fix example links in demo
+
 ## 0.1.7
 
 ### Patch Changes

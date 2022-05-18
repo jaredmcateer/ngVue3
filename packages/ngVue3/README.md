@@ -44,8 +44,8 @@ First of all, load AngularJS 1.x, Vue 3 and ngVue 3:
 
 ```html
 <!-- load on the page with `script` tag -->
-<script src="./node_modules/angular/angular.js"></script>
-<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/angular/angular.min.js"></script>
+<script src="./node_modules/vue/dist/vue.global.js"></script>
 <script src="./node_modules/ngVue/dist/main.js"></script>
 <!-- or if using modules -->
 <script type="module" src="./node_modules/ngVue/dist/main.mjs"></script>
@@ -58,24 +58,24 @@ _CommonJs Style_
 ```javascript
 const ng = require("angular");
 const vue = require("vue");
-const { useNgVue } = require("ngVue");
+const { useNgVue } = require("@jaredmcateer/ngvue3");
 ```
 
-_AMD Style_
+_UMD Style_
 
 ```javascript
 // the AMD style
-require(["angular", "vue", "ngVue"], function (ng, Vue, ngVue) {
-  const useNgVue = ngVue.useNgVue();
+require(["angular", "vue", "ngVue3"], function (ng, Vue, ngVue3) {
+  const useNgVue = ngVue3.useNgVue();
 });
 ```
 
 _ECMAScript module style_
 
 ```javascript
-import angular from 'angular';
-import vue from 'vue';
-import { useNgVue } 'ngVue';
+import angular from "angular";
+import vue from "vue";
+import { useNgVue } from "@jaredmcateer/ngvue3";
 ```
 
 And then require `ngVue` as a dependency in your app:

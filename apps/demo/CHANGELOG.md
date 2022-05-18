@@ -1,5 +1,11 @@
 # demo
 
+## 0.1.12
+
+### Patch Changes
+
+- [`f77e46b`](https://github.com/jaredmcateer/ngVue3/commit/f77e46b0cfc9566832226802d497e6616178b58d) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Zeroing in on demo problem
+
 ## 0.1.11
 
 ### Patch Changes

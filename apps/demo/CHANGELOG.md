@@ -1,5 +1,17 @@
 # demo
 
+## 0.1.7
+
+### Patch Changes
+
+- [`9ea3e7b`](https://github.com/jaredmcateer/ngVue3/commit/9ea3e7b62a9bc568d62908a611313ea5beafd026) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Build UMD Package
+
+  - Fixes build of UMD package
+  - Updates documentation and demo page with UMD usage
+
+- Updated dependencies [[`9ea3e7b`](https://github.com/jaredmcateer/ngVue3/commit/9ea3e7b62a9bc568d62908a611313ea5beafd026)]:
+  - @jaredmcateer/ngvue3@0.3.3
+
 ## 0.1.6
 
 ### Patch Changes

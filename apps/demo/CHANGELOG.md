@@ -1,5 +1,11 @@
 # demo
 
+## 0.1.11
+
+### Patch Changes
+
+- [`ab600e1`](https://github.com/jaredmcateer/ngVue3/commit/ab600e1ab93366d3ccf4ca736eedbd331d4e50fe) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Bypass jekyll on gh pages
+
 ## 0.1.10
 
 ### Patch Changes

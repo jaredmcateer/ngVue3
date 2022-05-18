@@ -1,5 +1,11 @@
 # demo
 
+## 0.1.6
+
+### Patch Changes
+
+- [`186dba7`](https://github.com/jaredmcateer/ngVue3/commit/186dba794696c9329f7c3dd40059973920957d21) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Fixing paths on demo
+
 ## 0.1.5
 
 ### Patch Changes

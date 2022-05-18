@@ -31949,36 +31949,28 @@ const _hoisted_10 = [
 ];
 const _hoisted_11 = /* @__PURE__ */ createTextVNode(" has been removed. ");
 const _hoisted_12 = /* @__PURE__ */ createStaticVNode("<li> Filters plugin has been removed <ul><li>Global filters don&#39;t exist in Vue 3, use importable functions/computed methods</li></ul></li><li> The global Vue singleton has been replaced with instanced Apps so: <ul><li>Root instance access has removed</li><li>Root props have been removed</li><li>Root lifecycle hooks have been removed</li></ul></li><li><code>class</code> and <code>style</code> will fall through</li><li><code>ng-class</code> and <code>ng-style</code> will not <ul><li> Their behaviour was pretty broken in the previous iteration and separating them makes more sense </li></ul></li>", 4);
-const _hoisted_16 = /* @__PURE__ */ createBaseVNode("h3", null, "Examples", -1);
-const _hoisted_17 = /* @__PURE__ */ createBaseVNode("p", null, " Under the hood Vue 3 uses the Composition API for everything, however the following are example of usage with the various styles you have available ", -1);
-const _hoisted_18 = /* @__PURE__ */ createBaseVNode("h4", null, "Quick Links", -1);
-const _hoisted_19 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/options-api/index.html" }, "Options API Demo", -1);
-const _hoisted_20 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/composition-api/index.html" }, "Composition API Demo", -1);
-const _hoisted_21 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/script-setup/index.html" }, "Script Setup Demo", -1);
-const _hoisted_22 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/umd/index.html" }, "UMD Demo", -1);
-const _hoisted_23 = /* @__PURE__ */ createBaseVNode("h4", null, "Implementation", -1);
-const _hoisted_24 = /* @__PURE__ */ createBaseVNode("h5", null, "Angular", -1);
-const _hoisted_25 = { class: "typescript" };
-const _hoisted_26 = /* @__PURE__ */ createBaseVNode("h5", null, "HTML", -1);
-const _hoisted_27 = { class: "html" };
-const _hoisted_28 = /* @__PURE__ */ createBaseVNode("h5", null, "Vue Template", -1);
-const _hoisted_29 = { class: "html" };
-const _hoisted_30 = /* @__PURE__ */ createBaseVNode("h5", null, "Options Api", -1);
-const _hoisted_31 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/options-api/index.html" }, "Demo", -1);
-const _hoisted_32 = /* @__PURE__ */ createBaseVNode("p", null, "This is the classic Vue style.", -1);
-const _hoisted_33 = { class: "typescript" };
-const _hoisted_34 = /* @__PURE__ */ createBaseVNode("h5", null, "Composition API (w/ setup function)", -1);
-const _hoisted_35 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/composition-api/index.html" }, "Demo", -1);
-const _hoisted_36 = /* @__PURE__ */ createBaseVNode("p", null, "This option is available as a non-build style alternative to the Options API", -1);
-const _hoisted_37 = { class: "typescript" };
-const _hoisted_38 = /* @__PURE__ */ createBaseVNode("h5", null, "Script Setup", -1);
-const _hoisted_39 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/script-setup/index.html" }, "Demo", -1);
-const _hoisted_40 = /* @__PURE__ */ createBaseVNode("p", null, " The cadillac of Vue 3, it adds compiler macros that reduce the amount of boilerplate needed by the standard Composition API style. ", -1);
-const _hoisted_41 = { class: "typescript" };
-const _hoisted_42 = /* @__PURE__ */ createBaseVNode("h5", null, "Using UMD", -1);
-const _hoisted_43 = /* @__PURE__ */ createBaseVNode("a", { href: "/examples/umd/index.html" }, "Demo", -1);
-const _hoisted_44 = /* @__PURE__ */ createBaseVNode("p", null, " Perhaps you need to use a completely browser based implementation with no build. That is possible using the UMD script ", -1);
-const _hoisted_45 = { class: "html" };
+const _hoisted_16 = /* @__PURE__ */ createStaticVNode('<h3>Examples</h3><p> Under the hood Vue 3 uses the Composition API for everything, however the following are example of usage with the various styles you have available </p><h4>Quick Links</h4><ul></ul><li><a href="examples/options-api/index.html">Options API Demo</a></li><li><a href="examples/composition-api/index.html">Composition API Demo</a></li><li><a href="examples/script-setup/index.html">Script Setup Demo</a></li><li><a href="examples/umd/index.html">UMD Demo</a></li><h4>Implementation</h4><h5>Angular</h5>', 10);
+const _hoisted_26 = { class: "typescript" };
+const _hoisted_27 = /* @__PURE__ */ createBaseVNode("h5", null, "HTML", -1);
+const _hoisted_28 = { class: "html" };
+const _hoisted_29 = /* @__PURE__ */ createBaseVNode("h5", null, "Vue Template", -1);
+const _hoisted_30 = { class: "html" };
+const _hoisted_31 = /* @__PURE__ */ createBaseVNode("h5", null, "Options Api", -1);
+const _hoisted_32 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/options-api/index.html" }, "Demo", -1);
+const _hoisted_33 = /* @__PURE__ */ createBaseVNode("p", null, "This is the classic Vue style.", -1);
+const _hoisted_34 = { class: "typescript" };
+const _hoisted_35 = /* @__PURE__ */ createBaseVNode("h5", null, "Composition API (w/ setup function)", -1);
+const _hoisted_36 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/composition-api/index.html" }, "Demo", -1);
+const _hoisted_37 = /* @__PURE__ */ createBaseVNode("p", null, "This option is available as a non-build style alternative to the Options API", -1);
+const _hoisted_38 = { class: "typescript" };
+const _hoisted_39 = /* @__PURE__ */ createBaseVNode("h5", null, "Script Setup", -1);
+const _hoisted_40 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/script-setup/index.html" }, "Demo", -1);
+const _hoisted_41 = /* @__PURE__ */ createBaseVNode("p", null, " The cadillac of Vue 3, it adds compiler macros that reduce the amount of boilerplate needed by the standard Composition API style. ", -1);
+const _hoisted_42 = { class: "typescript" };
+const _hoisted_43 = /* @__PURE__ */ createBaseVNode("h5", null, "Using UMD", -1);
+const _hoisted_44 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/umd/index.html" }, "Demo", -1);
+const _hoisted_45 = /* @__PURE__ */ createBaseVNode("p", null, " Perhaps you need to use a completely browser based implementation with no build. That is possible using the UMD script ", -1);
+const _hoisted_46 = { class: "html" };
 const _sfc_main = defineComponent({
   setup(__props) {
     const html = ref(`<div ng-controller="MyController as ctrl">
@@ -32152,60 +32144,52 @@ const onButtonClicked = () => emit("button-clicked");
           _hoisted_12
         ]),
         _hoisted_16,
-        _hoisted_17,
-        _hoisted_18,
-        _hoisted_19,
-        _hoisted_20,
-        _hoisted_21,
-        _hoisted_22,
-        _hoisted_23,
-        _hoisted_24,
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_25, toDisplayString(angular.value), 1)
+          createBaseVNode("code", _hoisted_26, toDisplayString(angular.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_26,
+        _hoisted_27,
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_27, toDisplayString(html.value), 1)
+          createBaseVNode("code", _hoisted_28, toDisplayString(html.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_28,
+        _hoisted_29,
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_29, toDisplayString(template.value), 1)
+          createBaseVNode("code", _hoisted_30, toDisplayString(template.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_30,
         _hoisted_31,
         _hoisted_32,
+        _hoisted_33,
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_33, toDisplayString(optionsApi.value), 1)
+          createBaseVNode("code", _hoisted_34, toDisplayString(optionsApi.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_34,
         _hoisted_35,
         _hoisted_36,
+        _hoisted_37,
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_37, toDisplayString(compositionApi.value), 1)
+          createBaseVNode("code", _hoisted_38, toDisplayString(compositionApi.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_38,
         _hoisted_39,
         _hoisted_40,
+        _hoisted_41,
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_41, toDisplayString(scriptSetup.value), 1)
+          createBaseVNode("code", _hoisted_42, toDisplayString(scriptSetup.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_42,
         _hoisted_43,
         _hoisted_44,
+        _hoisted_45,
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_45, toDisplayString(umdImplementation.value), 1)
+          createBaseVNode("code", _hoisted_46, toDisplayString(umdImplementation.value), 1)
         ])), [
           [_directive_highlightjs]
         ])

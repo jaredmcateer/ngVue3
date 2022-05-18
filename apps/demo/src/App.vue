@@ -232,10 +232,11 @@ const umdImplementation = ref(`
   </p>
 
   <h4>Quick Links</h4>
-  <a href="/examples/options-api/index.html">Options API Demo</a>
-  <a href="/examples/composition-api/index.html">Composition API Demo</a>
-  <a href="/examples/script-setup/index.html">Script Setup Demo</a>
-  <a href="/examples/umd/index.html">UMD Demo</a>
+  <ul></ul>
+  <li><a href="examples/options-api/index.html">Options API Demo</a></li>
+  <li><a href="examples/composition-api/index.html">Composition API Demo</a></li>
+  <li><a href="examples/script-setup/index.html">Script Setup Demo</a></li>
+  <li><a href="examples/umd/index.html">UMD Demo</a></li>
 
   <h4>Implementation</h4>
 
@@ -249,17 +250,17 @@ const umdImplementation = ref(`
   <pre v-highlightjs><code class="html">{{template}}</code></pre>
 
   <h5>Options Api</h5>
-  <a href="/examples/options-api/index.html">Demo</a>
+  <a href="examples/options-api/index.html">Demo</a>
   <p>This is the classic Vue style.</p>
   <pre v-highlightjs><code class="typescript">{{optionsApi}}</code></pre>
 
   <h5>Composition API (w/ setup function)</h5>
-  <a href="/examples/composition-api/index.html">Demo</a>
+  <a href="examples/composition-api/index.html">Demo</a>
   <p>This option is available as a non-build style alternative to the Options API</p>
   <pre v-highlightjs><code class="typescript">{{compositionApi}}</code></pre>
 
   <h5>Script Setup</h5>
-  <a href="/examples/script-setup/index.html">Demo</a>
+  <a href="examples/script-setup/index.html">Demo</a>
   <p>
     The cadillac of Vue 3, it adds compiler macros that reduce the amount of boilerplate needed by
     the standard Composition API style.
@@ -267,7 +268,7 @@ const umdImplementation = ref(`
   <pre v-highlightjs><code class="typescript">{{scriptSetup}}</code></pre>
 
   <h5>Using UMD</h5>
-  <a href="/examples/umd/index.html">Demo</a>
+  <a href="examples/umd/index.html">Demo</a>
   <p>
     Perhaps you need to use a completely browser based implementation with no build. That is
     possible using the UMD script

@@ -4,7 +4,8 @@
   "version": "0.1.9",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "clean": "rimraf dist/",
+    "build": "pnpm run clean && vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
     "config": "workspace:*",
+    "rimraf": "^3.0.2",
     "sass": "^1.51.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.4",

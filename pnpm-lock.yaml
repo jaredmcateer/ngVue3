@@ -27,6 +27,7 @@ importers:
       angular: ^1.8.3
       config: workspace:*
       highlight.js: ^10.3.2
+      rimraf: ^3.0.2
       sass: ^1.51.0
       tsconfig: workspace:*
       typescript: ^4.5.4
@@ -43,6 +44,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue': 2.3.1_vite@2.9.6+vue@3.2.33
       config: link:../../packages/config
+      rimraf: 3.0.2
       sass: 1.51.0
       tsconfig: link:../../packages/tsconfig
       typescript: 4.6.4
@@ -2301,7 +2303,7 @@ packages:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.9.6
+      vite: 2.9.6_sass@1.51.0
       vue: 3.2.33
     dev: true
 

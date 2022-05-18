@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ngVue 3 - Composition API Example</title>
-    <script type="module" crossorigin src="/ngVue3/assets/compositionExample.9b5160b6.js"></script>
-    <link rel="modulepreload" href="/ngVue3/assets/runtime-dom.esm-bundler.3037667d.js">
-    <link rel="modulepreload" href="/ngVue3/assets/main.e8843549.js">
-    <link rel="modulepreload" href="/ngVue3/assets/plugin-vue_export-helper.21dcd24c.js">
   </head>
 
   <body ng-app="vue.components">
@@ -49,6 +45,58 @@
         </label>
       </div>
     </div>
-    
+    <script src="/node_modules/angular/angular.min.js"></script>
+    <script src="/node_modules/vue/dist/vue.global.js"></script>
+    <script src="/node_modules/@jaredmcateer/ngvue3/dist/main.js"></script>
+    <script>
+      const { useNgVue, ngVueComponent } = ngVue3;
+      const ngVue = useNgVue();
+
+      angular
+        .module("vue.components", [ngVue])
+        .controller(
+          "MainController",
+          class MainController {
+            person = {
+              firstName: "Barb",
+              lastName: "Ara",
+              description: "ngVue 3 supports components using the Composition API",
+            };
+
+            foo = "my-class";
+
+            updateDescription(description) {
+              this.person.description = description;
+            }
+          }
+        )
+        .directive(
+          ...ngVueComponent("myComponent", {
+            template: `
+<div>
+  <span> Hi, {{ firstName }} {{ lastName }} </span>
+  <p>{{ description }}</p>
+</div>
+<div v-bind="$attrs">
+  <p><a href="https://vuejs.org/guide/overview.html">Vue.js</a></p>
+  <button @click="onButtonClick()">Update description from Vue</button>
+</div>
+                `,
+            props: {
+              firstName: String,
+              lastName: String,
+              description: String,
+            },
+            emits: ["update-description"],
+            setup(props, context) {
+              const onButtonClick = () => {
+                context.emit("update-description", props.description.toUpperCase());
+              };
+
+              return { onButtonClick };
+            },
+          })
+        );
+    </script>
   </body>
 </html>

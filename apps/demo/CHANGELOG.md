@@ -1,5 +1,13 @@
 # demo
 
+## 0.1.9
+
+### Patch Changes
+
+- [`c54032b`](https://github.com/jaredmcateer/ngVue3/commit/c54032be506ceda67110a2afbfdc8d32cbd18652) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Fix UMD demo
+
+  - Includes static packages for importing in HTML
+
 ## 0.1.8
 
 ### Patch Changes

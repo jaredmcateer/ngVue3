@@ -304,7 +304,7 @@ The bindings passed to the ngVue are the same bindings passed to the directives 
 - [x] vue components
 - [x] vue directives
 - [x] unit tests
-- [ ] docs + examples (they're done just working on deploying them)
+- [x] docs + examples (they're done just working on deploying them)
 - [x] plugins
 - ~~[x] Filters (won't do, vue 3 doesn't support global filters)~~
 - [ ] support vuex (maybe?)

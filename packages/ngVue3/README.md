@@ -152,7 +152,7 @@ app.directive("SomeComponent", [
 **ngVue 3** provides a helper function, `ngVueComponent`, to DRY this code
 
 ```javascript
-import { ngVueComponent } from "ngVue";
+import { ngVueComponent } from "@jaredmcateer/ngvue3";
 // ...
 app.directive(...ngVueComponent("SomeComponent", SomeComponent));
 ```

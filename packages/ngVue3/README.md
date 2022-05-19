@@ -88,7 +88,7 @@ angular.module("yourApp", [ngVue]);
 
 ## Features
 
-**ngVue 3** is composed of a factory `createVueComponent`. Plans to support `v-directives` is in the works. Unlike the previous version there is no plain `vue-component` directive nor plans to implement it, however, if you rely on this we are happy to accept a PR.
+**ngVue 3** is composed of a factory `createVueComponent`. Unlike the previous version there is no plain `vue-component` directive nor plans to implement it, however, if you rely on this we are happy to accept a PR.
 
 ### The `createVueComponent` factory
 

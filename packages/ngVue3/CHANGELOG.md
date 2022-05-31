@@ -1,5 +1,13 @@
 # @jaredmcateer/ngvue3
 
+## 0.3.4
+
+### Patch Changes
+
+- [`68b769e`](https://github.com/jaredmcateer/ngVue3/commit/68b769eb2287935c03d1326e4f8323fa582e3ca2) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Exposes NgVueProvider type through main module
+
+* [#21](https://github.com/jaredmcateer/ngVue3/pull/21) [`c84b302`](https://github.com/jaredmcateer/ngVue3/commit/c84b3020a2dcd4ade9b76a3fc6471557f986d897) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Use replaceChild on "slot" parent
+
 ## 0.3.3
 
 ### Patch Changes

@@ -85,7 +85,16 @@ function createAppInstance(
 
       onMounted(() => {
         if (html) {
-          slot.value?.replaceChild(html, slot.value);
+          try {
+            slot.value?.parentElement?.replaceChild(html, slot.value);
+          } catch (err) {
+            console.error(
+              "Attempted to insert content into slot and something went wrong. " +
+                "Inserting content, especially angular content, into a components slot is not advisable. " +
+                "This is a pretty hacky implementation in ngVue. " +
+                "Open an issue at https://github.com/jaredmcateer/ngvue3/issues with details."
+            );
+          }
         }
       });
 

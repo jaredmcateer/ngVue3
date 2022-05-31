@@ -12,3 +12,5 @@ export function useNgVue() {
   }
   return ngVueModule.name;
 }
+
+export type { NgVueProvider } from "./angular/ngVueProvider";

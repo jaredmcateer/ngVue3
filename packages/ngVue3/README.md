@@ -88,7 +88,7 @@ angular.module("yourApp", [ngVue]);
 
 ## Features
 
-**ngVue 3** is composed of a factory `createVueComponent`. Plans to support `v-directives` is in the works. Unlike the previous version there is no plain `vue-component` directive nor plans to implement it, however, if you rely on this we are happy to accept a PR.
+**ngVue 3** is composed of a factory `createVueComponent`. Unlike the previous version there is no plain `vue-component` directive nor plans to implement it, however, if you rely on this we are happy to accept a PR.
 
 ### The `createVueComponent` factory
 
@@ -152,7 +152,7 @@ app.directive("SomeComponent", [
 **ngVue 3** provides a helper function, `ngVueComponent`, to DRY this code
 
 ```javascript
-import { ngVueComponent } from "ngVue";
+import { ngVueComponent } from "@jaredmcateer/ngvue3";
 // ...
 app.directive(...ngVueComponent("SomeComponent", SomeComponent));
 ```
@@ -304,7 +304,7 @@ The bindings passed to the ngVue are the same bindings passed to the directives 
 - [x] vue components
 - [x] vue directives
 - [x] unit tests
-- [ ] docs + examples (they're done just working on deploying them)
+- [x] docs + examples (they're done just working on deploying them)
 - [x] plugins
 - ~~[x] Filters (won't do, vue 3 doesn't support global filters)~~
 - [ ] support vuex (maybe?)

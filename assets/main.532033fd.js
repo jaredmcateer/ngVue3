@@ -13337,9 +13337,13 @@ function createAppInstance(Component, html, state, events, ngVueDirectives) {
     setup() {
       const slot = ref(null);
       onMounted(() => {
-        var _a;
+        var _a, _b;
         if (html) {
-          (_a = slot.value) == null ? void 0 : _a.replaceChild(html, slot.value);
+          try {
+            (_b = (_a = slot.value) == null ? void 0 : _a.parentElement) == null ? void 0 : _b.replaceChild(html, slot.value);
+          } catch (err) {
+            console.error("Attempted to insert content into slot and something went wrong. Inserting content, especially angular content, into a components slot is not advisable. This is a pretty hacky implementation in ngVue. Open an issue at https://github.com/jaredmcateer/ngvue3/issues with details.");
+          }
         }
       });
       return () => {

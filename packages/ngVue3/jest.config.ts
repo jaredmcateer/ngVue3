@@ -7,6 +7,7 @@ const config: InitialOptionsTsJest = {
     "**/?(*.)+(spec|test).[jt]s?(x)",
     "!**/__fixtures__/**",
   ],
+  testPathIgnorePatterns: ["dist"],
   globals: {
     "ts-jest": {
       tsconfig: "<rootDir>/tsconfig.test.json",

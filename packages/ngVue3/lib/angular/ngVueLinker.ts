@@ -20,6 +20,7 @@ import { getExpressions } from "../components/getExpressions";
 import { WatchExpressionOptions, watchExpressions } from "../components/watchExpressions";
 import { getInstanceState, InstanceState } from "../instanceStore";
 import { NgVueService } from "./ngVueProvider";
+import { getComponentName } from "../utils/getComponentName";
 
 export function ngVueLinker(
   Component: any,
@@ -79,7 +80,7 @@ function createAppInstance(
   ngVueDirectives: NgVueDirective[]
 ) {
   return createApp({
-    name: `NgVue-${Component.name || "UnnamedComponent"}`,
+    name: `NgVue${getComponentName(Component)}`,
     setup() {
       const slot = ref<HTMLSpanElement | null>(null);
 

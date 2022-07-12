@@ -1,5 +1,15 @@
 # @jaredmcateer/ngvue3
 
+## 0.3.5
+
+### Patch Changes
+
+- [#26](https://github.com/jaredmcateer/ngVue3/pull/26) [`78cde59`](https://github.com/jaredmcateer/ngVue3/commit/78cde598fd4f61d2ea9283e57c173e6c1f89cb13) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Fixed component name inference
+
+  Previously if the name property of components was missing it would default to `UnnamedComponent`. This made it difficult to search for components in Vue Devtools since you would just get a list of `NgVue-UnnamedComponent` in the list.
+
+  This change will first attempt the name property, then it will use the file path and failing that it will name the component `AnonymousComponent`. This is more inline with the Vue 3 logic for determining component names.
+
 ## 0.3.4
 
 ### Patch Changes

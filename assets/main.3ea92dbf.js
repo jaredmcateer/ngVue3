@@ -13305,6 +13305,23 @@ function getInstanceState(id) {
   }
   return store[id];
 }
+function getComponentName(component) {
+  let name = "AnonymousComponent";
+  if (component.name) {
+    name = component.name;
+  } else if (component.__file) {
+    name = parseFileName(component.__file) || name;
+  }
+  return name;
+}
+function parseFileName(path) {
+  let name = "";
+  const match = path.match(/([^/\\]+)\.\w+$/);
+  if (match) {
+    name = match[1].replace(/(?:^|[-_])(\w)/g, (c) => c.toUpperCase()).replace(/[-_]/g, "");
+  }
+  return name;
+}
 function ngVueLinker(Component, jqElement, attrs, scope, $injector) {
   const instanceKey = Symbol("ngVueInstanceKey");
   const state = getInstanceState(instanceKey);
@@ -13333,7 +13350,7 @@ function ngVueLinker(Component, jqElement, attrs, scope, $injector) {
 }
 function createAppInstance(Component, html, state, events, ngVueDirectives) {
   return createApp({
-    name: `NgVue-${Component.name || "UnnamedComponent"}`,
+    name: `NgVue${getComponentName(Component)}`,
     setup() {
       const slot = ref(null);
       onMounted(() => {

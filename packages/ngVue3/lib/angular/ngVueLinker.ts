@@ -18,7 +18,7 @@ import { evaluateDirectives, NgVueDirective } from "../components/evaluateDirect
 import { extractSpecialAttributes } from "../components/extractSpecialAttributes";
 import { getExpressions } from "../components/getExpressions";
 import { WatchExpressionOptions, watchExpressions } from "../components/watchExpressions";
-import { getInstanceState, InstanceState } from "../instanceStore";
+import { clearInstanceState, getInstanceState, InstanceState } from "../instanceStore";
 import { NgVueService } from "./ngVueProvider";
 import { getComponentName } from "../utils/getComponentName";
 
@@ -60,6 +60,7 @@ export function ngVueLinker(
     }
     // @ts-ignore We're dereferencing this variable for garbage collection
     vueInstance = null;
+    clearInstanceState(instanceKey);
   });
 }
 

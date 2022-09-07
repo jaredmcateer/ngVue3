@@ -24,3 +24,7 @@ export function getInstanceState(id: symbol) {
 
   return store[id];
 }
+
+export function clearInstanceState(id: symbol) {
+  delete store[id];
+}

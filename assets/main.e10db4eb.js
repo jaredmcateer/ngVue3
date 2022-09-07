@@ -13305,6 +13305,9 @@ function getInstanceState(id) {
   }
   return store[id];
 }
+function clearInstanceState(id) {
+  delete store[id];
+}
 function getComponentName(component) {
   let name = "AnonymousComponent";
   if (component.name) {
@@ -13346,6 +13349,7 @@ function ngVueLinker(Component, jqElement, attrs, scope, $injector) {
       angular_1.element(vueInstance._container).remove();
     }
     vueInstance = null;
+    clearInstanceState(instanceKey);
   });
 }
 function createAppInstance(Component, html, state, events, ngVueDirectives) {

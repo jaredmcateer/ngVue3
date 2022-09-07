@@ -1,5 +1,11 @@
 # @jaredmcateer/ngvue3
 
+## 0.3.6
+
+### Patch Changes
+
+- [#29](https://github.com/jaredmcateer/ngVue3/pull/29) [`38ce025`](https://github.com/jaredmcateer/ngVue3/commit/38ce025af41db556c33192b2240b16ad8c0c2e67) Thanks [@JordanHeinrichs](https://github.com/JordanHeinrichs)! - Fix memory leak
+
 ## 0.3.5
 
 ### Patch Changes

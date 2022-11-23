@@ -109,7 +109,7 @@ export function useNgVuePlugins() {
   if (!ngVuePluginsModule) {
     ngVuePluginsModule = angular
       .module("ngVue.plugins", [])
-      .provider("$ngVue", ["$injector", NgVueProvider]);
+      .provider("$ngVue", ["$injector", function($injector: ng.auto.IInjectorService) {return new NgVueProvider($injector);}]);
   }
 
   return ngVuePluginsModule.name;

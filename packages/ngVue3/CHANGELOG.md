@@ -1,5 +1,11 @@
 # @jaredmcateer/ngvue3
 
+## 0.3.7
+
+### Patch Changes
+
+- [#31](https://github.com/jaredmcateer/ngVue3/pull/31) [`5bdc979`](https://github.com/jaredmcateer/ngVue3/commit/5bdc979299fee62dfe5c63f4e14f0aa3cea3dddc) Thanks [@gbarta-atex](https://github.com/gbarta-atex)! - Compatibility with angularjs < 1.5.0
+
 ## 0.3.6
 
 ### Patch Changes

@@ -1,3 +1,8 @@
+import { InjectionKey } from "vue";
+
+// Injection key used by ngVueProvider test and button component
+export const MyServiceKey: InjectionKey<(val: number) => number> = Symbol();
+
 export class MyService {
   private props: Record<string, any> = {
     make: "Kerluke",

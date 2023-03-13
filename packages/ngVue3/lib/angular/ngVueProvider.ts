@@ -1,5 +1,5 @@
 import angular from "angular";
-import { App, Directive, Plugin } from "vue";
+import { App, Directive, InjectionKey, Plugin } from "vue";
 
 export type PluginHook = ($injector: ng.auto.IInjectorService, app: App<Element>) => void;
 
@@ -12,11 +12,12 @@ export interface NgVuePlugin {
   $config: Record<string, unknown>;
 }
 
+export type NgVueInjectable = [key: string | InjectionKey<unknown>, value: unknown];
 export type NgVueHookCallback = (hook: PluginHook) => void;
 
 export interface NgVueService {
   initNgVuePlugins(app: App<Element>): void;
-  getInjectables(): [key: string, value: unknown][];
+  getInjectables(): NgVueInjectable[];
   getVuePlugins(): Plugin[];
   getVueDirectives(): Record<string, Directive>;
 }
@@ -27,7 +28,7 @@ export class NgVueProvider {
 
   private pluginHooks: PluginHook[] = [];
   private pluginConfig: Record<string, any> = {};
-  private injectables: [key: string, value: unknown][] = [];
+  private injectables: NgVueInjectable[] = [];
   private nativeVuePlugins: Plugin[] = [];
   private nativeVueDirectives: Record<string, Directive> = {};
 
@@ -59,10 +60,12 @@ export class NgVueProvider {
 
   /**
    * Acts as a pass through to the Vue app instance for providing an injectable.
-   * @param name
+   * @param name A string or symbol that can be used to inject into a component
    * @param value
    */
-  provide(name: string, value: unknown) {
+  provide(name: string, value: unknown): void;
+  provide<IKey = unknown>(name: InjectionKey<IKey>, value: unknown): void;
+  provide<IKey = unknown>(name: string | InjectionKey<IKey>, value: unknown) {
     this.injectables.push([name, value]);
   }
 
@@ -107,9 +110,12 @@ let ngVuePluginsModule: ng.IModule;
 
 export function useNgVuePlugins() {
   if (!ngVuePluginsModule) {
-    ngVuePluginsModule = angular
-      .module("ngVue.plugins", [])
-      .provider("$ngVue", ["$injector", function($injector: ng.auto.IInjectorService) {return new NgVueProvider($injector);}]);
+    ngVuePluginsModule = angular.module("ngVue.plugins", []).provider("$ngVue", [
+      "$injector",
+      function ($injector: ng.auto.IInjectorService) {
+        return new NgVueProvider($injector);
+      },
+    ]);
   }
 
   return ngVuePluginsModule.name;

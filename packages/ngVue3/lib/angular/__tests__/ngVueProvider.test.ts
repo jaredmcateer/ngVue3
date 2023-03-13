@@ -4,9 +4,9 @@ import { ngHtmlCompiler } from "../../utils/ngHtmlCompiler";
 import { NgVueProvider, useNgVuePlugins } from "../ngVueProvider";
 import { CustomNgVuePluginConfig, useCustomNgVuePlugin } from "./__fixtures__/NgVuePlugin";
 import Button from "./__fixtures__/Button.vue";
-import { MyService } from "./__fixtures__/MyService";
+import { MyService, MyServiceKey } from "./__fixtures__/MyService";
 
-interface TestScope extends ng.IScope {
+interface TestScope extends angular.IScope {
   handleButtonClick: (val: number) => number;
 }
 
@@ -14,7 +14,7 @@ describe("NgVueProvider", () => {
   let ngVueProvider: NgVueProvider;
   let compile: ReturnType<typeof ngHtmlCompiler>;
   let scope: TestScope;
-  let $compileProvider: ng.ICompileProvider;
+  let $compileProvider: angular.ICompileProvider;
   let element: JQLite;
 
   beforeEach(angular.mock.module(useNgVue()));
@@ -26,14 +26,17 @@ describe("NgVueProvider", () => {
       angular.mock.module(
         (
           _$ngVueProvider_: NgVueProvider,
-          _$provide_: ng.auto.IProvideService,
-          _$compileProvider_: ng.ICompileProvider
+          _$provide_: angular.auto.IProvideService,
+          _$compileProvider_: angular.ICompileProvider
         ) => {
           $compileProvider = _$compileProvider_;
           _$provide_.service("myService", MyService);
 
+          const addOne = (val: number) => val + 1;
+
           ngVueProvider = _$ngVueProvider_;
           ngVueProvider.provide("foo", 1001);
+          ngVueProvider.provide(MyServiceKey, addOne);
           ngVueProvider.directive("hello", {
             created(el: HTMLElement) {
               const span = document.createElement("span");
@@ -76,22 +79,29 @@ describe("NgVueProvider", () => {
     );
 
     beforeEach(
-      angular.mock.inject((_$rootScope_: ng.IRootScopeService, _$compile_: ng.ICompileService) => {
-        compile = ngHtmlCompiler(_$compile_);
-        scope = (function (): TestScope {
-          const tmpScope: any = _$rootScope_.$new();
-          tmpScope.handleButtonClick = jest.fn();
-          return tmpScope;
-        })();
+      angular.mock.inject(
+        (_$rootScope_: angular.IRootScopeService, _$compile_: angular.ICompileService) => {
+          compile = ngHtmlCompiler(_$compile_);
+          scope = (function (): TestScope {
+            const tmpScope: any = _$rootScope_.$new();
+            tmpScope.handleButtonClick = jest.fn();
+            return tmpScope;
+          })();
 
-        element = compile(`<my-button v-on-button-clicked="handleButtonClick"></my-button>`, scope);
-      })
+          element = compile(
+            `<my-button v-on-button-clicked="handleButtonClick"></my-button>`,
+            scope
+          );
+        }
+      )
     );
 
     it("should provide values from NgVueProvider#provide method", () => {
       element.find("button")[0].click();
       scope.$digest();
-      expect(scope.handleButtonClick).toHaveBeenCalledWith(1001);
+      // Combination of injectables foo which provides 1001 and MyServiceKey
+      // which adds 1 to the value
+      expect(scope.handleButtonClick).toHaveBeenCalledWith(1002);
     });
 
     it("should provide values from custom NgVue Plugins", () => {

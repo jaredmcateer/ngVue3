@@ -21,12 +21,21 @@ angular.module("mainApp", [useNgVue(), useNgVuePlugins()]);
 
 Sometimes you simply need to add a plugin, injectable or directive to the app instance, you don't have any specific need for angular but due to ngVue's architecture the app instance isn't readily available, `$ngVueProvider` has pass through function to help you with that.
 
+_Example using TypeScript_
+
 ```ts
+import { type NgVueProvider } from "@jaredmcateer/ngvue3";
+const fooKey: InjectionKey<"bar"> = new Symbol();
+
 angular
   .module("mainApp", [useNgVue(), useNgVuePlugins()])
   .config(($ngVueProvider: NgVueProvider) => {
     $ngVueProvider.use(MyPlugin);
+
     $ngVueProvider.provide("foo", "bar");
+    // You can also pass symbols as InjectionKeys for better type inference in your components.
+    $ngVueProvider.provide(fooKey, "bar");
+
     $ngVueProvider.directive("focus", {
       onMounted(el) {
         el.focus();
@@ -35,6 +44,29 @@ angular
   });
 ```
 
+<details><summary><strong>Equivalent using JavaScript</strong></summary>
+
+```javascript
+export const fooKey = Symbol();
+
+angular.module("mainApp", [useNgVue(), useNgVuePlugins()]).config(($ngVueProvider) => {
+  $ngVueProvider.use(MyPlugin);
+
+  $ngVueProvider.provide("foo", "bar");
+  $ngVueProvider.provide(fooKey, "bar");
+
+  $ngVueProvider.directive("focus", {
+    onMounted(el) {
+      el.focus();
+    },
+  });
+});
+```
+
+</details>
+
+<hr>
+
 ### ngVue Plugins
 
 Sometimes you need a bit more, ngVue plugins are special configurations which allow for configuring data during the bootstrapping of your Angular app and providing access to the Angular injector in your Vue plugin's install method.
@@ -42,6 +74,14 @@ Sometimes you need a bit more, ngVue plugins are special configurations which al
 #### Writing an ngVue Plugin
 
 During the configuration phase of Angular you can access the ngVue Provider:
+
+| Property | type     | Description                                                                                                       |
+| -------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| \$name   | string   | plugin namespace                                                                                                  |
+| \$plugin | function | Passes in Angular Injector and Vue app instance for use in crafting a Vue plugin                                  |
+| \$config | object   | This objects properties/methods gets added on to the `NgVueProvider` under `$ngVueProvider.plugins.<$name>.<...>` |
+
+_Example using TypeScript_
 
 ```ts
 import angular from "angular";
@@ -76,11 +116,42 @@ angular.module("custom.plugin", [useNgVuePlugin()]).config(($ngVueProvider: NgVu
 });
 ```
 
-| Property | type     | Description                                                                                                       |
-| -------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
-| \$name   | string   | plugin namespace                                                                                                  |
-| \$plugin | function | Passes in Angular Injector and Vue app instance for use in crafting a Vue plugin                                  |
-| \$config | object   | This objects properties/methods gets added on to the `NgVueProvider` under `$ngVueProvider.plugins.<$name>.<...>` |
+<details><summary><strong>Equivalent using JavaScript<strong></summary>
+
+```ts
+import angular from "angular";
+import { useNgVue, useNgVuePlugins } from "@jaredmcateer/ngvue3";
+
+angular.module("custom.plugin", [useNgVuePlugin()]).config(($ngVueProvider) => {
+  $ngVueProvider.install(() => ({
+    $name: "myPlugin",
+    $plugin: ($injector, app) => {
+      const customVuePlugin = {
+        install(app, options) {
+          // Vue plugin stuff with access to the injector
+          const myService = $inject.get("myService");
+          app.provide("foo", myServer.getFoo());
+          // or app.component(...)
+          // or app.directive(...)
+          // or app.config.globalProperties
+          // or some combination of all 4
+        },
+      };
+      app.use(customVuePlugin);
+    },
+    $config: {
+      /* ... */
+      foo() {
+        /* ... */
+      },
+    },
+  }));
+});
+```
+
+</details>
+
+<hr>
 
 #### Configuring a plugin
 

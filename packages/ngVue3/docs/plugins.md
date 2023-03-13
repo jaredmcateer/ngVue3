@@ -75,6 +75,12 @@ Sometimes you need a bit more, ngVue plugins are special configurations which al
 
 During the configuration phase of Angular you can access the ngVue Provider:
 
+| Property | type     | Description                                                                                                       |
+| -------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| \$name   | string   | plugin namespace                                                                                                  |
+| \$plugin | function | Passes in Angular Injector and Vue app instance for use in crafting a Vue plugin                                  |
+| \$config | object   | This objects properties/methods gets added on to the `NgVueProvider` under `$ngVueProvider.plugins.<$name>.<...>` |
+
 _Example using TypeScript_
 
 ```ts
@@ -146,12 +152,6 @@ angular.module("custom.plugin", [useNgVuePlugin()]).config(($ngVueProvider) => {
 </details>
 
 <hr>
-
-| Property | type     | Description                                                                                                       |
-| -------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
-| \$name   | string   | plugin namespace                                                                                                  |
-| \$plugin | function | Passes in Angular Injector and Vue app instance for use in crafting a Vue plugin                                  |
-| \$config | object   | This objects properties/methods gets added on to the `NgVueProvider` under `$ngVueProvider.plugins.<$name>.<...>` |
 
 #### Configuring a plugin
 

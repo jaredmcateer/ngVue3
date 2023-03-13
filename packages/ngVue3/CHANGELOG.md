@@ -1,5 +1,11 @@
 # @jaredmcateer/ngvue3
 
+## 0.4.0
+
+### Minor Changes
+
+- [#34](https://github.com/jaredmcateer/ngVue3/pull/34) [`e8366e1`](https://github.com/jaredmcateer/ngVue3/commit/e8366e175e7a05431dbe1a2a44c3958aa70c5b45) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Adding InjectionKey support to \$ngVueProvider.provide
+
 ## 0.3.7
 
 ### Patch Changes

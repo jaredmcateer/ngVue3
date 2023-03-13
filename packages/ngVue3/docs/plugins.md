@@ -22,11 +22,17 @@ angular.module("mainApp", [useNgVue(), useNgVuePlugins()]);
 Sometimes you simply need to add a plugin, injectable or directive to the app instance, you don't have any specific need for angular but due to ngVue's architecture the app instance isn't readily available, `$ngVueProvider` has pass through function to help you with that.
 
 ```ts
+const fooKey: InjectionKey<"bar"> = new Symbol();
+
 angular
   .module("mainApp", [useNgVue(), useNgVuePlugins()])
   .config(($ngVueProvider: NgVueProvider) => {
     $ngVueProvider.use(MyPlugin);
+
     $ngVueProvider.provide("foo", "bar");
+    // You can also pass symbols as InjectionKeys for better type inference in your components.
+    $ngVueProvider.provide(fooKey, "bar");
+
     $ngVueProvider.directive("focus", {
       onMounted(el) {
         el.focus();

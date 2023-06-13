@@ -1,5 +1,11 @@
 # @jaredmcateer/ngvue3
 
+## 0.5.0
+
+### Minor Changes
+
+- [#37](https://github.com/jaredmcateer/ngVue3/pull/37) [`89ea165`](https://github.com/jaredmcateer/ngVue3/commit/89ea165f6516d1b10e3ce72e6cdfdbfd99c6f5d2) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Adds support for global components
+
 ## 0.4.0
 
 ### Minor Changes

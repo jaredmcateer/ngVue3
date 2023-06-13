@@ -18,7 +18,7 @@ ngVue 3 is a fork of the [ngVue](https://github.com/ngVue/ngVue) project which i
       - [Notes](#notes)
     - [`v-on-*`](#v-on-)
   - [Handling HTML Attributes](#handling-html-attributes)
-- [Plugins, Injectables and Directives](#plugins-injectables-and-directives)
+- [Plugins, Injectables, Directives and Global Components](#plugins-injectables-directives-and-global-components)
   - [Directives usage](#directives-usage)
 - [TODO](#todo)
 
@@ -254,11 +254,11 @@ Keep in mind that hwne you pass down literal strings for anything other than `cl
 </template>
 ```
 
-## Plugins, Injectables and Directives
+## Plugins, Injectables, Directives and Global Components
 
 Due to the architectural changes introduced by Vue 3 in most cases if you need access to lifecycle hooks you can simply create a composable and use it directly in your vue components. However, there are instances you need to install plugins (e.g., Pinia/Vuex, VueRouter, etc), directives or you want access to shared logic in your angular app. Plugins in ngVue 3 have been revamped to be simpler, access to "root" props is no longer possible, however you can now pass through Plugins, Injectables and Directive easily as well as still create your own custom ngVue Plugin.
 
-[Plugin, Injectables and Directives Documentation](./docs/plugins.md)
+[Plugin, Injectables, Directives and Global Components Documentation](./docs/plugins.md)
 
 ### Directives usage
 

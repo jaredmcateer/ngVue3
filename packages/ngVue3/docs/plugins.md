@@ -17,7 +17,7 @@ angular.module("mainApp", [useNgVue(), useNgVuePlugins()]);
 
 `useNgVuePlugins` creates an Angular service `$ngVue`. This service implements a custom plugins system and a means to pass through Injectables and Plugins to the Vue app instance.
 
-### Provide/Use/Directives
+### Provide/Use/Directives/Global Components
 
 Sometimes you simply need to add a plugin, injectable or directive to the app instance, you don't have any specific need for angular but due to ngVue's architecture the app instance isn't readily available, `$ngVueProvider` has pass through function to help you with that.
 
@@ -25,6 +25,7 @@ _Example using TypeScript_
 
 ```ts
 import { type NgVueProvider } from "@jaredmcateer/ngvue3";
+import MyGlobalComponent from "./components/MyGlobalComponent.vue";
 const fooKey: InjectionKey<"bar"> = new Symbol();
 
 angular
@@ -41,12 +42,16 @@ angular
         el.focus();
       },
     });
+
+    // Register global component
+    $ngVueProvider.component("myGlobalComponent", MyGlobalComponent);
   });
 ```
 
 <details><summary><strong>Equivalent using JavaScript</strong></summary>
 
 ```javascript
+import MyGlobalComponent from "./components/MyGlobalComponent.vue";
 export const fooKey = Symbol();
 
 angular.module("mainApp", [useNgVue(), useNgVuePlugins()]).config(($ngVueProvider) => {
@@ -60,6 +65,9 @@ angular.module("mainApp", [useNgVue(), useNgVuePlugins()]).config(($ngVueProvide
       el.focus();
     },
   });
+
+  // Register global component
+  $ngVueProvider.component("myGlobalComponent", MyGlobalComponent);
 });
 ```
 

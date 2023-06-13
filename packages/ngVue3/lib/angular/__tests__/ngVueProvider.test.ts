@@ -5,6 +5,8 @@ import { NgVueProvider, useNgVuePlugins } from "../ngVueProvider";
 import { CustomNgVuePluginConfig, useCustomNgVuePlugin } from "./__fixtures__/NgVuePlugin";
 import Button from "./__fixtures__/Button.vue";
 import { MyService, MyServiceKey } from "./__fixtures__/MyService";
+import GlobalComponentConsumer from "./__fixtures__/GlobalComponentConsumer.vue";
+import MyGlobalComponent from "./__fixtures__/MyGlobalComponent.vue";
 
 interface TestScope extends angular.IScope {
   handleButtonClick: (val: number) => number;
@@ -67,6 +69,8 @@ describe("NgVueProvider", () => {
             },
           });
 
+          ngVueProvider.component("myGlobalComponent", MyGlobalComponent);
+
           (ngVueProvider.plugins.customNgVuePlugin as CustomNgVuePluginConfig).register([
             "make",
             "colour",
@@ -74,6 +78,9 @@ describe("NgVueProvider", () => {
           ]);
 
           $compileProvider.directive(...ngVueComponent("myButton", Button));
+          $compileProvider.directive(
+            ...ngVueComponent("globalComponentConsumer", GlobalComponentConsumer)
+          );
         }
       )
     );
@@ -171,6 +178,29 @@ describe("NgVueProvider", () => {
         expect(element.find("span")[0].textContent).toEqual("Hello!");
         expect(element.find("span")[1].textContent).toEqual("hallo? Hi.");
         expect(element.find("span")[2].textContent).toEqual("HELLO!?");
+      });
+    });
+
+    describe("global components", () => {
+      beforeEach(
+        angular.mock.inject(
+          (_$rootScope_: angular.IRootScopeService, _$compile_: angular.ICompileService) => {
+            compile = ngHtmlCompiler(_$compile_);
+            scope = (function (): TestScope {
+              const tmpScope: any = _$rootScope_.$new();
+              tmpScope.handleButtonClick = jest.fn();
+              return tmpScope;
+            })();
+
+            element = compile(`<global-component-consumer></global-component-consumer>`, scope);
+          }
+        )
+      );
+
+      it("should render a global component", () => {
+        expect(element.find("div")[0]).toBeDefined();
+        expect(element.find("div")[0].classList.contains("my-global-component")).toBeTruthy();
+        expect(element.find("div")[0].textContent).toEqual("Hello Jane!");
       });
     });
   });

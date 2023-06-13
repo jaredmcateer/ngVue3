@@ -1,5 +1,5 @@
 import angular from "angular";
-import { App, Directive, InjectionKey, Plugin } from "vue";
+import { App, Directive, InjectionKey, Plugin, Component } from "vue";
 
 export type PluginHook = ($injector: ng.auto.IInjectorService, app: App<Element>) => void;
 
@@ -20,6 +20,7 @@ export interface NgVueService {
   getInjectables(): NgVueInjectable[];
   getVuePlugins(): Plugin[];
   getVueDirectives(): Record<string, Directive>;
+  getVueComponents(): Record<string, Component>;
 }
 
 export class NgVueProvider {
@@ -31,6 +32,7 @@ export class NgVueProvider {
   private injectables: NgVueInjectable[] = [];
   private nativeVuePlugins: Plugin[] = [];
   private nativeVueDirectives: Record<string, Directive> = {};
+  private nativeVueComponents: Record<string, Component> = {};
 
   constructor(private $injector: ng.auto.IInjectorService) {
     this.$get = [
@@ -49,6 +51,7 @@ export class NgVueProvider {
           getInjectables: () => this.injectables,
           getVuePlugins: () => this.nativeVuePlugins,
           getVueDirectives: () => this.nativeVueDirectives,
+          getVueComponents: () => this.nativeVueComponents,
         };
       },
     ];
@@ -84,6 +87,14 @@ export class NgVueProvider {
    */
   directive(name: string, vueDirective: Directive) {
     this.nativeVueDirectives[name] = vueDirective;
+  }
+
+  /**
+   * Acts as a pass through for native vue components to the app instance.
+   * @param vueComponent
+   */
+  component(name: string, vueComponent: Component) {
+    this.nativeVueComponents[name] = vueComponent;
   }
 
   /**

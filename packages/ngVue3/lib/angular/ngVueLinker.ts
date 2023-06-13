@@ -125,22 +125,26 @@ function createAppInstance(
 }
 
 /**
- * Loads the globals such as Injectables, Plugins and Directives that has been
- * added via the ngVueProvider
+ * Loads the globals such as Injectables, Plugins, Directives, and Components
+ * that has been added via the ngVueProvider
  *
  * @param vueInstance
  * @param $injector
  */
 function loadNgVueGlobals(vueInstance: App<Element>, $injector: ng.auto.IInjectorService) {
   const $ngVue: NgVueService | null = $injector.has("$ngVue") ? $injector.get("$ngVue") : null;
-  if ($ngVue) {
-    $ngVue.initNgVuePlugins(vueInstance);
-    $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
-    $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
-    Object.entries($ngVue.getVueDirectives()).forEach(([name, directive]) =>
-      vueInstance.directive(name, directive)
-    );
-  }
+
+  if (!$ngVue) return;
+
+  $ngVue.initNgVuePlugins(vueInstance);
+  $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
+  $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
+  Object.entries($ngVue.getVueDirectives()).forEach(([name, directive]) =>
+    vueInstance.directive(name, directive)
+  );
+  Object.entries($ngVue.getVueComponents()).forEach(([name, component]) =>
+    vueInstance.component(name, component)
+  );
 }
 
 function getInnerHtml(element: HTMLElement) {

@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { d as defineComponent, c as createElementBlock, a as createBaseVNode, t as toDisplayString, n as normalizeProps, h as guardReactiveProps, F as Fragment, o as openBlock } from "./runtime-dom.esm-bundler.3037667d.js";
-import { u as useNgVue, a as angular_1, n as ngVueComponent } from "./main.e10db4eb.js";
+import { d as defineComponent, o as openBlock, c as createElementBlock, a as createBaseVNode, t as toDisplayString, n as normalizeProps, h as guardReactiveProps, F as Fragment } from "./runtime-dom.esm-bundler.3037667d.js";
+import { u as useNgVue, a as angular_1, n as ngVueComponent } from "./main.cd777d94.js";
 import { _ as _export_sfc } from "./plugin-vue_export-helper.21dcd24c.js";
 const _sfc_main = defineComponent({
   props: {
@@ -14,10 +14,11 @@ const _sfc_main = defineComponent({
     description: String
   },
   emits: ["update-description"],
-  methods: {
-    onButtonClick() {
-      this.$emit("update-description", this.description.toUpperCase());
-    }
+  setup(props, context) {
+    const onButtonClick = () => {
+      context.emit("update-description", props.description.toUpperCase());
+    };
+    return { onButtonClick };
   }
 });
 const _hoisted_1 = /* @__PURE__ */ createBaseVNode("p", null, [

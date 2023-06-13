@@ -13383,12 +13383,13 @@ function createAppInstance(Component, html, state, events, ngVueDirectives) {
 }
 function loadNgVueGlobals(vueInstance, $injector) {
   const $ngVue = $injector.has("$ngVue") ? $injector.get("$ngVue") : null;
-  if ($ngVue) {
-    $ngVue.initNgVuePlugins(vueInstance);
-    $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
-    $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
-    Object.entries($ngVue.getVueDirectives()).forEach(([name, directive]) => vueInstance.directive(name, directive));
-  }
+  if (!$ngVue)
+    return;
+  $ngVue.initNgVuePlugins(vueInstance);
+  $ngVue.getVuePlugins().forEach((plugin) => vueInstance.use(plugin));
+  $ngVue.getInjectables().forEach(([key, value]) => vueInstance.provide(key, value));
+  Object.entries($ngVue.getVueDirectives()).forEach(([name, directive]) => vueInstance.directive(name, directive));
+  Object.entries($ngVue.getVueComponents()).forEach(([name, component]) => vueInstance.component(name, component));
 }
 function getInnerHtml(element) {
   if (element.innerHTML.trim()) {
@@ -13439,6 +13440,7 @@ class NgVueProvider {
     __publicField(this, "injectables", []);
     __publicField(this, "nativeVuePlugins", []);
     __publicField(this, "nativeVueDirectives", {});
+    __publicField(this, "nativeVueComponents", {});
     this.$injector = $injector;
     this.$get = [
       "$injector",
@@ -13453,7 +13455,8 @@ class NgVueProvider {
           initNgVuePlugins,
           getInjectables: () => this.injectables,
           getVuePlugins: () => this.nativeVuePlugins,
-          getVueDirectives: () => this.nativeVueDirectives
+          getVueDirectives: () => this.nativeVueDirectives,
+          getVueComponents: () => this.nativeVueComponents
         };
       }
     ];
@@ -13469,6 +13472,9 @@ class NgVueProvider {
   }
   directive(name, vueDirective) {
     this.nativeVueDirectives[name] = vueDirective;
+  }
+  component(name, vueComponent) {
+    this.nativeVueComponents[name] = vueComponent;
   }
   installNgVuePlugin(plugin) {
     const { $name, $config, $plugin } = plugin();

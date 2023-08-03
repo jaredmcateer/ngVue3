@@ -67,7 +67,7 @@
     "ts-jest": "^27.1.4",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.4",
-    "vite": "^2.9.5",
+    "vite": "^2.9.16",
     "vue": "^3.2.25",
     "vue-tsc": "^0.34.7"
   }

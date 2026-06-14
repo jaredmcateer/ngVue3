@@ -16,13 +16,13 @@
     "release": "changeset publish"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.4",
-    "@changesets/cli": "^2.22.0",
-    "@commitlint/cli": "^16.2.4",
-    "@commitlint/config-conventional": "^16.2.4",
-    "husky": "^7.0.4",
-    "prettier": "latest",
-    "turbo": "latest"
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "husky": "^9.1.0",
+    "prettier": "^3.8.4",
+    "turbo": "^2.9.18"
   },
   "engines": {
     "node": ">=24.0.0",

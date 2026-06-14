@@ -22,7 +22,7 @@
     "sass": "^1.51.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.4",
-    "vite": "^2.9.16",
+    "vite": "^6.4.2",
     "vue-tsc": "^0.34.7"
   }
 }

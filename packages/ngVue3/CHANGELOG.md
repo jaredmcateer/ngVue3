@@ -1,5 +1,15 @@
 # @jaredmcateer/ngvue3
 
+## 0.5.1
+
+### Patch Changes
+
+- [#47](https://github.com/jaredmcateer/ngVue3/pull/47) [`f4edece`](https://github.com/jaredmcateer/ngVue3/commit/f4edece08d7b01f192c29893ac0dc506a1e50f7b) Thanks [@jaredmcateer](https://github.com/jaredmcateer)! - Upgrade Node.js to 24, pnpm to 11, and update CI workflows.
+
+  Refresh monorepo dependencies to modern stable majors: TypeScript 5.8, Vite 6, Jest 29, ESLint 9, Vue 3.5, Husky 9, and Commitlint 19. Migrate ESLint to flat config, Jest config to ts-jest 29 transform syntax, and Husky 9 hook format.
+
+- [#46](https://github.com/jaredmcateer/ngVue3/pull/46) [`2f337b0`](https://github.com/jaredmcateer/ngVue3/commit/2f337b0b08439a9921a26ddfe4633bb99f53be68) Thanks [@jowings](https://github.com/jowings)! - Declare `angular` and `vue` as peerDependencies so the library resolves them at runtime under strict package managers (e.g. pnpm with `hoist=false`). Fixes [#45](https://github.com/jaredmcateer/ngVue3/issues/45).
+
 ## 0.5.0
 
 ### Minor Changes

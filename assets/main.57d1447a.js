@@ -1,4 +1,4 @@
-import { d as defineComponent, r as ref, c as createElementBlock, a as createBaseVNode, w as withDirectives, t as toDisplayString, F as Fragment, b as createStaticVNode, e as createTextVNode, o as openBlock, f as resolveDirective, g as createApp } from "./runtime-dom.esm-bundler.3037667d.js";
+import { d as defineComponent, r as ref, c as createElementBlock, a as createStaticVNode, b as createBaseVNode, w as withDirectives, e as createTextVNode, t as toDisplayString, F as Fragment, f as resolveDirective, o as openBlock, g as createApp } from "./runtime-dom.esm-bundler.5fabd4f2.js";
 function deepFreeze(obj) {
   if (obj instanceof Map) {
     obj.clear = obj.delete = obj.set = function() {
@@ -236,7 +236,12 @@ const RE_STARTERS_RE = "!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|
 const SHEBANG = (opts = {}) => {
   const beginShebang = /^#![ ]*\//;
   if (opts.binary) {
-    opts.begin = concat$B(beginShebang, /.*\b/, opts.binary, /\b.*/);
+    opts.begin = concat$B(
+      beginShebang,
+      /.*\b/,
+      opts.binary,
+      /\b.*/
+    );
   }
   return inherit({
     className: "meta",
@@ -271,12 +276,15 @@ const PHRASAL_WORDS_MODE = {
   begin: /\b(a|an|the|are|I'm|isn't|don't|doesn't|won't|but|just|should|pretty|simply|enough|gonna|going|wtf|so|such|will|you|your|they|like|more)\b/
 };
 const COMMENT = function(begin, end, modeOptions = {}) {
-  const mode = inherit({
-    className: "comment",
-    begin,
-    end,
-    contains: []
-  }, modeOptions);
+  const mode = inherit(
+    {
+      className: "comment",
+      begin,
+      end,
+      contains: []
+    },
+    modeOptions
+  );
   mode.contains.push(PHRASAL_WORDS_MODE);
   mode.contains.push({
     className: "doctag",
@@ -341,15 +349,18 @@ const METHOD_GUARD = {
   relevance: 0
 };
 const END_SAME_AS_BEGIN = function(mode) {
-  return Object.assign(mode, {
-    "on:begin": (m, resp) => {
-      resp.data._beginMatch = m[1];
-    },
-    "on:end": (m, resp) => {
-      if (resp.data._beginMatch !== m[1])
-        resp.ignoreMatch();
+  return Object.assign(
+    mode,
+    {
+      "on:begin": (m, resp) => {
+        resp.data._beginMatch = m[1];
+      },
+      "on:end": (m, resp) => {
+        if (resp.data._beginMatch !== m[1])
+          resp.ignoreMatch();
+      }
     }
-  });
+  );
 };
 var MODES$4 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
@@ -436,7 +447,10 @@ function compileKeywords(rawKeywords, caseInsensitive, className = DEFAULT_KEYWO
     compileList(className, rawKeywords);
   } else {
     Object.keys(rawKeywords).forEach(function(className2) {
-      Object.assign(compiledKeywords, compileKeywords(rawKeywords[className2], caseInsensitive, className2));
+      Object.assign(
+        compiledKeywords,
+        compileKeywords(rawKeywords[className2], caseInsensitive, className2)
+      );
     });
   }
   return compiledKeywords;
@@ -461,7 +475,10 @@ function commonKeyword(keyword) {
 }
 function compileLanguage(language, { plugins }) {
   function langRe(value, global) {
-    return new RegExp(source$C(value), "m" + (language.case_insensitive ? "i" : "") + (global ? "g" : ""));
+    return new RegExp(
+      source$C(value),
+      "m" + (language.case_insensitive ? "i" : "") + (global ? "g" : "")
+    );
   }
   class MultiRegex {
     constructor() {
@@ -1167,7 +1184,9 @@ const HLJS = function(hljs2) {
   function highlightAuto(code, languageSubset) {
     languageSubset = languageSubset || options.languages || Object.keys(languages);
     const plaintext2 = justTextHighlightResult(code);
-    const results = languageSubset.filter(getLanguage).filter(autoDetection).map((name) => _highlight(name, code, false));
+    const results = languageSubset.filter(getLanguage).filter(autoDetection).map(
+      (name) => _highlight(name, code, false)
+    );
     results.unshift(plaintext2);
     const sorted = results.sort((a, b) => {
       if (a.relevance !== b.relevance)
@@ -1221,7 +1240,10 @@ const HLJS = function(hljs2) {
   const tabReplacePlugin = {
     "after:highlightElement": ({ result }) => {
       if (options.tabReplace) {
-        result.value = result.value.replace(TAB_REPLACE_RE, (m) => m.replace(/\t/g, options.tabReplace));
+        result.value = result.value.replace(
+          TAB_REPLACE_RE,
+          (m) => m.replace(/\t/g, options.tabReplace)
+        );
       }
     }
   };
@@ -1230,7 +1252,10 @@ const HLJS = function(hljs2) {
     const language = blockLanguage(element);
     if (shouldNotHighlight(language))
       return;
-    fire("before:highlightElement", { el: element, language });
+    fire(
+      "before:highlightElement",
+      { el: element, language }
+    );
     node = element;
     const text = node.textContent;
     const result = language ? highlight2(text, { language, ignoreIllegals: true }) : highlightAuto(text);
@@ -1346,12 +1371,16 @@ const HLJS = function(hljs2) {
   function upgradePluginAPI(plugin) {
     if (plugin["before:highlightBlock"] && !plugin["before:highlightElement"]) {
       plugin["before:highlightElement"] = (data) => {
-        plugin["before:highlightBlock"](Object.assign({ block: data.el }, data));
+        plugin["before:highlightBlock"](
+          Object.assign({ block: data.el }, data)
+        );
       };
     }
     if (plugin["after:highlightBlock"] && !plugin["after:highlightElement"]) {
       plugin["after:highlightElement"] = (data) => {
-        plugin["after:highlightBlock"](Object.assign({ block: data.el }, data));
+        plugin["after:highlightBlock"](
+          Object.assign({ block: data.el }, data)
+        );
       };
     }
   }
@@ -2092,9 +2121,12 @@ function either$b(...args) {
   return joined;
 }
 function applescript(hljs2) {
-  const STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
-    illegal: null
-  });
+  const STRING = hljs2.inherit(
+    hljs2.QUOTE_STRING_MODE,
+    {
+      illegal: null
+    }
+  );
   const PARAMS = {
     className: "params",
     begin: /\(/,
@@ -2106,12 +2138,16 @@ function applescript(hljs2) {
     ]
   };
   const COMMENT_MODE_1 = hljs2.COMMENT(/--/, /$/);
-  const COMMENT_MODE_2 = hljs2.COMMENT(/\(\*/, /\*\)/, {
-    contains: [
-      "self",
-      COMMENT_MODE_1
-    ]
-  });
+  const COMMENT_MODE_2 = hljs2.COMMENT(
+    /\(\*/,
+    /\*\)/,
+    {
+      contains: [
+        "self",
+        COMMENT_MODE_1
+      ]
+    }
+  );
   const COMMENTS = [
     COMMENT_MODE_1,
     COMMENT_MODE_2,
@@ -2170,7 +2206,11 @@ function applescript(hljs2) {
       hljs2.C_NUMBER_MODE,
       {
         className: "built_in",
-        begin: concat$x(/\b/, either$b(...BUILT_IN_PATTERNS), /\b/)
+        begin: concat$x(
+          /\b/,
+          either$b(...BUILT_IN_PATTERNS),
+          /\b/
+        )
       },
       {
         className: "built_in",
@@ -2182,7 +2222,11 @@ function applescript(hljs2) {
       },
       {
         className: "keyword",
-        begin: concat$x(/\b/, either$b(...KEYWORD_PATTERNS), /\b/)
+        begin: concat$x(
+          /\b/,
+          either$b(...KEYWORD_PATTERNS),
+          /\b/
+        )
       },
       {
         beginKeywords: "on",
@@ -2562,7 +2606,15 @@ function cPlusPlus$1(hljs2) {
     className: "function.dispatch",
     relevance: 0,
     keywords: CPP_KEYWORDS,
-    begin: concat$w(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs2.IDENT_RE, lookahead$c(/\s*\(/))
+    begin: concat$w(
+      /\b/,
+      /(?!decltype)/,
+      /(?!if)/,
+      /(?!for)/,
+      /(?!while)/,
+      hljs2.IDENT_RE,
+      lookahead$c(/\s*\(/)
+    )
   };
   const EXPRESSION_CONTAINS = [
     FUNCTION_DISPATCH,
@@ -2682,33 +2734,39 @@ function cPlusPlus$1(hljs2) {
     classNameAliases: {
       "function.dispatch": "built_in"
     },
-    contains: [].concat(EXPRESSION_CONTEXT, FUNCTION_DECLARATION, FUNCTION_DISPATCH, EXPRESSION_CONTAINS, [
-      PREPROCESSOR,
-      {
-        begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
-        end: ">",
-        keywords: CPP_KEYWORDS,
-        contains: [
-          "self",
-          CPP_PRIMITIVE_TYPES
-        ]
-      },
-      {
-        begin: hljs2.IDENT_RE + "::",
-        keywords: CPP_KEYWORDS
-      },
-      {
-        className: "class",
-        beginKeywords: "enum class struct union",
-        end: /[{;:<>=]/,
-        contains: [
-          {
-            beginKeywords: "final class struct"
-          },
-          hljs2.TITLE_MODE
-        ]
-      }
-    ]),
+    contains: [].concat(
+      EXPRESSION_CONTEXT,
+      FUNCTION_DECLARATION,
+      FUNCTION_DISPATCH,
+      EXPRESSION_CONTAINS,
+      [
+        PREPROCESSOR,
+        {
+          begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
+          end: ">",
+          keywords: CPP_KEYWORDS,
+          contains: [
+            "self",
+            CPP_PRIMITIVE_TYPES
+          ]
+        },
+        {
+          begin: hljs2.IDENT_RE + "::",
+          keywords: CPP_KEYWORDS
+        },
+        {
+          className: "class",
+          beginKeywords: "enum class struct union",
+          end: /[{;:<>=]/,
+          contains: [
+            {
+              beginKeywords: "final class struct"
+            },
+            hljs2.TITLE_MODE
+          ]
+        }
+      ]
+    ),
     exports: {
       preprocessor: PREPROCESSOR,
       strings: STRINGS,
@@ -2945,9 +3003,13 @@ function xml(hljs2) {
           }
         ]
       },
-      hljs2.COMMENT(/<!--/, /-->/, {
-        relevance: 10
-      }),
+      hljs2.COMMENT(
+        /<!--/,
+        /-->/,
+        {
+          relevance: 10
+        }
+      ),
       {
         begin: /<!\[CDATA\[/,
         end: /\]\]>/,
@@ -3001,7 +3063,13 @@ function xml(hljs2) {
       },
       {
         className: "tag",
-        begin: concat$v(/</, lookahead$b(concat$v(TAG_NAME_RE, either$a(/\/>/, />/, /\s/)))),
+        begin: concat$v(
+          /</,
+          lookahead$b(concat$v(
+            TAG_NAME_RE,
+            either$a(/\/>/, />/, /\s/)
+          ))
+        ),
         end: /\/?>/,
         contains: [
           {
@@ -3014,7 +3082,13 @@ function xml(hljs2) {
       },
       {
         className: "tag",
-        begin: concat$v(/<\//, lookahead$b(concat$v(TAG_NAME_RE, />/))),
+        begin: concat$v(
+          /<\//,
+          lookahead$b(concat$v(
+            TAG_NAME_RE,
+            />/
+          ))
+        ),
         contains: [
           {
             className: "name",
@@ -3072,7 +3146,12 @@ function asciidoc(hljs2) {
     },
     {
       className: "strong",
-      begin: concat$u(/\*\*/, /((\*(?!\*)|\\[^\n]|[^*\n\\])+\n)+/, /(\*(?!\*)|\\[^\n]|[^*\n\\])*/, /\*\*/),
+      begin: concat$u(
+        /\*\*/,
+        /((\*(?!\*)|\\[^\n]|[^*\n\\])+\n)+/,
+        /(\*(?!\*)|\\[^\n]|[^*\n\\])*/,
+        /\*\*/
+      ),
       relevance: 0
     },
     {
@@ -3091,7 +3170,12 @@ function asciidoc(hljs2) {
     },
     {
       className: "emphasis",
-      begin: concat$u(/__/, /((_(?!_)|\\[^\n]|[^_\n\\])+\n)+/, /(_(?!_)|\\[^\n]|[^_\n\\])*/, /__/),
+      begin: concat$u(
+        /__/,
+        /((_(?!_)|\\[^\n]|[^_\n\\])+\n)+/,
+        /(_(?!_)|\\[^\n]|[^_\n\\])*/,
+        /__/
+      ),
       relevance: 0
     },
     {
@@ -3126,12 +3210,20 @@ function asciidoc(hljs2) {
     name: "AsciiDoc",
     aliases: ["adoc"],
     contains: [
-      hljs2.COMMENT("^/{4,}\\n", "\\n/{4,}$", {
-        relevance: 10
-      }),
-      hljs2.COMMENT("^//", "$", {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        "^/{4,}\\n",
+        "\\n/{4,}$",
+        {
+          relevance: 10
+        }
+      ),
+      hljs2.COMMENT(
+        "^//",
+        "$",
+        {
+          relevance: 0
+        }
+      ),
       {
         className: "title",
         begin: "^\\.\\w.*$"
@@ -3269,19 +3361,23 @@ function aspectj(hljs2) {
     keywords: KEYWORDS2,
     illegal: /<\/|#/,
     contains: [
-      hljs2.COMMENT(/\/\*\*/, /\*\//, {
-        relevance: 0,
-        contains: [
-          {
-            begin: /\w+@/,
-            relevance: 0
-          },
-          {
-            className: "doctag",
-            begin: /@[A-Za-z]+/
-          }
-        ]
-      }),
+      hljs2.COMMENT(
+        /\/\*\*/,
+        /\*\//,
+        {
+          relevance: 0,
+          contains: [
+            {
+              begin: /\w+@/,
+              relevance: 0
+            },
+            {
+              className: "doctag",
+              begin: /@[A-Za-z]+/
+            }
+          ]
+        }
+      ),
       hljs2.C_LINE_COMMENT_MODE,
       hljs2.C_BLOCK_COMMENT_MODE,
       hljs2.APOS_STRING_MODE,
@@ -3624,9 +3720,13 @@ function avrasm(hljs2) {
     },
     contains: [
       hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.COMMENT(";", "$", {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        ";",
+        "$",
+        {
+          relevance: 0
+        }
+      ),
       hljs2.C_NUMBER_MODE,
       hljs2.BINARY_NUMBER_MODE,
       {
@@ -3913,7 +4013,10 @@ function bash(hljs2) {
   Object.assign(VAR, {
     className: "variable",
     variants: [
-      { begin: concat$s(/\$[\w\d#@][\w\d_]*/, `(?![\\w\\d])(?![$])`) },
+      { begin: concat$s(
+        /\$[\w\d#@][\w\d_]*/,
+        `(?![\\w\\d])(?![$])`
+      ) },
       BRACED_VAR
     ]
   });
@@ -4086,10 +4189,14 @@ function brainfuck(hljs2) {
     name: "Brainfuck",
     aliases: ["bf"],
     contains: [
-      hljs2.COMMENT("[^\\[\\]\\.,\\+\\-<> \r\n]", "[\\[\\]\\.,\\+\\-<> \r\n]", {
-        returnEnd: true,
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        "[^\\[\\]\\.,\\+\\-<> \r\n]",
+        "[\\[\\]\\.,\\+\\-<> \r\n]",
+        {
+          returnEnd: true,
+          relevance: 0
+        }
+      ),
       {
         className: "title",
         begin: "[\\[\\]]",
@@ -4332,7 +4439,15 @@ function cPlusPlus(hljs2) {
     className: "function.dispatch",
     relevance: 0,
     keywords: CPP_KEYWORDS,
-    begin: concat$r(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs2.IDENT_RE, lookahead$a(/\s*\(/))
+    begin: concat$r(
+      /\b/,
+      /(?!decltype)/,
+      /(?!if)/,
+      /(?!for)/,
+      /(?!while)/,
+      hljs2.IDENT_RE,
+      lookahead$a(/\s*\(/)
+    )
   };
   const EXPRESSION_CONTAINS = [
     FUNCTION_DISPATCH,
@@ -4452,33 +4567,39 @@ function cPlusPlus(hljs2) {
     classNameAliases: {
       "function.dispatch": "built_in"
     },
-    contains: [].concat(EXPRESSION_CONTEXT, FUNCTION_DECLARATION, FUNCTION_DISPATCH, EXPRESSION_CONTAINS, [
-      PREPROCESSOR,
-      {
-        begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
-        end: ">",
-        keywords: CPP_KEYWORDS,
-        contains: [
-          "self",
-          CPP_PRIMITIVE_TYPES
-        ]
-      },
-      {
-        begin: hljs2.IDENT_RE + "::",
-        keywords: CPP_KEYWORDS
-      },
-      {
-        className: "class",
-        beginKeywords: "enum class struct union",
-        end: /[{;:<>=]/,
-        contains: [
-          {
-            beginKeywords: "final class struct"
-          },
-          hljs2.TITLE_MODE
-        ]
-      }
-    ]),
+    contains: [].concat(
+      EXPRESSION_CONTEXT,
+      FUNCTION_DECLARATION,
+      FUNCTION_DISPATCH,
+      EXPRESSION_CONTAINS,
+      [
+        PREPROCESSOR,
+        {
+          begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
+          end: ">",
+          keywords: CPP_KEYWORDS,
+          contains: [
+            "self",
+            CPP_PRIMITIVE_TYPES
+          ]
+        },
+        {
+          begin: hljs2.IDENT_RE + "::",
+          keywords: CPP_KEYWORDS
+        },
+        {
+          className: "class",
+          beginKeywords: "enum class struct union",
+          end: /[{;:<>=]/,
+          contains: [
+            {
+              beginKeywords: "final class struct"
+            },
+            hljs2.TITLE_MODE
+          ]
+        }
+      ]
+    ),
     exports: {
       preprocessor: PREPROCESSOR,
       strings: STRINGS,
@@ -4707,33 +4828,38 @@ function c(hljs2) {
     keywords: CPP_KEYWORDS,
     disableAutodetect: true,
     illegal: "</",
-    contains: [].concat(EXPRESSION_CONTEXT, FUNCTION_DECLARATION, EXPRESSION_CONTAINS, [
-      PREPROCESSOR,
-      {
-        begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
-        end: ">",
-        keywords: CPP_KEYWORDS,
-        contains: [
-          "self",
-          CPP_PRIMITIVE_TYPES
-        ]
-      },
-      {
-        begin: hljs2.IDENT_RE + "::",
-        keywords: CPP_KEYWORDS
-      },
-      {
-        className: "class",
-        beginKeywords: "enum class struct union",
-        end: /[{;:<>=]/,
-        contains: [
-          {
-            beginKeywords: "final class struct"
-          },
-          hljs2.TITLE_MODE
-        ]
-      }
-    ]),
+    contains: [].concat(
+      EXPRESSION_CONTEXT,
+      FUNCTION_DECLARATION,
+      EXPRESSION_CONTAINS,
+      [
+        PREPROCESSOR,
+        {
+          begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
+          end: ">",
+          keywords: CPP_KEYWORDS,
+          contains: [
+            "self",
+            CPP_PRIMITIVE_TYPES
+          ]
+        },
+        {
+          begin: hljs2.IDENT_RE + "::",
+          keywords: CPP_KEYWORDS
+        },
+        {
+          className: "class",
+          beginKeywords: "enum class struct union",
+          end: /[{;:<>=]/,
+          contains: [
+            {
+              beginKeywords: "final class struct"
+            },
+            hljs2.TITLE_MODE
+          ]
+        }
+      ]
+    ),
     exports: {
       preprocessor: PREPROCESSOR,
       strings: STRINGS,
@@ -4747,12 +4873,20 @@ function cal(hljs2) {
   const LITERALS2 = "false true";
   const COMMENT_MODES = [
     hljs2.C_LINE_COMMENT_MODE,
-    hljs2.COMMENT(/\{/, /\}/, {
-      relevance: 0
-    }),
-    hljs2.COMMENT(/\(\*/, /\*\)/, {
-      relevance: 10
-    })
+    hljs2.COMMENT(
+      /\{/,
+      /\}/,
+      {
+        relevance: 0
+      }
+    ),
+    hljs2.COMMENT(
+      /\(\*/,
+      /\*\)/,
+      {
+        relevance: 10
+      }
+    )
   ];
   const STRING = {
     className: "string",
@@ -4978,9 +5112,13 @@ function clojure(hljs2) {
   const STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, {
     illegal: null
   });
-  const COMMENT2 = hljs2.COMMENT(";", "$", {
-    relevance: 0
-  });
+  const COMMENT2 = hljs2.COMMENT(
+    ";",
+    "$",
+    {
+      relevance: 0
+    }
+  );
   const LITERAL = {
     className: "literal",
     begin: /\b(true|false|nil)\b/
@@ -5226,7 +5364,12 @@ const BUILT_IN_VARIABLES$3 = [
   "module",
   "global"
 ];
-const BUILT_INS$3 = [].concat(BUILT_IN_GLOBALS$3, BUILT_IN_VARIABLES$3, TYPES$3, ERROR_TYPES$3);
+const BUILT_INS$3 = [].concat(
+  BUILT_IN_GLOBALS$3,
+  BUILT_IN_VARIABLES$3,
+  TYPES$3,
+  ERROR_TYPES$3
+);
 function coffeescript(hljs2) {
   const COFFEE_BUILT_INS = [
     "npm",
@@ -5750,7 +5893,15 @@ function cpp(hljs2) {
     className: "function.dispatch",
     relevance: 0,
     keywords: CPP_KEYWORDS,
-    begin: concat$p(/\b/, /(?!decltype)/, /(?!if)/, /(?!for)/, /(?!while)/, hljs2.IDENT_RE, lookahead$9(/\s*\(/))
+    begin: concat$p(
+      /\b/,
+      /(?!decltype)/,
+      /(?!if)/,
+      /(?!for)/,
+      /(?!while)/,
+      hljs2.IDENT_RE,
+      lookahead$9(/\s*\(/)
+    )
   };
   const EXPRESSION_CONTAINS = [
     FUNCTION_DISPATCH,
@@ -5870,33 +6021,39 @@ function cpp(hljs2) {
     classNameAliases: {
       "function.dispatch": "built_in"
     },
-    contains: [].concat(EXPRESSION_CONTEXT, FUNCTION_DECLARATION, FUNCTION_DISPATCH, EXPRESSION_CONTAINS, [
-      PREPROCESSOR,
-      {
-        begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
-        end: ">",
-        keywords: CPP_KEYWORDS,
-        contains: [
-          "self",
-          CPP_PRIMITIVE_TYPES
-        ]
-      },
-      {
-        begin: hljs2.IDENT_RE + "::",
-        keywords: CPP_KEYWORDS
-      },
-      {
-        className: "class",
-        beginKeywords: "enum class struct union",
-        end: /[{;:<>=]/,
-        contains: [
-          {
-            beginKeywords: "final class struct"
-          },
-          hljs2.TITLE_MODE
-        ]
-      }
-    ]),
+    contains: [].concat(
+      EXPRESSION_CONTEXT,
+      FUNCTION_DECLARATION,
+      FUNCTION_DISPATCH,
+      EXPRESSION_CONTAINS,
+      [
+        PREPROCESSOR,
+        {
+          begin: "\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",
+          end: ">",
+          keywords: CPP_KEYWORDS,
+          contains: [
+            "self",
+            CPP_PRIMITIVE_TYPES
+          ]
+        },
+        {
+          begin: hljs2.IDENT_RE + "::",
+          keywords: CPP_KEYWORDS
+        },
+        {
+          className: "class",
+          beginKeywords: "enum class struct union",
+          end: /[{;:<>=]/,
+          contains: [
+            {
+              beginKeywords: "final class struct"
+            },
+            hljs2.TITLE_MODE
+          ]
+        }
+      ]
+    ),
     exports: {
       preprocessor: PREPROCESSOR,
       strings: STRINGS,
@@ -6588,27 +6745,31 @@ function csharp(hljs2) {
     keywords: KEYWORDS2,
     illegal: /::/,
     contains: [
-      hljs2.COMMENT("///", "$", {
-        returnBegin: true,
-        contains: [
-          {
-            className: "doctag",
-            variants: [
-              {
-                begin: "///",
-                relevance: 0
-              },
-              {
-                begin: "<!--|-->"
-              },
-              {
-                begin: "</?",
-                end: ">"
-              }
-            ]
-          }
-        ]
-      }),
+      hljs2.COMMENT(
+        "///",
+        "$",
+        {
+          returnBegin: true,
+          contains: [
+            {
+              className: "doctag",
+              variants: [
+                {
+                  begin: "///",
+                  relevance: 0
+                },
+                {
+                  begin: "<!--|-->"
+                },
+                {
+                  begin: "</?",
+                  end: ">"
+                }
+              ]
+            }
+          ]
+        }
+      ),
       hljs2.C_LINE_COMMENT_MODE,
       hljs2.C_BLOCK_COMMENT_MODE,
       {
@@ -7379,10 +7540,14 @@ function d(hljs2) {
     className: "keyword",
     begin: "@[a-zA-Z_][a-zA-Z_\\d]*"
   };
-  const D_NESTING_COMMENT_MODE = hljs2.COMMENT("\\/\\+", "\\+\\/", {
-    contains: ["self"],
-    relevance: 10
-  });
+  const D_NESTING_COMMENT_MODE = hljs2.COMMENT(
+    "\\/\\+",
+    "\\+\\/",
+    {
+      contains: ["self"],
+      relevance: 10
+    }
+  );
   return {
     name: "D",
     keywords: D_KEYWORDS,
@@ -7753,18 +7918,26 @@ function dart(hljs2) {
     keywords: KEYWORDS2,
     contains: [
       STRING,
-      hljs2.COMMENT(/\/\*\*(?!\/)/, /\*\//, {
-        subLanguage: "markdown",
-        relevance: 0
-      }),
-      hljs2.COMMENT(/\/{3,} ?/, /$/, {
-        contains: [{
+      hljs2.COMMENT(
+        /\/\*\*(?!\/)/,
+        /\*\//,
+        {
           subLanguage: "markdown",
-          begin: ".",
-          end: "$",
           relevance: 0
-        }]
-      }),
+        }
+      ),
+      hljs2.COMMENT(
+        /\/{3,} ?/,
+        /$/,
+        {
+          contains: [{
+            subLanguage: "markdown",
+            begin: ".",
+            end: "$",
+            relevance: 0
+          }]
+        }
+      ),
       hljs2.C_LINE_COMMENT_MODE,
       hljs2.C_BLOCK_COMMENT_MODE,
       {
@@ -8074,9 +8247,13 @@ function dockerfile(hljs2) {
 }
 var dockerfile_1 = dockerfile;
 function dos(hljs2) {
-  const COMMENT2 = hljs2.COMMENT(/^\s*@?rem\b/, /$/, {
-    relevance: 10
-  });
+  const COMMENT2 = hljs2.COMMENT(
+    /^\s*@?rem\b/,
+    /$/,
+    {
+      relevance: 10
+    }
+  );
   const LABEL = {
     className: "symbol",
     begin: "^\\s*[A-Za-z._?][A-Za-z0-9_$#@~.?]*(:|\\s+label)",
@@ -8630,9 +8807,13 @@ function elm(hljs2) {
   const COMMENT2 = {
     variants: [
       hljs2.COMMENT("--", "$"),
-      hljs2.COMMENT(/\{-/, /-\}/, {
-        contains: ["self"]
-      })
+      hljs2.COMMENT(
+        /\{-/,
+        /-\}/,
+        {
+          contains: ["self"]
+        }
+      )
     ]
   };
   const CONSTRUCTOR = {
@@ -8758,13 +8939,21 @@ function ruby(hljs2) {
     end: ">"
   };
   const COMMENT_MODES = [
-    hljs2.COMMENT("#", "$", {
-      contains: [YARDOCTAG]
-    }),
-    hljs2.COMMENT("^=begin", "^=end", {
-      contains: [YARDOCTAG],
-      relevance: 10
-    }),
+    hljs2.COMMENT(
+      "#",
+      "$",
+      {
+        contains: [YARDOCTAG]
+      }
+    ),
+    hljs2.COMMENT(
+      "^=begin",
+      "^=end",
+      {
+        contains: [YARDOCTAG],
+        relevance: 10
+      }
+    ),
     hljs2.COMMENT("^__END__", "\\n$")
   ];
   const SUBST = {
@@ -9090,7 +9279,11 @@ function erlangRepl(hljs2) {
       hljs2.APOS_STRING_MODE,
       hljs2.QUOTE_STRING_MODE,
       {
-        begin: concat$l(/\?(::)?/, /([A-Z]\w*)/, /((::)[A-Z]\w*)*/)
+        begin: concat$l(
+          /\?(::)?/,
+          /([A-Z]\w*)/,
+          /((::)[A-Z]\w*)*/
+        )
       },
       {
         begin: "->"
@@ -9330,11 +9523,15 @@ function excel(hljs2) {
         begin: hljs2.NUMBER_RE + "(%)?",
         relevance: 0
       },
-      hljs2.COMMENT(/\bN\(/, /\)/, {
-        excludeBegin: true,
-        excludeEnd: true,
-        illegal: /\n/
-      })
+      hljs2.COMMENT(
+        /\bN\(/,
+        /\)/,
+        {
+          excludeBegin: true,
+          excludeEnd: true,
+          illegal: /\n/
+        }
+      )
     ]
   };
 }
@@ -9646,7 +9843,10 @@ function gams(hljs2) {
       ASSIGNMENT,
       {
         className: "comment",
-        begin: concat$j(COMMENT_WORD, anyNumberOfTimes$2(concat$j(/[ ]+/, COMMENT_WORD))),
+        begin: concat$j(
+          COMMENT_WORD,
+          anyNumberOfTimes$2(concat$j(/[ ]+/, COMMENT_WORD))
+        ),
         relevance: 0
       }
     ]
@@ -9803,13 +10003,16 @@ function gauss(hljs2) {
     relevance: 0
   };
   const DEFINITION = function(beginKeywords2, end, inherits) {
-    const mode = hljs2.inherit({
-      className: "function",
-      beginKeywords: beginKeywords2,
-      end,
-      excludeEnd: true,
-      contains: [].concat(PARSE_PARAMS)
-    }, inherits || {});
+    const mode = hljs2.inherit(
+      {
+        className: "function",
+        beginKeywords: beginKeywords2,
+        end,
+        excludeEnd: true,
+        contains: [].concat(PARSE_PARAMS)
+      },
+      inherits || {}
+    );
     mode.contains.push(FUNCTION_DEF);
     mode.contains.push(hljs2.C_NUMBER_MODE);
     mode.contains.push(hljs2.C_BLOCK_COMMENT_MODE);
@@ -10188,19 +10391,23 @@ function groovy(hljs2) {
   const COMMENT2 = variants([
     hljs2.C_LINE_COMMENT_MODE,
     hljs2.C_BLOCK_COMMENT_MODE,
-    hljs2.COMMENT("/\\*\\*", "\\*/", {
-      relevance: 0,
-      contains: [
-        {
-          begin: /\w+@/,
-          relevance: 0
-        },
-        {
-          className: "doctag",
-          begin: "@[A-Za-z]+"
-        }
-      ]
-    })
+    hljs2.COMMENT(
+      "/\\*\\*",
+      "\\*/",
+      {
+        relevance: 0,
+        contains: [
+          {
+            begin: /\w+@/,
+            relevance: 0
+          },
+          {
+            className: "doctag",
+            begin: "@[A-Za-z]+"
+          }
+        ]
+      }
+    )
   ]);
   const REGEXP = {
     className: "regexp",
@@ -10211,25 +10418,28 @@ function groovy(hljs2) {
     hljs2.BINARY_NUMBER_MODE,
     hljs2.C_NUMBER_MODE
   ]);
-  const STRING = variants([
+  const STRING = variants(
+    [
+      {
+        begin: /"""/,
+        end: /"""/
+      },
+      {
+        begin: /'''/,
+        end: /'''/
+      },
+      {
+        begin: "\\$/",
+        end: "/\\$",
+        relevance: 10
+      },
+      hljs2.APOS_STRING_MODE,
+      hljs2.QUOTE_STRING_MODE
+    ],
     {
-      begin: /"""/,
-      end: /"""/
-    },
-    {
-      begin: /'''/,
-      end: /'''/
-    },
-    {
-      begin: "\\$/",
-      end: "/\\$",
-      relevance: 10
-    },
-    hljs2.APOS_STRING_MODE,
-    hljs2.QUOTE_STRING_MODE
-  ], {
-    className: "string"
-  });
+      className: "string"
+    }
+  );
   return {
     name: "Groovy",
     keywords: {
@@ -10302,9 +10512,13 @@ function haml(hljs2) {
         begin: "^!!!( (5|1\\.1|Strict|Frameset|Basic|Mobile|RDFa|XML\\b.*))?$",
         relevance: 10
       },
-      hljs2.COMMENT("^\\s*(!=#|=#|-#|/).*$", false, {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        "^\\s*(!=#|=#|-#|/).*$",
+        false,
+        {
+          relevance: 0
+        }
+      ),
       {
         begin: "^\\s*(-|=|!=)(?!#)",
         starts: {
@@ -10462,9 +10676,27 @@ function handlebars$1(hljs2) {
   const BRACKET_QUOTED_ID_REGEX = /\[\]|\[[^\]]+\]/;
   const PLAIN_ID_REGEX = /[^\s!"#%&'()*+,.\/;<=>@\[\\\]^`{|}~]+/;
   const PATH_DELIMITER_REGEX = /(\.|\/)/;
-  const ANY_ID = either$9(DOUBLE_QUOTED_ID_REGEX, SINGLE_QUOTED_ID_REGEX, BRACKET_QUOTED_ID_REGEX, PLAIN_ID_REGEX);
-  const IDENTIFIER_REGEX = concat$h(optional$3(/\.|\.\/|\//), ANY_ID, anyNumberOfTimes$1(concat$h(PATH_DELIMITER_REGEX, ANY_ID)));
-  const HASH_PARAM_REGEX = concat$h("(", BRACKET_QUOTED_ID_REGEX, "|", PLAIN_ID_REGEX, ")(?==)");
+  const ANY_ID = either$9(
+    DOUBLE_QUOTED_ID_REGEX,
+    SINGLE_QUOTED_ID_REGEX,
+    BRACKET_QUOTED_ID_REGEX,
+    PLAIN_ID_REGEX
+  );
+  const IDENTIFIER_REGEX = concat$h(
+    optional$3(/\.|\.\/|\//),
+    ANY_ID,
+    anyNumberOfTimes$1(concat$h(
+      PATH_DELIMITER_REGEX,
+      ANY_ID
+    ))
+  );
+  const HASH_PARAM_REGEX = concat$h(
+    "(",
+    BRACKET_QUOTED_ID_REGEX,
+    "|",
+    PLAIN_ID_REGEX,
+    ")(?==)"
+  );
   const HELPER_NAME_OR_PATH_EXPRESSION = {
     begin: IDENTIFIER_REGEX,
     lexemes: /[\w.\/]+/
@@ -10628,9 +10860,13 @@ function haskell(hljs2) {
   const COMMENT2 = {
     variants: [
       hljs2.COMMENT("--", "$"),
-      hljs2.COMMENT(/\{-/, /-\}/, {
-        contains: ["self"]
-      })
+      hljs2.COMMENT(
+        /\{-/,
+        /-\}/,
+        {
+          contains: ["self"]
+        }
+      )
     ]
   };
   const PRAGMA = {
@@ -11025,9 +11261,27 @@ function handlebars(hljs2) {
   const BRACKET_QUOTED_ID_REGEX = /\[\]|\[[^\]]+\]/;
   const PLAIN_ID_REGEX = /[^\s!"#%&'()*+,.\/;<=>@\[\\\]^`{|}~]+/;
   const PATH_DELIMITER_REGEX = /(\.|\/)/;
-  const ANY_ID = either$8(DOUBLE_QUOTED_ID_REGEX, SINGLE_QUOTED_ID_REGEX, BRACKET_QUOTED_ID_REGEX, PLAIN_ID_REGEX);
-  const IDENTIFIER_REGEX = concat$g(optional$2(/\.|\.\/|\//), ANY_ID, anyNumberOfTimes(concat$g(PATH_DELIMITER_REGEX, ANY_ID)));
-  const HASH_PARAM_REGEX = concat$g("(", BRACKET_QUOTED_ID_REGEX, "|", PLAIN_ID_REGEX, ")(?==)");
+  const ANY_ID = either$8(
+    DOUBLE_QUOTED_ID_REGEX,
+    SINGLE_QUOTED_ID_REGEX,
+    BRACKET_QUOTED_ID_REGEX,
+    PLAIN_ID_REGEX
+  );
+  const IDENTIFIER_REGEX = concat$g(
+    optional$2(/\.|\.\/|\//),
+    ANY_ID,
+    anyNumberOfTimes(concat$g(
+      PATH_DELIMITER_REGEX,
+      ANY_ID
+    ))
+  );
+  const HASH_PARAM_REGEX = concat$g(
+    "(",
+    BRACKET_QUOTED_ID_REGEX,
+    "|",
+    PLAIN_ID_REGEX,
+    ")(?==)"
+  );
   const HELPER_NAME_OR_PATH_EXPRESSION = {
     begin: IDENTIFIER_REGEX,
     lexemes: /[\w.\/]+/
@@ -11308,9 +11562,13 @@ function hy(hljs2) {
     relevance: 0
   };
   var STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, { illegal: null });
-  var COMMENT2 = hljs2.COMMENT(";", "$", {
-    relevance: 0
-  });
+  var COMMENT2 = hljs2.COMMENT(
+    ";",
+    "$",
+    {
+      relevance: 0
+    }
+  );
   var LITERAL = {
     className: "literal",
     begin: /\b([Tt]rue|[Ff]alse|nil|None)\b/
@@ -11501,8 +11759,18 @@ function ini(hljs2) {
   const BARE_KEY = /[A-Za-z0-9_-]+/;
   const QUOTED_KEY_DOUBLE_QUOTE = /"(\\"|[^"])*"/;
   const QUOTED_KEY_SINGLE_QUOTE = /'[^']*'/;
-  const ANY_KEY = either$7(BARE_KEY, QUOTED_KEY_DOUBLE_QUOTE, QUOTED_KEY_SINGLE_QUOTE);
-  const DOTTED_KEY = concat$e(ANY_KEY, "(\\s*\\.\\s*", ANY_KEY, ")*", lookahead$5(/\s*=\s*[^#\s]/));
+  const ANY_KEY = either$7(
+    BARE_KEY,
+    QUOTED_KEY_DOUBLE_QUOTE,
+    QUOTED_KEY_SINGLE_QUOTE
+  );
+  const DOTTED_KEY = concat$e(
+    ANY_KEY,
+    "(\\s*\\.\\s*",
+    ANY_KEY,
+    ")*",
+    lookahead$5(/\s*=\s*[^#\s]/)
+  );
   return {
     name: "TOML, also INI",
     aliases: ["toml"],
@@ -11905,19 +12173,23 @@ function java(hljs2) {
     keywords: KEYWORDS2,
     illegal: /<\/|#/,
     contains: [
-      hljs2.COMMENT("/\\*\\*", "\\*/", {
-        relevance: 0,
-        contains: [
-          {
-            begin: /\w+@/,
-            relevance: 0
-          },
-          {
-            className: "doctag",
-            begin: "@[A-Za-z]+"
-          }
-        ]
-      }),
+      hljs2.COMMENT(
+        "/\\*\\*",
+        "\\*/",
+        {
+          relevance: 0,
+          contains: [
+            {
+              begin: /\w+@/,
+              relevance: 0
+            },
+            {
+              className: "doctag",
+              begin: "@[A-Za-z]+"
+            }
+          ]
+        }
+      ),
       {
         begin: /import java\.[a-z]+\./,
         keywords: "import",
@@ -12135,7 +12407,12 @@ const BUILT_IN_VARIABLES$2 = [
   "module",
   "global"
 ];
-const BUILT_INS$2 = [].concat(BUILT_IN_GLOBALS$2, BUILT_IN_VARIABLES$2, TYPES$2, ERROR_TYPES$2);
+const BUILT_INS$2 = [].concat(
+  BUILT_IN_GLOBALS$2,
+  BUILT_IN_VARIABLES$2,
+  TYPES$2,
+  ERROR_TYPES$2
+);
 function source$d(re) {
   if (!re)
     return null;
@@ -12242,33 +12519,37 @@ function javascript$1(hljs2) {
       SUBST
     ]
   };
-  const JSDOC_COMMENT = hljs2.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
-    relevance: 0,
-    contains: [
-      {
-        className: "doctag",
-        begin: "@[A-Za-z]+",
-        contains: [
-          {
-            className: "type",
-            begin: "\\{",
-            end: "\\}",
-            relevance: 0
-          },
-          {
-            className: "variable",
-            begin: IDENT_RE$1$1 + "(?=\\s*(-)|$)",
-            endsParent: true,
-            relevance: 0
-          },
-          {
-            begin: /(?=[^\n])\s/,
-            relevance: 0
-          }
-        ]
-      }
-    ]
-  });
+  const JSDOC_COMMENT = hljs2.COMMENT(
+    /\/\*\*(?!\/)/,
+    "\\*/",
+    {
+      relevance: 0,
+      contains: [
+        {
+          className: "doctag",
+          begin: "@[A-Za-z]+",
+          contains: [
+            {
+              className: "type",
+              begin: "\\{",
+              end: "\\}",
+              relevance: 0
+            },
+            {
+              className: "variable",
+              begin: IDENT_RE$1$1 + "(?=\\s*(-)|$)",
+              endsParent: true,
+              relevance: 0
+            },
+            {
+              begin: /(?=[^\n])\s/,
+              relevance: 0
+            }
+          ]
+        }
+      ]
+    }
+  );
   const COMMENT2 = {
     className: "comment",
     variants: [
@@ -12338,7 +12619,13 @@ function javascript$1(hljs2) {
       COMMENT2,
       NUMBER,
       {
-        begin: concat$c(/[{,\n]\s*/, lookahead$4(concat$c(/(((\/\/.*$)|(\/\*(\*[^/]|[^*])*\*\/))\s*)*/, IDENT_RE$1$1 + "\\s*:"))),
+        begin: concat$c(
+          /[{,\n]\s*/,
+          lookahead$4(concat$c(
+            /(((\/\/.*$)|(\/\*(\*[^/]|[^*])*\*\/))\s*)*/,
+            IDENT_RE$1$1 + "\\s*:"
+          ))
+        ),
         relevance: 0,
         contains: [
           {
@@ -13047,9 +13334,13 @@ function kotlin(hljs2) {
     ]
   };
   const KOTLIN_NUMBER_MODE = NUMERIC;
-  const KOTLIN_NESTED_COMMENT = hljs2.COMMENT("/\\*", "\\*/", {
-    contains: [hljs2.C_BLOCK_COMMENT_MODE]
-  });
+  const KOTLIN_NESTED_COMMENT = hljs2.COMMENT(
+    "/\\*",
+    "\\*/",
+    {
+      contains: [hljs2.C_BLOCK_COMMENT_MODE]
+    }
+  );
   const KOTLIN_PAREN_TYPE = {
     variants: [
       {
@@ -13071,15 +13362,19 @@ function kotlin(hljs2) {
     aliases: ["kt", "kts"],
     keywords: KEYWORDS2,
     contains: [
-      hljs2.COMMENT("/\\*\\*", "\\*/", {
-        relevance: 0,
-        contains: [
-          {
-            className: "doctag",
-            begin: "@[A-Za-z]+"
-          }
-        ]
-      }),
+      hljs2.COMMENT(
+        "/\\*\\*",
+        "\\*/",
+        {
+          relevance: 0,
+          contains: [
+            {
+              className: "doctag",
+              begin: "@[A-Za-z]+"
+            }
+          ]
+        }
+      ),
       hljs2.C_LINE_COMMENT_MODE,
       KOTLIN_NESTED_COMMENT,
       KEYWORDS_WITH_LABEL,
@@ -13190,9 +13485,13 @@ function lasso(hljs2) {
     built_in: "array date decimal duration integer map pair string tag xml null boolean bytes keyword list locale queue set stack staticarray local var variable global data self inherited currentcapture givenblock",
     keyword: "cache database_names database_schemanames database_tablenames define_tag define_type email_batch encode_set html_comment handle handle_error header if inline iterate ljax_target link link_currentaction link_currentgroup link_currentrecord link_detail link_firstgroup link_firstrecord link_lastgroup link_lastrecord link_nextgroup link_nextrecord link_prevgroup link_prevrecord log loop namespace_using output_none portal private protect records referer referrer repeating resultset rows search_args search_arguments select sort_args sort_arguments thread_atomic value_list while abort case else fail_if fail_ifnot fail if_empty if_false if_null if_true loop_abort loop_continue loop_count params params_up return return_value run_children soap_definetag soap_lastrequest soap_lastresponse tag_name ascending average by define descending do equals frozen group handle_failure import in into join let match max min on order parent protected provide public require returnhome skip split_thread sum take thread to trait type where with yield yieldhome"
   };
-  const HTML_COMMENT = hljs2.COMMENT("<!--", "-->", {
-    relevance: 0
-  });
+  const HTML_COMMENT = hljs2.COMMENT(
+    "<!--",
+    "-->",
+    {
+      relevance: 0
+    }
+  );
   const LASSO_NOPROCESS = {
     className: "meta",
     begin: "\\[noprocess\\]",
@@ -13433,9 +13732,13 @@ function latex(hljs2) {
     end: "$",
     relevance: 10
   };
-  const COMMENT2 = hljs2.COMMENT("%", "$", {
-    relevance: 0
-  });
+  const COMMENT2 = hljs2.COMMENT(
+    "%",
+    "$",
+    {
+      relevance: 0
+    }
+  );
   const EVERYTHING_BUT_VERBATIM = [
     CONTROL_SEQUENCE,
     MACRO_PARAM,
@@ -13450,11 +13753,14 @@ function latex(hljs2) {
     relevance: 0,
     contains: ["self", ...EVERYTHING_BUT_VERBATIM]
   };
-  const ARGUMENT_BRACES = hljs2.inherit(BRACE_GROUP_NO_VERBATIM, {
-    relevance: 0,
-    endsParent: true,
-    contains: [BRACE_GROUP_NO_VERBATIM, ...EVERYTHING_BUT_VERBATIM]
-  });
+  const ARGUMENT_BRACES = hljs2.inherit(
+    BRACE_GROUP_NO_VERBATIM,
+    {
+      relevance: 0,
+      endsParent: true,
+      contains: [BRACE_GROUP_NO_VERBATIM, ...EVERYTHING_BUT_VERBATIM]
+    }
+  );
   const ARGUMENT_BRACKETS = {
     begin: /\[/,
     end: /\]/,
@@ -13488,11 +13794,14 @@ function latex(hljs2) {
     };
   };
   const BEGIN_ENV = function(envname, starts_mode) {
-    return hljs2.inherit({
-      begin: "\\\\begin(?=[ 	]*(\\r?\\n[ 	]*)?\\{" + envname + "\\})",
-      keywords: { $pattern: /\\[a-zA-Z]+/, keyword: "\\begin" },
-      relevance: 0
-    }, ARGUMENT_AND_THEN(ARGUMENT_M, starts_mode));
+    return hljs2.inherit(
+      {
+        begin: "\\\\begin(?=[ 	]*(\\r?\\n[ 	]*)?\\{" + envname + "\\})",
+        keywords: { $pattern: /\\[a-zA-Z]+/, keyword: "\\begin" },
+        relevance: 0
+      },
+      ARGUMENT_AND_THEN(ARGUMENT_M, starts_mode)
+    );
   };
   const VERBATIM_DELIMITED_EQUAL = (innerName = "string") => {
     return hljs2.END_SAME_AS_BEGIN({
@@ -13544,7 +13853,9 @@ function latex(hljs2) {
     ...[].concat(...["", "\\*"].map((suffix) => [
       BEGIN_ENV("verbatim" + suffix, VERBATIM_DELIMITED_ENV("verbatim" + suffix)),
       BEGIN_ENV("filecontents" + suffix, ARGUMENT_AND_THEN(ARGUMENT_M, VERBATIM_DELIMITED_ENV("filecontents" + suffix))),
-      ...["", "B", "L"].map((prefix) => BEGIN_ENV(prefix + "Verbatim" + suffix, ARGUMENT_AND_THEN(ARGUMENT_O, VERBATIM_DELIMITED_ENV(prefix + "Verbatim" + suffix))))
+      ...["", "B", "L"].map(
+        (prefix) => BEGIN_ENV(prefix + "Verbatim" + suffix, ARGUMENT_AND_THEN(ARGUMENT_O, VERBATIM_DELIMITED_ENV(prefix + "Verbatim" + suffix)))
+      )
     ])),
     BEGIN_ENV("minted", ARGUMENT_AND_THEN(ARGUMENT_O, ARGUMENT_AND_THEN(ARGUMENT_M, VERBATIM_DELIMITED_ENV("minted"))))
   ];
@@ -14086,20 +14397,34 @@ function less(hljs2) {
     keywords: AT_KEYWORDS,
     relevance: 0
   };
-  VALUE_MODES.push(hljs2.C_LINE_COMMENT_MODE, hljs2.C_BLOCK_COMMENT_MODE, STRING_MODE("'"), STRING_MODE('"'), hljs2.CSS_NUMBER_MODE, {
-    begin: "(url|data-uri)\\(",
-    starts: {
-      className: "string",
-      end: "[\\)\\n]",
+  VALUE_MODES.push(
+    hljs2.C_LINE_COMMENT_MODE,
+    hljs2.C_BLOCK_COMMENT_MODE,
+    STRING_MODE("'"),
+    STRING_MODE('"'),
+    hljs2.CSS_NUMBER_MODE,
+    {
+      begin: "(url|data-uri)\\(",
+      starts: {
+        className: "string",
+        end: "[\\)\\n]",
+        excludeEnd: true
+      }
+    },
+    modes.HEXCOLOR,
+    PARENS_MODE,
+    IDENT_MODE("variable", "@@?" + IDENT_RE2, 10),
+    IDENT_MODE("variable", "@\\{" + IDENT_RE2 + "\\}"),
+    IDENT_MODE("built_in", "~?`[^`]*?`"),
+    {
+      className: "attribute",
+      begin: IDENT_RE2 + "\\s*:",
+      end: ":",
+      returnBegin: true,
       excludeEnd: true
-    }
-  }, modes.HEXCOLOR, PARENS_MODE, IDENT_MODE("variable", "@@?" + IDENT_RE2, 10), IDENT_MODE("variable", "@\\{" + IDENT_RE2 + "\\}"), IDENT_MODE("built_in", "~?`[^`]*?`"), {
-    className: "attribute",
-    begin: IDENT_RE2 + "\\s*:",
-    end: ":",
-    returnBegin: true,
-    excludeEnd: true
-  }, modes.IMPORTANT);
+    },
+    modes.IMPORTANT
+  );
   const VALUE_WITH_RULESETS = VALUE_MODES.concat({
     begin: /\{/,
     end: /\}/,
@@ -14217,7 +14542,15 @@ function less(hljs2) {
     returnBegin: true,
     contains: [SELECTOR_MODE]
   };
-  RULES.push(hljs2.C_LINE_COMMENT_MODE, hljs2.C_BLOCK_COMMENT_MODE, AT_RULE_MODE, VAR_RULE_MODE, PSEUDO_SELECTOR_MODE, RULE_MODE, SELECTOR_MODE);
+  RULES.push(
+    hljs2.C_LINE_COMMENT_MODE,
+    hljs2.C_BLOCK_COMMENT_MODE,
+    AT_RULE_MODE,
+    VAR_RULE_MODE,
+    PSEUDO_SELECTOR_MODE,
+    RULE_MODE,
+    SELECTOR_MODE
+  );
   return {
     name: "Less",
     case_insensitive: true,
@@ -14245,9 +14578,13 @@ function lisp(hljs2) {
     ]
   };
   var STRING = hljs2.inherit(hljs2.QUOTE_STRING_MODE, { illegal: null });
-  var COMMENT2 = hljs2.COMMENT(";", "$", {
-    relevance: 0
-  });
+  var COMMENT2 = hljs2.COMMENT(
+    ";",
+    "$",
+    {
+      relevance: 0
+    }
+  );
   var VARIABLE = {
     begin: "\\*",
     end: "\\*"
@@ -14562,7 +14899,12 @@ const BUILT_IN_VARIABLES$1 = [
   "module",
   "global"
 ];
-const BUILT_INS$1 = [].concat(BUILT_IN_GLOBALS$1, BUILT_IN_VARIABLES$1, TYPES$1, ERROR_TYPES$1);
+const BUILT_INS$1 = [].concat(
+  BUILT_IN_GLOBALS$1,
+  BUILT_IN_VARIABLES$1,
+  TYPES$1,
+  ERROR_TYPES$1
+);
 function livescript(hljs2) {
   const LIVESCRIPT_BUILT_INS = [
     "npm",
@@ -14953,10 +15295,14 @@ function lua(hljs2) {
   };
   const COMMENTS = [
     hljs2.COMMENT("--(?!" + OPENING_LONG_BRACKET + ")", "$"),
-    hljs2.COMMENT("--" + OPENING_LONG_BRACKET, CLOSING_LONG_BRACKET, {
-      contains: [LONG_BRACKETS],
-      relevance: 10
-    })
+    hljs2.COMMENT(
+      "--" + OPENING_LONG_BRACKET,
+      CLOSING_LONG_BRACKET,
+      {
+        contains: [LONG_BRACKETS],
+        relevance: 10
+      }
+    )
   ];
   return {
     name: "Lua",
@@ -21722,7 +22068,11 @@ function mathematica(hljs2) {
   const PRECISION_RE = /`([+-]?(\d*\.\d+|\d+\.\d*|\d+))?/;
   const APPROXIMATE_NUMBER_RE = either$5(ACCURACY_RE, PRECISION_RE);
   const SCIENTIFIC_NOTATION_RE = /\*\^[+-]?\d+/;
-  const MATHEMATICA_NUMBER_RE = concat$a(BASE_NUMBER_RE, optional$1(APPROXIMATE_NUMBER_RE), optional$1(SCIENTIFIC_NOTATION_RE));
+  const MATHEMATICA_NUMBER_RE = concat$a(
+    BASE_NUMBER_RE,
+    optional$1(APPROXIMATE_NUMBER_RE),
+    optional$1(SCIENTIFIC_NOTATION_RE)
+  );
   const NUMBERS = {
     className: "number",
     relevance: 0,
@@ -22382,7 +22732,10 @@ function perl(hljs2) {
         begin: /\$\d/
       },
       {
-        begin: concat$9(/[$%@](\^\w\b|#\w+(::\w+)*|\{\w+\}|\w+(::\w*)*)/, `(?![A-Za-z])(?![@$%])`)
+        begin: concat$9(
+          /[$%@](\^\w\b|#\w+(::\w+)*|\{\w+\}|\w+(::\w*)*)/,
+          `(?![A-Za-z])(?![@$%])`
+        )
       },
       {
         begin: /[$%@][^\s\w{]/,
@@ -22406,17 +22759,35 @@ function perl(hljs2) {
   ];
   const PAIRED_DOUBLE_RE = (prefix, open, close = "\\1") => {
     const middle = close === "\\1" ? close : concat$9(close, open);
-    return concat$9(concat$9("(?:", prefix, ")"), open, /(?:\\.|[^\\\/])*?/, middle, /(?:\\.|[^\\\/])*?/, close, REGEX_MODIFIERS);
+    return concat$9(
+      concat$9("(?:", prefix, ")"),
+      open,
+      /(?:\\.|[^\\\/])*?/,
+      middle,
+      /(?:\\.|[^\\\/])*?/,
+      close,
+      REGEX_MODIFIERS
+    );
   };
   const PAIRED_RE = (prefix, open, close) => {
-    return concat$9(concat$9("(?:", prefix, ")"), open, /(?:\\.|[^\\\/])*?/, close, REGEX_MODIFIERS);
+    return concat$9(
+      concat$9("(?:", prefix, ")"),
+      open,
+      /(?:\\.|[^\\\/])*?/,
+      close,
+      REGEX_MODIFIERS
+    );
   };
   const PERL_DEFAULT_CONTAINS = [
     VAR,
     hljs2.HASH_COMMENT_MODE,
-    hljs2.COMMENT(/^=\w/, /=cut/, {
-      endsWithParent: true
-    }),
+    hljs2.COMMENT(
+      /^=\w/,
+      /=cut/,
+      {
+        endsWithParent: true
+      }
+    ),
     METHOD,
     {
       className: "string",
@@ -22598,9 +22969,13 @@ function monkey(hljs2) {
     illegal: /\/\*/,
     contains: [
       hljs2.COMMENT("#rem", "#end"),
-      hljs2.COMMENT("'", "$", {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        "'",
+        "$",
+        {
+          relevance: 0
+        }
+      ),
       {
         className: "function",
         beginKeywords: "function method",
@@ -22660,12 +23035,15 @@ function moonscript(hljs2) {
     keywords: KEYWORDS2
   };
   const EXPRESSIONS = [
-    hljs2.inherit(hljs2.C_NUMBER_MODE, {
-      starts: {
-        end: "(\\s*/)?",
-        relevance: 0
+    hljs2.inherit(
+      hljs2.C_NUMBER_MODE,
+      {
+        starts: {
+          end: "(\\s*/)?",
+          relevance: 0
+        }
       }
-    }),
+    ),
     {
       className: "string",
       variants: [
@@ -23142,9 +23520,13 @@ function nsis(hljs2) {
     contains: [
       hljs2.HASH_COMMENT_MODE,
       hljs2.C_BLOCK_COMMENT_MODE,
-      hljs2.COMMENT(";", "$", {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        ";",
+        "$",
+        {
+          relevance: 0
+        }
+      ),
       {
         className: "function",
         beginKeywords: "Function PageEx Section SectionGroup",
@@ -23265,9 +23647,13 @@ function ocaml(hljs2) {
         begin: "\\[(\\|\\|)?\\]|\\(\\)",
         relevance: 0
       },
-      hljs2.COMMENT("\\(\\*", "\\*\\)", {
-        contains: ["self"]
-      }),
+      hljs2.COMMENT(
+        "\\(\\*",
+        "\\*\\)",
+        {
+          contains: ["self"]
+        }
+      ),
       {
         className: "symbol",
         begin: "'[A-Za-z_](?!')[\\w']*"
@@ -23375,12 +23761,20 @@ function oxygene(hljs2) {
     $pattern: /\.?\w+/,
     keyword: "abstract add and array as asc aspect assembly async begin break block by case class concat const copy constructor continue create default delegate desc distinct div do downto dynamic each else empty end ensure enum equals event except exit extension external false final finalize finalizer finally flags for forward from function future global group has if implementation implements implies in index inherited inline interface into invariants is iterator join locked locking loop matching method mod module namespace nested new nil not notify nullable of old on operator or order out override parallel params partial pinned private procedure property protected public queryable raise read readonly record reintroduce remove repeat require result reverse sealed select self sequence set shl shr skip static step soft take then to true try tuple type union unit unsafe until uses using var virtual raises volatile where while with write xor yield await mapped deprecated stdcall cdecl pascal register safecall overload library platform reference packed strict published autoreleasepool selector strong weak unretained"
   };
-  const CURLY_COMMENT = hljs2.COMMENT(/\{/, /\}/, {
-    relevance: 0
-  });
-  const PAREN_COMMENT = hljs2.COMMENT("\\(\\*", "\\*\\)", {
-    relevance: 10
-  });
+  const CURLY_COMMENT = hljs2.COMMENT(
+    /\{/,
+    /\}/,
+    {
+      relevance: 0
+    }
+  );
+  const PAREN_COMMENT = hljs2.COMMENT(
+    "\\(\\*",
+    "\\*\\)",
+    {
+      relevance: 10
+    }
+  );
   const STRING = {
     className: "string",
     begin: "'",
@@ -23448,19 +23842,27 @@ function oxygene(hljs2) {
 }
 var oxygene_1 = oxygene;
 function parser3(hljs2) {
-  const CURLY_SUBCOMMENT = hljs2.COMMENT(/\{/, /\}/, {
-    contains: ["self"]
-  });
+  const CURLY_SUBCOMMENT = hljs2.COMMENT(
+    /\{/,
+    /\}/,
+    {
+      contains: ["self"]
+    }
+  );
   return {
     name: "Parser3",
     subLanguage: "xml",
     relevance: 0,
     contains: [
       hljs2.COMMENT("^#", "$"),
-      hljs2.COMMENT(/\^rem\{/, /\}/, {
-        relevance: 10,
-        contains: [CURLY_SUBCOMMENT]
-      }),
+      hljs2.COMMENT(
+        /\^rem\{/,
+        /\}/,
+        {
+          relevance: 10,
+          contains: [CURLY_SUBCOMMENT]
+        }
+      ),
       {
         className: "meta",
         begin: "^@(?:BASE|USE|CLASS|OPTIONS)$",
@@ -23907,18 +24309,26 @@ function php(hljs2) {
     contains: [
       hljs2.HASH_COMMENT_MODE,
       hljs2.COMMENT("//", "$", { contains: [PREPROCESSOR] }),
-      hljs2.COMMENT("/\\*", "\\*/", {
-        contains: [
-          {
-            className: "doctag",
-            begin: "@[A-Za-z]+"
-          }
-        ]
-      }),
-      hljs2.COMMENT("__halt_compiler.+?;", false, {
-        endsWithParent: true,
-        keywords: "__halt_compiler"
-      }),
+      hljs2.COMMENT(
+        "/\\*",
+        "\\*/",
+        {
+          contains: [
+            {
+              className: "doctag",
+              begin: "@[A-Za-z]+"
+            }
+          ]
+        }
+      ),
+      hljs2.COMMENT(
+        "__halt_compiler.+?;",
+        false,
+        {
+          endsWithParent: true,
+          keywords: "__halt_compiler"
+        }
+      ),
       PREPROCESSOR,
       {
         className: "keyword",
@@ -24197,19 +24607,22 @@ function powershell(hljs2) {
       }
     ]
   };
-  const PS_COMMENT = hljs2.inherit(hljs2.COMMENT(null, null), {
-    variants: [
-      {
-        begin: /#/,
-        end: /$/
-      },
-      {
-        begin: /<#/,
-        end: /#>/
-      }
-    ],
-    contains: [PS_HELPTAGS]
-  });
+  const PS_COMMENT = hljs2.inherit(
+    hljs2.COMMENT(null, null),
+    {
+      variants: [
+        {
+          begin: /#/,
+          end: /$/
+        },
+        {
+          begin: /<#/,
+          end: /#>/
+        }
+      ],
+      contains: [PS_HELPTAGS]
+    }
+  );
   const CMDLETS = {
     className: "built_in",
     variants: [
@@ -24293,7 +24706,13 @@ function powershell(hljs2) {
     contains: [
       {
         className: "keyword",
-        begin: "(".concat(KEYWORDS2.keyword.toString().replace(/\s/g, "|"), ")\\b"),
+        begin: "(".concat(
+          KEYWORDS2.keyword.toString().replace(
+            /\s/g,
+            "|"
+          ),
+          ")\\b"
+        ),
         endsParent: true,
         relevance: 0
       },
@@ -24320,15 +24739,20 @@ function powershell(hljs2) {
     excludeBegin: true,
     excludeEnd: true,
     relevance: 0,
-    contains: [].concat("self", GENTLEMANS_SET, {
-      begin: "(" + TYPES2.join("|") + ")",
-      className: "built_in",
-      relevance: 0
-    }, {
-      className: "type",
-      begin: /[\.\w\d]+/,
-      relevance: 0
-    })
+    contains: [].concat(
+      "self",
+      GENTLEMANS_SET,
+      {
+        begin: "(" + TYPES2.join("|") + ")",
+        className: "built_in",
+        relevance: 0
+      },
+      {
+        className: "type",
+        begin: /[\.\w\d]+/,
+        relevance: 0
+      }
+    )
   };
   PS_METHODS.contains.unshift(PS_TYPE);
   return {
@@ -24339,7 +24763,13 @@ function powershell(hljs2) {
     ],
     case_insensitive: true,
     keywords: KEYWORDS2,
-    contains: GENTLEMANS_SET.concat(PS_CLASS, PS_FUNCTION, PS_USING, PS_ARGUMENTS, PS_TYPE)
+    contains: GENTLEMANS_SET.concat(
+      PS_CLASS,
+      PS_FUNCTION,
+      PS_USING,
+      PS_ARGUMENTS,
+      PS_TYPE
+    )
   };
 }
 var powershell_1 = powershell;
@@ -25369,51 +25799,55 @@ function r(hljs2) {
       }
     ],
     contains: [
-      hljs2.COMMENT(/#'/, /$/, {
-        contains: [
-          {
-            className: "doctag",
-            begin: "@examples",
-            starts: {
+      hljs2.COMMENT(
+        /#'/,
+        /$/,
+        {
+          contains: [
+            {
+              className: "doctag",
+              begin: "@examples",
+              starts: {
+                contains: [
+                  { begin: /\n/ },
+                  {
+                    begin: /#'\s*(?=@[a-zA-Z]+)/,
+                    endsParent: true
+                  },
+                  {
+                    begin: /#'/,
+                    end: /$/,
+                    excludeBegin: true
+                  }
+                ]
+              }
+            },
+            {
+              className: "doctag",
+              begin: "@param",
+              end: /$/,
               contains: [
-                { begin: /\n/ },
                 {
-                  begin: /#'\s*(?=@[a-zA-Z]+)/,
+                  className: "variable",
+                  variants: [
+                    { begin: IDENT_RE2 },
+                    { begin: /`(?:\\.|[^`\\])+`/ }
+                  ],
                   endsParent: true
-                },
-                {
-                  begin: /#'/,
-                  end: /$/,
-                  excludeBegin: true
                 }
               ]
+            },
+            {
+              className: "doctag",
+              begin: /@[a-zA-Z]+/
+            },
+            {
+              className: "meta-keyword",
+              begin: /\\[a-zA-Z]+/
             }
-          },
-          {
-            className: "doctag",
-            begin: "@param",
-            end: /$/,
-            contains: [
-              {
-                className: "variable",
-                variants: [
-                  { begin: IDENT_RE2 },
-                  { begin: /`(?:\\.|[^`\\])+`/ }
-                ],
-                endsParent: true
-              }
-            ]
-          },
-          {
-            className: "doctag",
-            begin: /@[a-zA-Z]+/
-          },
-          {
-            className: "meta-keyword",
-            begin: /\\[a-zA-Z]+/
-          }
-        ]
-      }),
+          ]
+        }
+      ),
       hljs2.HASH_COMMENT_MODE,
       {
         className: "string",
@@ -26331,9 +26765,13 @@ function scheme(hljs2) {
   };
   const STRING = hljs2.QUOTE_STRING_MODE;
   const COMMENT_MODES = [
-    hljs2.COMMENT(";", "$", {
-      relevance: 0
-    }),
+    hljs2.COMMENT(
+      ";",
+      "$",
+      {
+        relevance: 0
+      }
+    ),
     hljs2.COMMENT("#\\|", "\\|#")
   ];
   const IDENT = {
@@ -27102,9 +27540,13 @@ function smali(hljs2) {
         end: '"',
         relevance: 0
       },
-      hljs2.COMMENT("#", "$", {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        "#",
+        "$",
+        {
+          relevance: 0
+        }
+      ),
       {
         className: "keyword",
         variants: [
@@ -27221,9 +27663,13 @@ function sml(hljs2) {
         begin: /\[(\|\|)?\]|\(\)/,
         relevance: 0
       },
-      hljs2.COMMENT("\\(\\*", "\\*\\)", {
-        contains: ["self"]
-      }),
+      hljs2.COMMENT(
+        "\\(\\*",
+        "\\*\\)",
+        {
+          contains: ["self"]
+        }
+      ),
       {
         className: "symbol",
         begin: "'[A-Za-z_](?!')[\\w']*"
@@ -28499,21 +28945,29 @@ function stan(hljs2) {
     },
     contains: [
       hljs2.C_LINE_COMMENT_MODE,
-      hljs2.COMMENT(/#/, /$/, {
-        relevance: 0,
-        keywords: {
-          "meta-keyword": "include"
-        }
-      }),
-      hljs2.COMMENT(/\/\*/, /\*\//, {
-        relevance: 0,
-        contains: [
-          {
-            className: "doctag",
-            begin: /@(return|param)/
+      hljs2.COMMENT(
+        /#/,
+        /$/,
+        {
+          relevance: 0,
+          keywords: {
+            "meta-keyword": "include"
           }
-        ]
-      }),
+        }
+      ),
+      hljs2.COMMENT(
+        /\/\*/,
+        /\*\//,
+        {
+          relevance: 0,
+          contains: [
+            {
+              className: "doctag",
+              begin: /@(return|param)/
+            }
+          ]
+        }
+      ),
       {
         begin: /<\s*lower\s*=/,
         keywords: "lower"
@@ -29268,7 +29722,11 @@ function either$2(...args) {
   const joined = "(" + args.map((x) => source$4(x)).join("|") + ")";
   return joined;
 }
-const keywordWrapper = (keyword) => concat$4(/\b/, keyword, /\w$/.test(keyword) ? /\b/ : /\B/);
+const keywordWrapper = (keyword) => concat$4(
+  /\b/,
+  keyword,
+  /\w$/.test(keyword) ? /\b/ : /\B/
+);
 const dotKeywords = [
   "Protocol",
   "Type"
@@ -29437,11 +29895,53 @@ const builtIns = [
   "withoutActuallyEscaping",
   "zip"
 ];
-const operatorHead = either$2(/[/=\-+!*%<>&|^~?]/, /[\u00A1-\u00A7]/, /[\u00A9\u00AB]/, /[\u00AC\u00AE]/, /[\u00B0\u00B1]/, /[\u00B6\u00BB\u00BF\u00D7\u00F7]/, /[\u2016-\u2017]/, /[\u2020-\u2027]/, /[\u2030-\u203E]/, /[\u2041-\u2053]/, /[\u2055-\u205E]/, /[\u2190-\u23FF]/, /[\u2500-\u2775]/, /[\u2794-\u2BFF]/, /[\u2E00-\u2E7F]/, /[\u3001-\u3003]/, /[\u3008-\u3020]/, /[\u3030]/);
-const operatorCharacter = either$2(operatorHead, /[\u0300-\u036F]/, /[\u1DC0-\u1DFF]/, /[\u20D0-\u20FF]/, /[\uFE00-\uFE0F]/, /[\uFE20-\uFE2F]/);
+const operatorHead = either$2(
+  /[/=\-+!*%<>&|^~?]/,
+  /[\u00A1-\u00A7]/,
+  /[\u00A9\u00AB]/,
+  /[\u00AC\u00AE]/,
+  /[\u00B0\u00B1]/,
+  /[\u00B6\u00BB\u00BF\u00D7\u00F7]/,
+  /[\u2016-\u2017]/,
+  /[\u2020-\u2027]/,
+  /[\u2030-\u203E]/,
+  /[\u2041-\u2053]/,
+  /[\u2055-\u205E]/,
+  /[\u2190-\u23FF]/,
+  /[\u2500-\u2775]/,
+  /[\u2794-\u2BFF]/,
+  /[\u2E00-\u2E7F]/,
+  /[\u3001-\u3003]/,
+  /[\u3008-\u3020]/,
+  /[\u3030]/
+);
+const operatorCharacter = either$2(
+  operatorHead,
+  /[\u0300-\u036F]/,
+  /[\u1DC0-\u1DFF]/,
+  /[\u20D0-\u20FF]/,
+  /[\uFE00-\uFE0F]/,
+  /[\uFE20-\uFE2F]/
+);
 const operator = concat$4(operatorHead, operatorCharacter, "*");
-const identifierHead = either$2(/[a-zA-Z_]/, /[\u00A8\u00AA\u00AD\u00AF\u00B2-\u00B5\u00B7-\u00BA]/, /[\u00BC-\u00BE\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]/, /[\u0100-\u02FF\u0370-\u167F\u1681-\u180D\u180F-\u1DBF]/, /[\u1E00-\u1FFF]/, /[\u200B-\u200D\u202A-\u202E\u203F-\u2040\u2054\u2060-\u206F]/, /[\u2070-\u20CF\u2100-\u218F\u2460-\u24FF\u2776-\u2793]/, /[\u2C00-\u2DFF\u2E80-\u2FFF]/, /[\u3004-\u3007\u3021-\u302F\u3031-\u303F\u3040-\uD7FF]/, /[\uF900-\uFD3D\uFD40-\uFDCF\uFDF0-\uFE1F\uFE30-\uFE44]/, /[\uFE47-\uFEFE\uFF00-\uFFFD]/);
-const identifierCharacter = either$2(identifierHead, /\d/, /[\u0300-\u036F\u1DC0-\u1DFF\u20D0-\u20FF\uFE20-\uFE2F]/);
+const identifierHead = either$2(
+  /[a-zA-Z_]/,
+  /[\u00A8\u00AA\u00AD\u00AF\u00B2-\u00B5\u00B7-\u00BA]/,
+  /[\u00BC-\u00BE\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF]/,
+  /[\u0100-\u02FF\u0370-\u167F\u1681-\u180D\u180F-\u1DBF]/,
+  /[\u1E00-\u1FFF]/,
+  /[\u200B-\u200D\u202A-\u202E\u203F-\u2040\u2054\u2060-\u206F]/,
+  /[\u2070-\u20CF\u2100-\u218F\u2460-\u24FF\u2776-\u2793]/,
+  /[\u2C00-\u2DFF\u2E80-\u2FFF]/,
+  /[\u3004-\u3007\u3021-\u302F\u3031-\u303F\u3040-\uD7FF]/,
+  /[\uF900-\uFD3D\uFD40-\uFDCF\uFDF0-\uFE1F\uFE30-\uFE44]/,
+  /[\uFE47-\uFEFE\uFF00-\uFFFD]/
+);
+const identifierCharacter = either$2(
+  identifierHead,
+  /\d/,
+  /[\u0300-\u036F\u1DC0-\u1DFF\u20D0-\u20FF\uFE20-\uFE2F]/
+);
 const identifier = concat$4(identifierHead, identifierCharacter, "*");
 const typeIdentifier = concat$4(/[A-Z]/, identifierCharacter, "*");
 const keywordAttributes = [
@@ -29492,9 +29992,13 @@ function swift(hljs2) {
     match: /\s+/,
     relevance: 0
   };
-  const BLOCK_COMMENT = hljs2.COMMENT("/\\*", "\\*/", {
-    contains: ["self"]
-  });
+  const BLOCK_COMMENT = hljs2.COMMENT(
+    "/\\*",
+    "\\*/",
+    {
+      contains: ["self"]
+    }
+  );
   const COMMENTS = [
     hljs2.C_LINE_COMMENT_MODE,
     BLOCK_COMMENT
@@ -29520,7 +30024,10 @@ function swift(hljs2) {
     ]
   };
   const KEYWORDS2 = {
-    $pattern: either$2(/\b\w+/, /#\w+/),
+    $pattern: either$2(
+      /\b\w+/,
+      /#\w+/
+    ),
     keyword: PLAIN_KEYWORDS.concat(numberSignKeywords),
     literal: literals
   };
@@ -29764,7 +30271,10 @@ function swift(hljs2) {
     ]
   };
   const FUNCTION_PARAMETER_NAME = {
-    begin: either$2(lookahead$1(concat$4(identifier, /\s*:/)), lookahead$1(concat$4(identifier, /\s+/, identifier, /\s*:/))),
+    begin: either$2(
+      lookahead$1(concat$4(identifier, /\s*:/)),
+      lookahead$1(concat$4(identifier, /\s+/, identifier, /\s*:/))
+    ),
     end: /:/,
     relevance: 0,
     contains: [
@@ -30194,7 +30704,14 @@ function tcl(hljs2) {
         className: "variable",
         variants: [
           {
-            begin: concat$3(/\$/, optional(/::/), TCL_IDENT, "(::", TCL_IDENT, ")*")
+            begin: concat$3(
+              /\$/,
+              optional(/::/),
+              TCL_IDENT,
+              "(::",
+              TCL_IDENT,
+              ")*"
+            )
           },
           {
             begin: "\\$\\{(::)?[a-zA-Z_]((::)?[a-zA-Z0-9_])*",
@@ -30514,7 +31031,12 @@ const BUILT_IN_VARIABLES = [
   "module",
   "global"
 ];
-const BUILT_INS = [].concat(BUILT_IN_GLOBALS, BUILT_IN_VARIABLES, TYPES, ERROR_TYPES);
+const BUILT_INS = [].concat(
+  BUILT_IN_GLOBALS,
+  BUILT_IN_VARIABLES,
+  TYPES,
+  ERROR_TYPES
+);
 function source$2(re) {
   if (!re)
     return null;
@@ -30621,33 +31143,37 @@ function javascript(hljs2) {
       SUBST
     ]
   };
-  const JSDOC_COMMENT = hljs2.COMMENT(/\/\*\*(?!\/)/, "\\*/", {
-    relevance: 0,
-    contains: [
-      {
-        className: "doctag",
-        begin: "@[A-Za-z]+",
-        contains: [
-          {
-            className: "type",
-            begin: "\\{",
-            end: "\\}",
-            relevance: 0
-          },
-          {
-            className: "variable",
-            begin: IDENT_RE$12 + "(?=\\s*(-)|$)",
-            endsParent: true,
-            relevance: 0
-          },
-          {
-            begin: /(?=[^\n])\s/,
-            relevance: 0
-          }
-        ]
-      }
-    ]
-  });
+  const JSDOC_COMMENT = hljs2.COMMENT(
+    /\/\*\*(?!\/)/,
+    "\\*/",
+    {
+      relevance: 0,
+      contains: [
+        {
+          className: "doctag",
+          begin: "@[A-Za-z]+",
+          contains: [
+            {
+              className: "type",
+              begin: "\\{",
+              end: "\\}",
+              relevance: 0
+            },
+            {
+              className: "variable",
+              begin: IDENT_RE$12 + "(?=\\s*(-)|$)",
+              endsParent: true,
+              relevance: 0
+            },
+            {
+              begin: /(?=[^\n])\s/,
+              relevance: 0
+            }
+          ]
+        }
+      ]
+    }
+  );
   const COMMENT2 = {
     className: "comment",
     variants: [
@@ -30717,7 +31243,13 @@ function javascript(hljs2) {
       COMMENT2,
       NUMBER,
       {
-        begin: concat$2(/[{,\n]\s*/, lookahead(concat$2(/(((\/\/.*$)|(\/\*(\*[^/]|[^*])*\*\/))\s*)*/, IDENT_RE$12 + "\\s*:"))),
+        begin: concat$2(
+          /[{,\n]\s*/,
+          lookahead(concat$2(
+            /(((\/\/.*$)|(\/\*(\*[^/]|[^*])*\*\/))\s*)*/,
+            IDENT_RE$12 + "\\s*:"
+          ))
+        ),
         relevance: 0,
         contains: [
           {
@@ -31027,7 +31559,13 @@ function vbnet(hljs2) {
         begin: concat$1(/# */, TIME_12H, / *#/)
       },
       {
-        begin: concat$1(/# */, either$1(YYYY_MM_DD, MM_DD_YYYY), / +/, either$1(TIME_12H, TIME_24H), / *#/)
+        begin: concat$1(
+          /# */,
+          either$1(YYYY_MM_DD, MM_DD_YYYY),
+          / +/,
+          either$1(TIME_12H, TIME_24H),
+          / *#/
+        )
       }
     ]
   };
@@ -31157,9 +31695,13 @@ function vbscript(hljs2) {
     contains: [
       BUILT_IN_CALL,
       hljs2.inherit(hljs2.QUOTE_STRING_MODE, { contains: [{ begin: '""' }] }),
-      hljs2.COMMENT(/'/, /$/, {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        /'/,
+        /$/,
+        {
+          relevance: 0
+        }
+      ),
       hljs2.C_NUMBER_MODE
     ]
   };
@@ -31338,9 +31880,13 @@ function x86asm(hljs2) {
       meta: "%define %xdefine %+ %undef %defstr %deftok %assign %strcat %strlen %substr %rotate %elif %else %endif %if %ifmacro %ifctx %ifidn %ifidni %ifid %ifnum %ifstr %iftoken %ifempty %ifenv %error %warning %fatal %rep %endrep %include %push %pop %repl %pathsearch %depend %use %arg %stacksize %local %line %comment %endcomment .nolist __FILE__ __LINE__ __SECT__  __BITS__ __OUTPUT_FORMAT__ __DATE__ __TIME__ __DATE_NUM__ __TIME_NUM__ __UTC_DATE__ __UTC_TIME__ __UTC_DATE_NUM__ __UTC_TIME_NUM__  __PASS__ struc endstruc istruc at iend align alignb sectalign daz nodaz up down zero default option assume public bits use16 use32 use64 default section segment absolute extern global common cpu float __utf16__ __utf16le__ __utf16be__ __utf32__ __utf32le__ __utf32be__ __float8__ __float16__ __float32__ __float64__ __float80m__ __float80e__ __float128l__ __float128h__ __Infinity__ __QNaN__ __SNaN__ Inf NaN QNaN SNaN float8 float16 float32 float64 float80m float80e float128l float128h __FLOAT_DAZ__ __FLOAT_ROUND__ __FLOAT__"
     },
     contains: [
-      hljs2.COMMENT(";", "$", {
-        relevance: 0
-      }),
+      hljs2.COMMENT(
+        ";",
+        "$",
+        {
+          relevance: 0
+        }
+      ),
       {
         className: "number",
         variants: [
@@ -31649,14 +32195,18 @@ function zephir(hljs2) {
     keywords: KEYWORDS2,
     contains: [
       hljs2.C_LINE_COMMENT_MODE,
-      hljs2.COMMENT(/\/\*/, /\*\//, {
-        contains: [
-          {
-            className: "doctag",
-            begin: /@[A-Za-z]+/
-          }
-        ]
-      }),
+      hljs2.COMMENT(
+        /\/\*/,
+        /\*\//,
+        {
+          contains: [
+            {
+              className: "doctag",
+              begin: /@[A-Za-z]+/
+            }
+          ]
+        }
+      ),
       {
         className: "string",
         begin: /<<<['"]?\w+['"]?$/,
@@ -31929,49 +32479,15 @@ function index(app2) {
 var foundation = "";
 var _imports_0 = "/ngVue3/assets/android-chrome-192x192.d72e0638.png";
 var App_vue_vue_type_style_index_0_lang = "";
-const _hoisted_1 = /* @__PURE__ */ createStaticVNode('<h1 class="header"><img src="' + _imports_0 + '">ngVue 3</h1><h2>Use Vue 3 inside Angular 1.x</h2><p> Based off the excellent work by <a href="https://github.com/dorayx">Doray Hong</a> and <a href="https://github.com/nicolaspayot">Nicolas Payot</a> in the first iteration of <a href="https://github.com/ngVue/ngVue">ngVue</a> (which is recommended if you need to support Vue 2). </p><p> ngVue 3 is a rewrite of the original vue package and while it behaves mostly the same there are additional caveats. </p>', 4);
-const _hoisted_5 = /* @__PURE__ */ createBaseVNode("code", { class: "typescript" }, "useNgVue()", -1);
-const _hoisted_6 = [
-  _hoisted_5
-];
-const _hoisted_7 = /* @__PURE__ */ createTextVNode(" instead of just importing the module ");
-const _hoisted_8 = /* @__PURE__ */ createBaseVNode("li", null, [
-  /* @__PURE__ */ createTextVNode(" Components can be at the root level of your document "),
-  /* @__PURE__ */ createBaseVNode("ul", null, [
-    /* @__PURE__ */ createBaseVNode("li", null, "Vue 2 used to use outerHTML to replace its container"),
-    /* @__PURE__ */ createBaseVNode("li", null, " Vue 3 uses innerHTML and allows multiple elements at the root level. As a consequence your ngVue directive won't be deleted in the DOM "),
-    /* @__PURE__ */ createBaseVNode("li", null, " ngVue 3 will strip all the attributes, props and events handler properties that it pulls into the component ")
-  ])
-], -1);
-const _hoisted_9 = /* @__PURE__ */ createBaseVNode("code", { class: "html" }, /* @__PURE__ */ toDisplayString("<vue-component name='my-component'></vue-component>"), -1);
-const _hoisted_10 = [
-  _hoisted_9
-];
-const _hoisted_11 = /* @__PURE__ */ createTextVNode(" has been removed. ");
-const _hoisted_12 = /* @__PURE__ */ createStaticVNode("<li> Filters plugin has been removed <ul><li>Global filters don&#39;t exist in Vue 3, use importable functions/computed methods</li></ul></li><li> The global Vue singleton has been replaced with instanced Apps so: <ul><li>Root instance access has removed</li><li>Root props have been removed</li><li>Root lifecycle hooks have been removed</li></ul></li><li><code>class</code> and <code>style</code> will fall through</li><li><code>ng-class</code> and <code>ng-style</code> will not <ul><li> Their behaviour was pretty broken in the previous iteration and separating them makes more sense </li></ul></li>", 4);
-const _hoisted_16 = /* @__PURE__ */ createStaticVNode('<h3>Examples</h3><p> Under the hood Vue 3 uses the Composition API for everything, however the following are example of usage with the various styles you have available </p><h4>Quick Links</h4><ul></ul><li><a href="examples/options-api/index.html">Options API Demo</a></li><li><a href="examples/composition-api/index.html">Composition API Demo</a></li><li><a href="examples/script-setup/index.html">Script Setup Demo</a></li><li><a href="examples/umd/index.html">UMD Demo</a></li><h4>Implementation</h4><h5>Angular</h5>', 10);
-const _hoisted_26 = { class: "typescript" };
-const _hoisted_27 = /* @__PURE__ */ createBaseVNode("h5", null, "HTML", -1);
-const _hoisted_28 = { class: "html" };
-const _hoisted_29 = /* @__PURE__ */ createBaseVNode("h5", null, "Vue Template", -1);
-const _hoisted_30 = { class: "html" };
-const _hoisted_31 = /* @__PURE__ */ createBaseVNode("h5", null, "Options Api", -1);
-const _hoisted_32 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/options-api/index.html" }, "Demo", -1);
-const _hoisted_33 = /* @__PURE__ */ createBaseVNode("p", null, "This is the classic Vue style.", -1);
-const _hoisted_34 = { class: "typescript" };
-const _hoisted_35 = /* @__PURE__ */ createBaseVNode("h5", null, "Composition API (w/ setup function)", -1);
-const _hoisted_36 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/composition-api/index.html" }, "Demo", -1);
-const _hoisted_37 = /* @__PURE__ */ createBaseVNode("p", null, "This option is available as a non-build style alternative to the Options API", -1);
-const _hoisted_38 = { class: "typescript" };
-const _hoisted_39 = /* @__PURE__ */ createBaseVNode("h5", null, "Script Setup", -1);
-const _hoisted_40 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/script-setup/index.html" }, "Demo", -1);
-const _hoisted_41 = /* @__PURE__ */ createBaseVNode("p", null, " The cadillac of Vue 3, it adds compiler macros that reduce the amount of boilerplate needed by the standard Composition API style. ", -1);
-const _hoisted_42 = { class: "typescript" };
-const _hoisted_43 = /* @__PURE__ */ createBaseVNode("h5", null, "Using UMD", -1);
-const _hoisted_44 = /* @__PURE__ */ createBaseVNode("a", { href: "examples/umd/index.html" }, "Demo", -1);
-const _hoisted_45 = /* @__PURE__ */ createBaseVNode("p", null, " Perhaps you need to use a completely browser based implementation with no build. That is possible using the UMD script ", -1);
-const _hoisted_46 = { class: "html" };
+const _hoisted_1 = { class: "typescript" };
+const _hoisted_2 = { class: "html" };
+const _hoisted_3 = { class: "html" };
+const _hoisted_4 = { class: "typescript" };
+const _hoisted_5 = { class: "typescript" };
+const _hoisted_6 = { class: "typescript" };
+const _hoisted_7 = { class: "html" };
 const _sfc_main = defineComponent({
+  __name: "App",
   setup(__props) {
     const html = ref(`<div ng-controller="MyController as ctrl">
   <my-component
@@ -32126,70 +32642,81 @@ const onButtonClicked = () => emit("button-clicked");
     return (_ctx, _cache) => {
       const _directive_highlightjs = resolveDirective("highlightjs");
       return openBlock(), createElementBlock(Fragment, null, [
-        _hoisted_1,
+        _cache[6] || (_cache[6] = createStaticVNode('<h1 class="header"><img src="' + _imports_0 + '">ngVue 3</h1><h2>Use Vue 3 inside Angular 1.x</h2><p> Based off the excellent work by <a href="https://github.com/dorayx">Doray Hong</a> and <a href="https://github.com/nicolaspayot">Nicolas Payot</a> in the first iteration of <a href="https://github.com/ngVue/ngVue">ngVue</a> (which is recommended if you need to support Vue 2). </p><p> ngVue 3 is a rewrite of the original vue package and while it behaves mostly the same there are additional caveats. </p>', 4)),
         createBaseVNode("ul", null, [
           createBaseVNode("li", null, [
-            withDirectives((openBlock(), createElementBlock("pre", null, _hoisted_6)), [
+            withDirectives((openBlock(), createElementBlock("pre", null, [..._cache[0] || (_cache[0] = [
+              createBaseVNode("code", { class: "typescript" }, "useNgVue()", -1)
+            ])])), [
               [_directive_highlightjs]
             ]),
-            _hoisted_7
+            _cache[1] || (_cache[1] = createTextVNode(" instead of just importing the module ", -1))
           ]),
-          _hoisted_8,
+          _cache[4] || (_cache[4] = createBaseVNode("li", null, [
+            createTextVNode(" Components can be at the root level of your document "),
+            createBaseVNode("ul", null, [
+              createBaseVNode("li", null, "Vue 2 used to use outerHTML to replace its container"),
+              createBaseVNode("li", null, " Vue 3 uses innerHTML and allows multiple elements at the root level. As a consequence your ngVue directive won't be deleted in the DOM "),
+              createBaseVNode("li", null, " ngVue 3 will strip all the attributes, props and events handler properties that it pulls into the component ")
+            ])
+          ], -1)),
           createBaseVNode("li", null, [
-            withDirectives((openBlock(), createElementBlock("pre", null, _hoisted_10)), [
+            withDirectives((openBlock(), createElementBlock("pre", null, [..._cache[2] || (_cache[2] = [
+              createBaseVNode("code", { class: "html" }, toDisplayString("<vue-component name='my-component'></vue-component>"), -1)
+            ])])), [
               [_directive_highlightjs]
             ]),
-            _hoisted_11
+            _cache[3] || (_cache[3] = createTextVNode(" has been removed. ", -1))
           ]),
-          _hoisted_12
+          _cache[5] || (_cache[5] = createStaticVNode("<li> Filters plugin has been removed <ul><li>Global filters don&#39;t exist in Vue 3, use importable functions/computed methods</li></ul></li><li> The global Vue singleton has been replaced with instanced Apps so: <ul><li>Root instance access has removed</li><li>Root props have been removed</li><li>Root lifecycle hooks have been removed</li></ul></li><li><code>class</code> and <code>style</code> will fall through</li><li><code>ng-class</code> and <code>ng-style</code> will not <ul><li> Their behaviour was pretty broken in the previous iteration and separating them makes more sense </li></ul></li>", 4))
         ]),
-        _hoisted_16,
+        _cache[7] || (_cache[7] = createStaticVNode('<h3>Examples</h3><p> Under the hood Vue 3 uses the Composition API for everything, however the following are example of usage with the various styles you have available </p><h4>Quick Links</h4><ul></ul><li><a href="examples/options-api/index.html">Options API Demo</a></li><li><a href="examples/composition-api/index.html">Composition API Demo</a></li><li><a href="examples/script-setup/index.html">Script Setup Demo</a></li><li><a href="examples/umd/index.html">UMD Demo</a></li><h4>Implementation</h4><h5>Angular</h5>', 10)),
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_26, toDisplayString(angular.value), 1)
+          createBaseVNode("code", _hoisted_1, toDisplayString(angular.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_27,
+        _cache[8] || (_cache[8] = createBaseVNode("h5", null, "HTML", -1)),
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_28, toDisplayString(html.value), 1)
+          createBaseVNode("code", _hoisted_2, toDisplayString(html.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_29,
+        _cache[9] || (_cache[9] = createBaseVNode("h5", null, "Vue Template", -1)),
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_30, toDisplayString(template.value), 1)
+          createBaseVNode("code", _hoisted_3, toDisplayString(template.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_31,
-        _hoisted_32,
-        _hoisted_33,
+        _cache[10] || (_cache[10] = createBaseVNode("h5", null, "Options Api", -1)),
+        _cache[11] || (_cache[11] = createBaseVNode("a", { href: "examples/options-api/index.html" }, "Demo", -1)),
+        _cache[12] || (_cache[12] = createBaseVNode("p", null, "This is the classic Vue style.", -1)),
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_34, toDisplayString(optionsApi.value), 1)
+          createBaseVNode("code", _hoisted_4, toDisplayString(optionsApi.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_35,
-        _hoisted_36,
-        _hoisted_37,
+        _cache[13] || (_cache[13] = createBaseVNode("h5", null, "Composition API (w/ setup function)", -1)),
+        _cache[14] || (_cache[14] = createBaseVNode("a", { href: "examples/composition-api/index.html" }, "Demo", -1)),
+        _cache[15] || (_cache[15] = createBaseVNode("p", null, "This option is available as a non-build style alternative to the Options API", -1)),
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_38, toDisplayString(compositionApi.value), 1)
+          createBaseVNode("code", _hoisted_5, toDisplayString(compositionApi.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_39,
-        _hoisted_40,
-        _hoisted_41,
+        _cache[16] || (_cache[16] = createBaseVNode("h5", null, "Script Setup", -1)),
+        _cache[17] || (_cache[17] = createBaseVNode("a", { href: "examples/script-setup/index.html" }, "Demo", -1)),
+        _cache[18] || (_cache[18] = createBaseVNode("p", null, " The cadillac of Vue 3, it adds compiler macros that reduce the amount of boilerplate needed by the standard Composition API style. ", -1)),
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_42, toDisplayString(scriptSetup.value), 1)
+          createBaseVNode("code", _hoisted_6, toDisplayString(scriptSetup.value), 1)
         ])), [
           [_directive_highlightjs]
         ]),
-        _hoisted_43,
-        _hoisted_44,
-        _hoisted_45,
+        _cache[19] || (_cache[19] = createBaseVNode("h5", null, "Using UMD", -1)),
+        _cache[20] || (_cache[20] = createBaseVNode("a", { href: "examples/umd/index.html" }, "Demo", -1)),
+        _cache[21] || (_cache[21] = createBaseVNode("p", null, " Perhaps you need to use a completely browser based implementation with no build. That is possible using the UMD script ", -1)),
         withDirectives((openBlock(), createElementBlock("pre", null, [
-          createBaseVNode("code", _hoisted_46, toDisplayString(umdImplementation.value), 1)
+          createBaseVNode("code", _hoisted_7, toDisplayString(umdImplementation.value), 1)
         ])), [
           [_directive_highlightjs]
         ])

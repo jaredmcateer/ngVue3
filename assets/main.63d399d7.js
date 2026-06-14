@@ -1,4 +1,4 @@
-import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective, w as withDirectives, k as reactive } from "./runtime-dom.esm-bundler.3037667d.js";
+import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective, k as reactive, w as withDirectives } from "./runtime-dom.esm-bundler.5fabd4f2.js";
 /**
  * @license AngularJS v1.8.3
  * (c) 2010-2020 Google LLC. http://angularjs.org
@@ -357,7 +357,10 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         return stackDest[index];
       }
       if (isWindow(source2) || isScope(source2)) {
-        throw ngMinErr("cpws", "Can't copy! Making copies of Window or Scope instances is not supported.");
+        throw ngMinErr(
+          "cpws",
+          "Can't copy! Making copies of Window or Scope instances is not supported."
+        );
       }
       var needsRecurse = false;
       var destination2 = copyType(source2);
@@ -701,7 +704,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       element = jqLite(element);
       if (element.injector()) {
         var tag = element[0] === window2.document ? "document" : startingTag(element);
-        throw ngMinErr("btstrpd", "App already bootstrapped with this element '{0}'", tag.replace(/</, "&lt;").replace(/>/, "&gt;"));
+        throw ngMinErr(
+          "btstrpd",
+          "App already bootstrapped with this element '{0}'",
+          tag.replace(/</, "&lt;").replace(/>/, "&gt;")
+        );
       }
       modules = modules || [];
       modules.unshift(["$provide", function($provide) {
@@ -714,18 +721,20 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       }
       modules.unshift("ng");
       var injector = createInjector(modules, config.strictDi);
-      injector.invoke([
-        "$rootScope",
-        "$rootElement",
-        "$compile",
-        "$injector",
-        function bootstrapApply(scope, element2, compile, injector2) {
-          scope.$apply(function() {
-            element2.data("$injector", injector2);
-            compile(element2)(scope);
-          });
-        }
-      ]);
+      injector.invoke(
+        [
+          "$rootScope",
+          "$rootElement",
+          "$compile",
+          "$injector",
+          function bootstrapApply(scope, element2, compile, injector2) {
+            scope.$apply(function() {
+              element2.data("$injector", injector2);
+              compile(element2)(scope);
+            });
+          }
+        ]
+      );
       return injector;
     };
     var NG_ENABLE_DEBUG_INFO = /^NG_ENABLE_DEBUG_INFO!/;
@@ -755,7 +764,10 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
   function getTestability(rootElement) {
     var injector = angular2.element(rootElement).injector();
     if (!injector) {
-      throw ngMinErr("test", "no injector found for element argument to getTestability");
+      throw ngMinErr(
+        "test",
+        "no injector found for element argument to getTestability"
+      );
     }
     return injector.get("$$testability");
   }
@@ -2034,7 +2046,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             if (!isString(name) || !name) {
               name = fn.name || anonFn(fn);
             }
-            throw $injectorMinErr("strictdi", "{0} is not using explicit annotation and cannot be invoked in strict mode", name);
+            throw $injectorMinErr(
+              "strictdi",
+              "{0} is not using explicit annotation and cannot be invoked in strict mode",
+              name
+            );
           }
           argDecl = extractArgs(fn);
           forEach(argDecl[1].split(FN_ARG_SPLIT), function(arg) {
@@ -2072,7 +2088,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       throw $injectorMinErr("unpr", "Unknown provider: {0}", path.join(" <- "));
     }), instanceCache = {}, protoInstanceInjector = createInternalInjector(instanceCache, function(serviceName, caller) {
       var provider2 = providerInjector.get(serviceName + providerSuffix, caller);
-      return instanceInjector.invoke(provider2.$get, provider2, void 0, serviceName);
+      return instanceInjector.invoke(
+        provider2.$get,
+        provider2,
+        void 0,
+        serviceName
+      );
     }), instanceInjector = protoInstanceInjector;
     providerCache["$injector" + providerSuffix] = { $get: valueFn(protoInstanceInjector) };
     instanceInjector.modules = providerInjector.modules = createMap();
@@ -2178,7 +2199,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (e.message && e.stack && e.stack.indexOf(e.message) === -1) {
             e = e.message + "\n" + e.stack;
           }
-          throw $injectorMinErr("modulerr", "Failed to instantiate module {0} due to:\n{1}", module, e.stack || e.message || e);
+          throw $injectorMinErr(
+            "modulerr",
+            "Failed to instantiate module {0} due to:\n{1}",
+            module,
+            e.stack || e.message || e
+          );
         }
       });
       return runBlocks2;
@@ -2187,7 +2213,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       function getService(serviceName, caller) {
         if (cache.hasOwnProperty(serviceName)) {
           if (cache[serviceName] === INSTANTIATING) {
-            throw $injectorMinErr("cdep", "Circular dependency found: {0}", serviceName + " <- " + path.join(" <- "));
+            throw $injectorMinErr(
+              "cdep",
+              "Circular dependency found: {0}",
+              serviceName + " <- " + path.join(" <- ")
+            );
           }
           return cache[serviceName];
         } else {
@@ -2211,7 +2241,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         for (var i = 0, length = $inject.length; i < length; i++) {
           var key2 = $inject[i];
           if (typeof key2 !== "string") {
-            throw $injectorMinErr("itkn", "Incorrect injection token! Expected service name as string, got {0}", key2);
+            throw $injectorMinErr(
+              "itkn",
+              "Incorrect injection token! Expected service name as string, got {0}",
+              key2
+            );
           }
           args.push(locals && locals.hasOwnProperty(key2) ? locals[key2] : getService(key2, serviceName));
         }
@@ -2320,15 +2354,18 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           scrollTo(null);
       }
       if (autoScrollingEnabled) {
-        $rootScope.$watch(function autoScrollWatch() {
-          return $location.hash();
-        }, function autoScrollWatchAction(newVal, oldVal) {
-          if (newVal === oldVal && newVal === "")
-            return;
-          jqLiteDocumentLoaded(function() {
-            $rootScope.$evalAsync(scroll);
-          });
-        });
+        $rootScope.$watch(
+          function autoScrollWatch() {
+            return $location.hash();
+          },
+          function autoScrollWatchAction(newVal, oldVal) {
+            if (newVal === oldVal && newVal === "")
+              return;
+            jqLiteDocumentLoaded(function() {
+              $rootScope.$evalAsync(scroll);
+            });
+          }
+        );
       }
       return scroll;
     }];
@@ -3052,7 +3089,14 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         }
         var match = definition.match(LOCAL_REGEXP);
         if (!match) {
-          throw $compileMinErr("iscp", "Invalid {3} for directive '{0}'. Definition: {... {1}: '{2}' ...}", directiveName, scopeName, definition, isController ? "controller bindings definition" : "isolate scope definition");
+          throw $compileMinErr(
+            "iscp",
+            "Invalid {3} for directive '{0}'. Definition: {... {1}: '{2}' ...}",
+            directiveName,
+            scopeName,
+            definition,
+            isController ? "controller bindings definition" : "isolate scope definition"
+          );
         }
         bindings[scopeName] = {
           mode: match[1][0],
@@ -3073,17 +3117,29 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       };
       if (isObject(directive.scope)) {
         if (directive.bindToController === true) {
-          bindings.bindToController = parseIsolateBindings(directive.scope, directiveName, true);
+          bindings.bindToController = parseIsolateBindings(
+            directive.scope,
+            directiveName,
+            true
+          );
           bindings.isolateScope = {};
         } else {
-          bindings.isolateScope = parseIsolateBindings(directive.scope, directiveName, false);
+          bindings.isolateScope = parseIsolateBindings(
+            directive.scope,
+            directiveName,
+            false
+          );
         }
       }
       if (isObject(directive.bindToController)) {
         bindings.bindToController = parseIsolateBindings(directive.bindToController, directiveName, true);
       }
       if (bindings.bindToController && !directive.controller) {
-        throw $compileMinErr("noctrl", "Cannot bind to controller without directive '{0}'s controller.", directiveName);
+        throw $compileMinErr(
+          "noctrl",
+          "Cannot bind to controller without directive '{0}'s controller.",
+          directiveName
+        );
       }
       return bindings;
     }
@@ -3093,7 +3149,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         throw $compileMinErr("baddir", "Directive/Component name '{0}' is invalid. The first character must be a lowercase letter", name);
       }
       if (name !== name.trim()) {
-        throw $compileMinErr("baddir", "Directive/Component name '{0}' is invalid. The name should not contain leading or trailing whitespaces", name);
+        throw $compileMinErr(
+          "baddir",
+          "Directive/Component name '{0}' is invalid. The name should not contain leading or trailing whitespaces",
+          name
+        );
       }
     }
     function getDirectiveRequire(directive) {
@@ -3110,7 +3170,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     }
     function getDirectiveRestrict(restrict, name) {
       if (restrict && !(isString(restrict) && /[EACM]/.test(restrict))) {
-        throw $compileMinErr("badrestrict", "Restrict property '{0}' of directive '{1}' is invalid", restrict, name);
+        throw $compileMinErr(
+          "badrestrict",
+          "Restrict property '{0}' of directive '{1}' is invalid",
+          restrict,
+          name
+        );
       }
       return restrict || "EA";
     }
@@ -3543,7 +3608,14 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (!($compileNodes instanceof jqLite)) {
             $compileNodes = jqLite($compileNodes);
           }
-          var compositeLinkFn = compileNodes($compileNodes, transcludeFn, $compileNodes, maxPriority, ignoreDirective, previousCompileContext);
+          var compositeLinkFn = compileNodes(
+            $compileNodes,
+            transcludeFn,
+            $compileNodes,
+            maxPriority,
+            ignoreDirective,
+            previousCompileContext
+          );
           compile.$$addScopeClass($compileNodes);
           var namespace = null;
           return function publicLinkFn(scope, cloneConnectFn, options) {
@@ -3564,7 +3636,9 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             }
             var $linkNode;
             if (namespace !== "html") {
-              $linkNode = jqLite(wrapTemplate(namespace, jqLite("<div></div>").append($compileNodes).html()));
+              $linkNode = jqLite(
+                wrapTemplate(namespace, jqLite("<div></div>").append($compileNodes).html())
+              );
             } else if (cloneConnectFn) {
               $linkNode = JQLitePrototype.clone.call($compileNodes);
             } else {
@@ -3601,12 +3675,31 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             if (msie === 11) {
               mergeConsecutiveTextNodes(nodeList, i, notLiveList);
             }
-            directives = collectDirectives(nodeList[i], [], attrs, i === 0 ? maxPriority : void 0, ignoreDirective);
-            nodeLinkFn = directives.length ? applyDirectivesToNode(directives, nodeList[i], attrs, transcludeFn, $rootElement, null, [], [], previousCompileContext) : null;
+            directives = collectDirectives(
+              nodeList[i],
+              [],
+              attrs,
+              i === 0 ? maxPriority : void 0,
+              ignoreDirective
+            );
+            nodeLinkFn = directives.length ? applyDirectivesToNode(
+              directives,
+              nodeList[i],
+              attrs,
+              transcludeFn,
+              $rootElement,
+              null,
+              [],
+              [],
+              previousCompileContext
+            ) : null;
             if (nodeLinkFn && nodeLinkFn.scope) {
               compile.$$addScopeClass(attrs.$$element);
             }
-            childLinkFn = nodeLinkFn && nodeLinkFn.terminal || !(childNodes = nodeList[i].childNodes) || !childNodes.length ? null : compileNodes(childNodes, nodeLinkFn ? (nodeLinkFn.transcludeOnThisElement || !nodeLinkFn.templateOnThisElement) && nodeLinkFn.transclude : transcludeFn);
+            childLinkFn = nodeLinkFn && nodeLinkFn.terminal || !(childNodes = nodeList[i].childNodes) || !childNodes.length ? null : compileNodes(
+              childNodes,
+              nodeLinkFn ? (nodeLinkFn.transcludeOnThisElement || !nodeLinkFn.templateOnThisElement) && nodeLinkFn.transclude : transcludeFn
+            );
             if (nodeLinkFn || childLinkFn) {
               linkFns.push(i, nodeLinkFn, childLinkFn);
               linkFnFound = true;
@@ -3640,7 +3733,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                   childScope = scope;
                 }
                 if (nodeLinkFn2.transcludeOnThisElement) {
-                  childBoundTranscludeFn = createBoundTranscludeFn(scope, nodeLinkFn2.transclude, parentBoundTranscludeFn);
+                  childBoundTranscludeFn = createBoundTranscludeFn(
+                    scope,
+                    nodeLinkFn2.transclude,
+                    parentBoundTranscludeFn
+                  );
                 } else if (!nodeLinkFn2.templateOnThisElement && parentBoundTranscludeFn) {
                   childBoundTranscludeFn = parentBoundTranscludeFn;
                 } else if (!parentBoundTranscludeFn && transcludeFn) {
@@ -3703,7 +3800,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           switch (nodeType) {
             case NODE_TYPE_ELEMENT:
               nodeName = nodeName_(node);
-              addDirective(directives, directiveNormalize(nodeName), "E", maxPriority, ignoreDirective);
+              addDirective(
+                directives,
+                directiveNormalize(nodeName),
+                "E",
+                maxPriority,
+                ignoreDirective
+              );
               for (var attr, name, nName, value, ngPrefixMatch, nAttrs = node.attributes, j = 0, jj = nAttrs && nAttrs.length; j < jj; j++) {
                 var attrStartName = false;
                 var attrEndName = false;
@@ -3743,7 +3846,15 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                     }
                   }
                   addAttrInterpolateDirective(node, directives, value, nName, isNgAttr);
-                  addDirective(directives, nName, "A", maxPriority, ignoreDirective, attrStartName, attrEndName);
+                  addDirective(
+                    directives,
+                    nName,
+                    "A",
+                    maxPriority,
+                    ignoreDirective,
+                    attrStartName,
+                    attrEndName
+                  );
                 }
               }
               if (nodeName === "input" && node.getAttribute("type") === "hidden") {
@@ -3795,7 +3906,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (attrStart && node.hasAttribute && node.hasAttribute(attrStart)) {
             do {
               if (!node) {
-                throw $compileMinErr("uterdir", "Unterminated attribute, found '{0}' but no matching '{1}' found.", attrStart, attrEnd);
+                throw $compileMinErr(
+                  "uterdir",
+                  "Unterminated attribute, found '{0}' but no matching '{1}' found.",
+                  attrStart,
+                  attrEnd
+                );
               }
               if (node.nodeType === NODE_TYPE_ELEMENT) {
                 if (node.hasAttribute(attrStart))
@@ -3848,10 +3964,20 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             if (directiveValue) {
               if (!directive.templateUrl) {
                 if (isObject(directiveValue)) {
-                  assertNoDuplicate("new/isolated scope", newIsolateScopeDirective || newScopeDirective, directive, $compileNode);
+                  assertNoDuplicate(
+                    "new/isolated scope",
+                    newIsolateScopeDirective || newScopeDirective,
+                    directive,
+                    $compileNode
+                  );
                   newIsolateScopeDirective = directive;
                 } else {
-                  assertNoDuplicate("new/isolated scope", newIsolateScopeDirective, directive, $compileNode);
+                  assertNoDuplicate(
+                    "new/isolated scope",
+                    newIsolateScopeDirective,
+                    directive,
+                    $compileNode
+                  );
                 }
               }
               newScopeDirective = newScopeDirective || directive;
@@ -3869,7 +3995,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             }
             if (!directive.templateUrl && directive.controller) {
               controllerDirectives = controllerDirectives || createMap();
-              assertNoDuplicate("'" + directiveName + "' controller", controllerDirectives[directiveName], directive, $compileNode);
+              assertNoDuplicate(
+                "'" + directiveName + "' controller",
+                controllerDirectives[directiveName],
+                directive,
+                $compileNode
+              );
               controllerDirectives[directiveName] = directive;
             }
             directiveValue = directive.transclude;
@@ -3886,9 +4017,16 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                 $compileNode = templateAttrs.$$element = jqLite(compile.$$createComment(directiveName, templateAttrs[directiveName]));
                 compileNode = $compileNode[0];
                 replaceWith(jqCollection, sliceArgs($template), compileNode);
-                childTranscludeFn = compilationGenerator(mightHaveMultipleTransclusionError, $template, transcludeFn, terminalPriority, replaceDirective && replaceDirective.name, {
-                  nonTlbTranscludeDirective
-                });
+                childTranscludeFn = compilationGenerator(
+                  mightHaveMultipleTransclusionError,
+                  $template,
+                  transcludeFn,
+                  terminalPriority,
+                  replaceDirective && replaceDirective.name,
+                  {
+                    nonTlbTranscludeDirective
+                  }
+                );
               } else {
                 var slots = createMap();
                 if (!isObject(directiveValue)) {
@@ -3928,7 +4066,14 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                   $template = jqLite($template.childNodes);
                 }
                 $compileNode.empty();
-                childTranscludeFn = compilationGenerator(mightHaveMultipleTransclusionError, $template, transcludeFn, void 0, void 0, { needsNewScope: directive.$$isolateScope || directive.$$newScope });
+                childTranscludeFn = compilationGenerator(
+                  mightHaveMultipleTransclusionError,
+                  $template,
+                  transcludeFn,
+                  void 0,
+                  void 0,
+                  { needsNewScope: directive.$$isolateScope || directive.$$newScope }
+                );
                 childTranscludeFn.$$slots = slots;
               }
             }
@@ -3947,7 +4092,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                 }
                 compileNode = $template[0];
                 if ($template.length !== 1 || compileNode.nodeType !== NODE_TYPE_ELEMENT) {
-                  throw $compileMinErr("tplrt", "Template for directive '{0}' must have exactly one root element. {1}", directiveName, "");
+                  throw $compileMinErr(
+                    "tplrt",
+                    "Template for directive '{0}' must have exactly one root element. {1}",
+                    directiveName,
+                    ""
+                  );
                 }
                 replaceWith(jqCollection, $compileNode, compileNode);
                 var newTemplateAttrs = { $attr: {} };
@@ -3970,13 +4120,22 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
               if (directive.replace) {
                 replaceDirective = directive;
               }
-              nodeLinkFn = compileTemplateUrl(directives.splice(i, directives.length - i), $compileNode, templateAttrs, jqCollection, hasTranscludeDirective && childTranscludeFn, preLinkFns, postLinkFns, {
-                controllerDirectives,
-                newScopeDirective: newScopeDirective !== directive && newScopeDirective,
-                newIsolateScopeDirective,
-                templateDirective,
-                nonTlbTranscludeDirective
-              });
+              nodeLinkFn = compileTemplateUrl(
+                directives.splice(i, directives.length - i),
+                $compileNode,
+                templateAttrs,
+                jqCollection,
+                hasTranscludeDirective && childTranscludeFn,
+                preLinkFns,
+                postLinkFns,
+                {
+                  controllerDirectives,
+                  newScopeDirective: newScopeDirective !== directive && newScopeDirective,
+                  newIsolateScopeDirective,
+                  templateDirective,
+                  nonTlbTranscludeDirective
+                }
+              );
               ii = directives.length;
             } else if (directive.compile) {
               try {
@@ -4053,7 +4212,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
               compile.$$addScopeInfo($element, isolateScope, true, !(templateDirective && (templateDirective === newIsolateScopeDirective || templateDirective === newIsolateScopeDirective.$$originalDirective)));
               compile.$$addScopeClass($element, true);
               isolateScope.$$isolateBindings = newIsolateScopeDirective.$$isolateBindings;
-              scopeBindingInfo = initializeDirectiveBindings(scope, attrs, isolateScope, isolateScope.$$isolateBindings, newIsolateScopeDirective);
+              scopeBindingInfo = initializeDirectiveBindings(
+                scope,
+                attrs,
+                isolateScope,
+                isolateScope.$$isolateBindings,
+                newIsolateScopeDirective
+              );
               if (scopeBindingInfo.removeWatches) {
                 isolateScope.$on("$destroy", scopeBindingInfo.removeWatches);
               }
@@ -4102,7 +4267,14 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             });
             for (i2 = 0, ii2 = preLinkFns.length; i2 < ii2; i2++) {
               linkFn2 = preLinkFns[i2];
-              invokeLinkFn(linkFn2, linkFn2.isolateScope ? isolateScope : scope, $element, attrs, linkFn2.require && getControllers(linkFn2.directiveName, linkFn2.require, $element, elementControllers), transcludeFn2);
+              invokeLinkFn(
+                linkFn2,
+                linkFn2.isolateScope ? isolateScope : scope,
+                $element,
+                attrs,
+                linkFn2.require && getControllers(linkFn2.directiveName, linkFn2.require, $element, elementControllers),
+                transcludeFn2
+              );
             }
             var scopeToChild = scope;
             if (newIsolateScopeDirective && (newIsolateScopeDirective.template || newIsolateScopeDirective.templateUrl === null)) {
@@ -4113,7 +4285,14 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             }
             for (i2 = postLinkFns.length - 1; i2 >= 0; i2--) {
               linkFn2 = postLinkFns[i2];
-              invokeLinkFn(linkFn2, linkFn2.isolateScope ? isolateScope : scope, $element, attrs, linkFn2.require && getControllers(linkFn2.directiveName, linkFn2.require, $element, elementControllers), transcludeFn2);
+              invokeLinkFn(
+                linkFn2,
+                linkFn2.isolateScope ? isolateScope : scope,
+                $element,
+                attrs,
+                linkFn2.require && getControllers(linkFn2.directiveName, linkFn2.require, $element, elementControllers),
+                transcludeFn2
+              );
             }
             forEach(elementControllers, function(controller2) {
               var controllerInstance = controller2.instance;
@@ -4140,7 +4319,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                 if (slotTranscludeFn) {
                   return slotTranscludeFn(scope2, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
                 } else if (isUndefined(slotTranscludeFn)) {
-                  throw $compileMinErr("noslot", 'No parent directive that requires a transclusion with slot name "{0}". Element: {1}', slotName2, startingTag($element));
+                  throw $compileMinErr(
+                    "noslot",
+                    'No parent directive that requires a transclusion with slot name "{0}". Element: {1}',
+                    slotName2,
+                    startingTag($element)
+                  );
                 }
               } else {
                 return boundTranscludeFn(scope2, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
@@ -4170,7 +4354,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
               }
             }
             if (!value && !optional) {
-              throw $compileMinErr("ctreq", "Controller '{0}', required by directive '{1}', can't be found!", name, directiveName);
+              throw $compileMinErr(
+                "ctreq",
+                "Controller '{0}', required by directive '{1}', can't be found!",
+                name,
+                directiveName
+              );
             }
           } else if (isArray(require)) {
             value = [];
@@ -4287,7 +4476,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
               }
               compileNode = $template[0];
               if ($template.length !== 1 || compileNode.nodeType !== NODE_TYPE_ELEMENT) {
-                throw $compileMinErr("tplrt", "Template for directive '{0}' must have exactly one root element. {1}", origAsyncDirective.name, templateUrl);
+                throw $compileMinErr(
+                  "tplrt",
+                  "Template for directive '{0}' must have exactly one root element. {1}",
+                  origAsyncDirective.name,
+                  templateUrl
+                );
               }
               tempTemplateAttrs = { $attr: {} };
               replaceWith($rootElement, $compileNode, compileNode);
@@ -4302,7 +4496,17 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
               $compileNode.html(content);
             }
             directives.unshift(derivedSyncDirective);
-            afterTemplateNodeLinkFn = applyDirectivesToNode(directives, compileNode, tAttrs, childTranscludeFn, $compileNode, origAsyncDirective, preLinkFns, postLinkFns, previousCompileContext);
+            afterTemplateNodeLinkFn = applyDirectivesToNode(
+              directives,
+              compileNode,
+              tAttrs,
+              childTranscludeFn,
+              $compileNode,
+              origAsyncDirective,
+              preLinkFns,
+              postLinkFns,
+              previousCompileContext
+            );
             forEach($rootElement, function(node, i) {
               if (node === compileNode) {
                 $rootElement[i] = $compileNode[0];
@@ -4326,7 +4530,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
               } else {
                 childBoundTranscludeFn = boundTranscludeFn;
               }
-              afterTemplateNodeLinkFn(afterTemplateChildLinkFn, scope, linkNode, $rootElement, childBoundTranscludeFn);
+              afterTemplateNodeLinkFn(
+                afterTemplateChildLinkFn,
+                scope,
+                linkNode,
+                $rootElement,
+                childBoundTranscludeFn
+              );
             }
             linkQueue = null;
           }).catch(function(error) {
@@ -4339,7 +4549,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             if (scope.$$destroyed)
               return;
             if (linkQueue) {
-              linkQueue.push(scope, node, rootElement, childBoundTranscludeFn);
+              linkQueue.push(
+                scope,
+                node,
+                rootElement,
+                childBoundTranscludeFn
+              );
             } else {
               if (afterTemplateNodeLinkFn.transcludeOnThisElement) {
                 childBoundTranscludeFn = createBoundTranscludeFn(scope, afterTemplateNodeLinkFn.transclude, boundTranscludeFn);
@@ -4361,7 +4576,16 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             return moduleName ? " (module: " + moduleName + ")" : "";
           }
           if (previousDirective) {
-            throw $compileMinErr("multidir", "Multiple directives [{0}{1}, {2}{3}] asking for {4} on: {5}", previousDirective.name, wrapModuleNameIfDefined(previousDirective.$$moduleName), directive.name, wrapModuleNameIfDefined(directive.$$moduleName), what, startingTag(element));
+            throw $compileMinErr(
+              "multidir",
+              "Multiple directives [{0}{1}, {2}{3}] asking for {4} on: {5}",
+              previousDirective.name,
+              wrapModuleNameIfDefined(previousDirective.$$moduleName),
+              directive.name,
+              wrapModuleNameIfDefined(directive.$$moduleName),
+              what,
+              startingTag(element)
+            );
           }
         }
         function addTextInterpolateDirective(directives, text) {
@@ -4459,7 +4683,9 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           });
         }
         function addEventDirective(directives, attrName, eventName) {
-          directives.push(createEventDirective($parse, $rootScope, $exceptionHandler, attrName, eventName, false));
+          directives.push(
+            createEventDirective($parse, $rootScope, $exceptionHandler, attrName, eventName, false)
+          );
         }
         function addAttrInterpolateDirective(node, directives, value, name, isNgAttr) {
           var nodeName = nodeName_(node);
@@ -4470,7 +4696,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (!interpolateFn)
             return;
           if (name === "multiple" && nodeName === "select") {
-            throw $compileMinErr("selmulti", "Binding to the 'multiple' attribute is not supported. Element: {0}", startingTag(node));
+            throw $compileMinErr(
+              "selmulti",
+              "Binding to the 'multiple' attribute is not supported. Element: {0}",
+              startingTag(node)
+            );
           }
           if (EVENT_HANDLER_ATTR_REGEXP.test(name)) {
             throw $compileMinErr("nodomevents", "Interpolations for HTML DOM event attributes are disallowed");
@@ -4555,7 +4785,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         }
         function strictBindingsCheck(attrName, directiveName) {
           if (strictComponentBindingsEnabled) {
-            throw $compileMinErr("missingattr", "Attribute '{0}' of '{1}' is non-optional and must be set!", attrName, directiveName);
+            throw $compileMinErr(
+              "missingattr",
+              "Attribute '{0}' of '{1}' is non-optional and must be set!",
+              attrName,
+              directiveName
+            );
           }
         }
         function initializeDirectiveBindings(scope, attrs, destination, bindings, directive) {
@@ -4604,7 +4839,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                 }
                 parentSet = parentGet.assign || function() {
                   lastValue = destination[scopeName] = parentGet(scope);
-                  throw $compileMinErr("nonassign", "Expression '{0}' in attribute '{1}' used with directive '{2}' is non-assignable!", attrs[attrName], attrName, directive.name);
+                  throw $compileMinErr(
+                    "nonassign",
+                    "Expression '{0}' in attribute '{1}' used with directive '{2}' is non-assignable!",
+                    attrs[attrName],
+                    attrName,
+                    directive.name
+                  );
                 };
                 lastValue = destination[scopeName] = parentGet(scope);
                 var parentValueWatch = function parentValueWatch2(parentValue) {
@@ -4771,13 +5012,21 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         if (isString(expression)) {
           match = expression.match(CNTRL_REG);
           if (!match) {
-            throw $controllerMinErr("ctrlfmt", "Badly formed controller string '{0}'. Must match `__name__ as __id__` or `__name__`.", expression);
+            throw $controllerMinErr(
+              "ctrlfmt",
+              "Badly formed controller string '{0}'. Must match `__name__ as __id__` or `__name__`.",
+              expression
+            );
           }
           constructor = match[1];
           identifier = identifier || match[3];
           expression = controllers.hasOwnProperty(constructor) ? controllers[constructor] : getter(locals.$scope, constructor, true);
           if (!expression) {
-            throw $controllerMinErr("ctrlreg", "The controller with the name '{0}' is not registered.", constructor);
+            throw $controllerMinErr(
+              "ctrlreg",
+              "The controller with the name '{0}' is not registered.",
+              constructor
+            );
           }
           assertArgFn(expression, constructor, true);
         }
@@ -4809,7 +5058,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       };
       function addIdentifier(locals, identifier, instance, name) {
         if (!(locals && isObject(locals.$scope))) {
-          throw minErr("$controller")("noscp", "Cannot export controller '{0}' as '{1}'! No $scope object provided via `locals`.", name, identifier);
+          throw minErr("$controller")(
+            "noscp",
+            "Cannot export controller '{0}' as '{1}'! No $scope object provided via `locals`.",
+            name,
+            identifier
+          );
         }
         locals.$scope[identifier] = instance;
       }
@@ -5136,7 +5390,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           }
           function transformResponse(response) {
             var resp = extend({}, response);
-            resp.data = transformData(response.data, response.headers, response.status, config.transformResponse);
+            resp.data = transformData(
+              response.data,
+              response.headers,
+              response.status,
+              config.transformResponse
+            );
             return isSuccess(response.status) ? resp : $q.reject(resp);
           }
         }
@@ -5203,7 +5462,18 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             if (xsrfValue) {
               reqHeaders[config.xsrfHeaderName || defaults2.xsrfHeaderName] = xsrfValue;
             }
-            $httpBackend(config.method, url, reqData, done, reqHeaders, config.timeout, config.withCredentials, config.responseType, createApplyHandlers(config.eventHandlers), createApplyHandlers(config.uploadEventHandlers));
+            $httpBackend(
+              config.method,
+              url,
+              reqData,
+              done,
+              reqHeaders,
+              config.timeout,
+              config.withCredentials,
+              config.responseType,
+              createApplyHandlers(config.eventHandlers),
+              createApplyHandlers(config.uploadEventHandlers)
+            );
           }
           return promise;
           function createApplyHandlers(eventHandlers) {
@@ -5329,7 +5599,14 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (status === 0) {
             status = response ? 200 : urlResolve(url).protocol === "file" ? 404 : 0;
           }
-          completeRequest(callback, status, response, xhr.getAllResponseHeaders(), statusText, "complete");
+          completeRequest(
+            callback,
+            status,
+            response,
+            xhr.getAllResponseHeaders(),
+            statusText,
+            "complete"
+          );
         };
         var requestError = function() {
           completeRequest(callback, -1, null, null, "", "error");
@@ -5421,7 +5698,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
   }
   var $interpolateMinErr = angular2.$interpolateMinErr = minErr("$interpolate");
   $interpolateMinErr.throwNoconcat = function(text) {
-    throw $interpolateMinErr("noconcat", "Error while interpolating: {0}\nStrict Contextual Escaping disallows interpolations that concatenate multiple expressions when a trusted value is required.  See http://docs.angularjs.org/api/ng.$sce", text);
+    throw $interpolateMinErr(
+      "noconcat",
+      "Error while interpolating: {0}\nStrict Contextual Escaping disallows interpolations that concatenate multiple expressions when a trusted value is required.  See http://docs.angularjs.org/api/ng.$sce",
+      text
+    );
   };
   $interpolateMinErr.interr = function(text, err) {
     return $interpolateMinErr("interr", "Can't interpolate: {0}\n{1}", text, err.toString());
@@ -5575,7 +5856,10 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (!promise)
             return false;
           if (!promise.hasOwnProperty("$$intervalId")) {
-            throw $intervalMinErr("badprom", "`$interval.cancel()` called with a promise that was not generated by `$interval()`.");
+            throw $intervalMinErr(
+              "badprom",
+              "`$interval.cancel()` called with a promise that was not generated by `$interval()`."
+            );
           }
           if (!intervals.hasOwnProperty(promise.$$intervalId))
             return false;
@@ -5735,7 +6019,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     this.$$parse = function(url) {
       var pathUrl = stripBaseUrl(appBaseNoFile, url);
       if (!isString(pathUrl)) {
-        throw $locationMinErr("ipthprfx", 'Invalid url "{0}", missing path prefix "{1}".', url, appBaseNoFile);
+        throw $locationMinErr(
+          "ipthprfx",
+          'Invalid url "{0}", missing path prefix "{1}".',
+          url,
+          appBaseNoFile
+        );
       }
       parseAppUrl(pathUrl, this, true);
       if (!this.$$path) {
@@ -5890,7 +6179,10 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             });
             this.$$search = search;
           } else {
-            throw $locationMinErr("isrcharg", "The first argument of the `$location#search()` call must be a string or an object.");
+            throw $locationMinErr(
+              "isrcharg",
+              "The first argument of the `$location#search()` call must be a string or an object."
+            );
           }
           break;
         default:
@@ -5983,7 +6275,10 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         var $location, LocationMode, baseHref = $browser.baseHref(), initialUrl = $browser.url(), appBase;
         if (html5Mode.enabled) {
           if (!baseHref && html5Mode.requireBase) {
-            throw $locationMinErr("nobase", "$location in HTML5 mode requires a <base> tag to be present!");
+            throw $locationMinErr(
+              "nobase",
+              "$location in HTML5 mode requires a <base> tag to be present!"
+            );
           }
           appBase = serverBase(initialUrl) + (baseHref || "/");
           LocationMode = $sniffer.history ? LocationHtml5Url : LocationHashbangInHtml5Url;
@@ -6053,7 +6348,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             var defaultPrevented;
             $location.$$parse(newUrl);
             $location.$$state = newState;
-            defaultPrevented = $rootScope.$broadcast("$locationChangeStart", newUrl, oldUrl, newState, oldState).defaultPrevented;
+            defaultPrevented = $rootScope.$broadcast(
+              "$locationChangeStart",
+              newUrl,
+              oldUrl,
+              newState,
+              oldState
+            ).defaultPrevented;
             if ($location.absUrl() !== newUrl)
               return;
             if (defaultPrevented) {
@@ -6080,7 +6381,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
               initializing = false;
               $rootScope.$evalAsync(function() {
                 var newUrl2 = $location.absUrl();
-                var defaultPrevented = $rootScope.$broadcast("$locationChangeStart", newUrl2, oldUrl, $location.$$state, oldState).defaultPrevented;
+                var defaultPrevented = $rootScope.$broadcast(
+                  "$locationChangeStart",
+                  newUrl2,
+                  oldUrl,
+                  $location.$$state,
+                  oldState
+                ).defaultPrevented;
                 if ($location.absUrl() !== newUrl2)
                   return;
                 if (defaultPrevented) {
@@ -6088,7 +6395,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                   $location.$$state = oldState;
                 } else {
                   if (urlOrStateChanged) {
-                    setBrowserUrlWithFallback(newUrl2, currentReplace, oldState === $location.$$state ? null : $location.$$state);
+                    setBrowserUrlWithFallback(
+                      newUrl2,
+                      currentReplace,
+                      oldState === $location.$$state ? null : $location.$$state
+                    );
                   }
                   afterLocationChange(oldUrl, oldState);
                 }
@@ -6099,7 +6410,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         });
         return $location;
         function afterLocationChange(oldUrl, oldState) {
-          $rootScope.$broadcast("$locationChangeSuccess", $location.absUrl(), oldUrl, $location.$$state, oldState);
+          $rootScope.$broadcast(
+            "$locationChangeSuccess",
+            $location.absUrl(),
+            oldUrl,
+            $location.$$state,
+            oldState
+          );
         }
       }
     ];
@@ -6218,7 +6535,7 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       return this.options.isIdentifierStart ? this.options.isIdentifierStart(ch, this.codePointAt(ch)) : this.isValidIdentifierStart(ch);
     },
     isValidIdentifierStart: function(ch) {
-      return "a" <= ch && ch <= "z" || "A" <= ch && ch <= "Z" || ch === "_" || ch === "$";
+      return "a" <= ch && ch <= "z" || "A" <= ch && ch <= "Z" || "_" === ch || ch === "$";
     },
     isIdentifierContinue: function(ch) {
       return this.options.isIdentifierContinue ? this.options.isIdentifierContinue(ch, this.codePointAt(ch)) : this.isValidIdentifierContinue(ch);
@@ -6250,7 +6567,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     throwError: function(error, start, end) {
       end = end || this.index;
       var colStr = isDefined(start) ? "s " + start + "-" + this.index + " [" + this.text.substring(start, end) + "]" : " " + end;
-      throw $parseMinErr("lexerr", "Lexer Error: {0} at column{1} in expression [{2}].", error, colStr, this.text);
+      throw $parseMinErr(
+        "lexerr",
+        "Lexer Error: {0} at column{1} in expression [{2}].",
+        error,
+        colStr,
+        this.text
+      );
     },
     readNumber: function() {
       var number = "";
@@ -6583,7 +6906,15 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       return { type: AST.ObjectExpression, properties };
     },
     throwError: function(msg, token) {
-      throw $parseMinErr("syntax", "Syntax Error: Token '{0}' {1} at column {2} of the expression [{3}] starting at [{4}].", token.text, msg, token.index + 1, this.text, this.text.substring(token.index));
+      throw $parseMinErr(
+        "syntax",
+        "Syntax Error: Token '{0}' {1} at column {2} of the expression [{3}] starting at [{4}].",
+        token.text,
+        msg,
+        token.index + 1,
+        this.text,
+        this.text.substring(token.index)
+      );
     },
     consume: function(e1) {
       if (this.tokens.length === 0) {
@@ -6657,7 +6988,7 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       case AST.CallExpression:
         return false;
     }
-    return parentIsPure === void 0 ? PURITY_RELATIVE : parentIsPure;
+    return void 0 === parentIsPure ? PURITY_RELATIVE : parentIsPure;
   }
   function findConstantAndWatchExpressions(ast, $filter, parentIsPure) {
     var allConstants;
@@ -6831,7 +7162,18 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       this.stage = "main";
       this.recurse(ast);
       var fnString = '"' + this.USE + " " + this.STRICT + '";\n' + this.filterPrefix() + "var fn=" + this.generateFunction("fn", "s,l,a,i") + extra + this.watchFns() + "return fn;";
-      var fn = new Function("$filter", "getStringValue", "ifDefined", "plus", fnString)(this.$filter, getStringValue, ifDefined, plusFn);
+      var fn = new Function(
+        "$filter",
+        "getStringValue",
+        "ifDefined",
+        "plus",
+        fnString
+      )(
+        this.$filter,
+        getStringValue,
+        ifDefined,
+        plusFn
+      );
       this.state = this.stage = void 0;
       return fn;
     },
@@ -6878,7 +7220,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       recursionFn = recursionFn || noop;
       if (!skipWatchIdCheck && isDefined(ast.watchId)) {
         intoId = intoId || this.nextId();
-        this.if_("i", this.lazyAssign(intoId, this.computedMember("i", ast.watchId)), this.lazyRecurse(ast, intoId, nameId, recursionFn, create, true));
+        this.if_(
+          "i",
+          this.lazyAssign(intoId, this.computedMember("i", ast.watchId)),
+          this.lazyRecurse(ast, intoId, nameId, recursionFn, create, true)
+        );
         return;
       }
       switch (ast.type) {
@@ -6943,14 +7289,21 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             nameId.computed = false;
             nameId.name = ast.name;
           }
-          self.if_(self.stage === "inputs" || self.not(self.getHasOwnProperty("l", ast.name)), function() {
-            self.if_(self.stage === "inputs" || "s", function() {
-              if (create && create !== 1) {
-                self.if_(self.isNull(self.nonComputedMember("s", ast.name)), self.lazyAssign(self.nonComputedMember("s", ast.name), "{}"));
-              }
-              self.assign(intoId, self.nonComputedMember("s", ast.name));
-            });
-          }, intoId && self.lazyAssign(intoId, self.nonComputedMember("l", ast.name)));
+          self.if_(
+            self.stage === "inputs" || self.not(self.getHasOwnProperty("l", ast.name)),
+            function() {
+              self.if_(self.stage === "inputs" || "s", function() {
+                if (create && create !== 1) {
+                  self.if_(
+                    self.isNull(self.nonComputedMember("s", ast.name)),
+                    self.lazyAssign(self.nonComputedMember("s", ast.name), "{}")
+                  );
+                }
+                self.assign(intoId, self.nonComputedMember("s", ast.name));
+              });
+            },
+            intoId && self.lazyAssign(intoId, self.nonComputedMember("l", ast.name))
+          );
           recursionFn(intoId);
           break;
         case AST.MemberExpression:
@@ -7073,7 +7426,9 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           } else {
             forEach(ast.properties, function(property) {
               self.recurse(property.value, ast.constant ? void 0 : self.nextId(), void 0, function(expr) {
-                args.push(self.escape(property.key.type === AST.Identifier ? property.key.name : "" + property.key.value) + ":" + expr);
+                args.push(self.escape(
+                  property.key.type === AST.Identifier ? property.key.name : "" + property.key.value
+                ) + ":" + expr);
               });
             });
             expression = "{" + args.join(",") + "}";
@@ -7275,7 +7630,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           right = this.recurse(ast.right);
           return this["binary" + ast.operator](left, right, context);
         case AST.ConditionalExpression:
-          return this["ternary?:"](this.recurse(ast.test), this.recurse(ast.alternate), this.recurse(ast.consequent), context);
+          return this["ternary?:"](
+            this.recurse(ast.test),
+            this.recurse(ast.alternate),
+            this.recurse(ast.consequent),
+            context
+          );
         case AST.Identifier:
           return self.identifier(ast.name, context, create);
         case AST.MemberExpression:
@@ -7935,7 +8295,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       if (promise.$$state.status)
         return;
       if (val === promise) {
-        $$reject(promise, $qMinErr("qcycle", "Expected promise to be resolved with value other than itself '{0}'", val));
+        $$reject(promise, $qMinErr(
+          "qcycle",
+          "Expected promise to be resolved with value other than itself '{0}'",
+          val
+        ));
       } else {
         $$resolve(promise, val);
       }
@@ -8446,7 +8810,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                 } while (current = next);
               if ((dirty || asyncQueue.length) && !ttl--) {
                 clearPhase();
-                throw $rootScopeMinErr("infdig", "{0} $digest() iterations reached. Aborting!\nWatchers fired in the last 5 iterations: {1}", TTL, watchLog);
+                throw $rootScopeMinErr(
+                  "infdig",
+                  "{0} $digest() iterations reached. Aborting!\nWatchers fired in the last 5 iterations: {1}",
+                  TTL,
+                  watchLog
+                );
               }
             } while (dirty || asyncQueue.length);
             clearPhase();
@@ -8735,14 +9104,21 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       return matcher;
     } else if (isString(matcher)) {
       if (matcher.indexOf("***") > -1) {
-        throw $sceMinErr("iwcard", "Illegal sequence *** in string matcher.  String: {0}", matcher);
+        throw $sceMinErr(
+          "iwcard",
+          "Illegal sequence *** in string matcher.  String: {0}",
+          matcher
+        );
       }
       matcher = escapeForRegexp(matcher).replace(/\\\*\\\*/g, ".*").replace(/\\\*/g, "[^:/.?&;]*");
       return new RegExp("^" + matcher + "$");
     } else if (isRegExp(matcher)) {
       return new RegExp("^" + matcher.source + "$");
     } else {
-      throw $sceMinErr("imatcher", 'Matchers may only be "self", string patterns or RegExp objects');
+      throw $sceMinErr(
+        "imatcher",
+        'Matchers may only be "self", string patterns or RegExp objects'
+      );
     }
   }
   function adjustMatchers(matchers) {
@@ -8845,13 +9221,22 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       function trustAs(type, trustedValue) {
         var Constructor = byType.hasOwnProperty(type) ? byType[type] : null;
         if (!Constructor) {
-          throw $sceMinErr("icontext", "Attempted to trust a value in invalid context. Context: {0}; Value: {1}", type, trustedValue);
+          throw $sceMinErr(
+            "icontext",
+            "Attempted to trust a value in invalid context. Context: {0}; Value: {1}",
+            type,
+            trustedValue
+          );
         }
         if (trustedValue === null || isUndefined(trustedValue) || trustedValue === "") {
           return trustedValue;
         }
         if (typeof trustedValue !== "string") {
-          throw $sceMinErr("itype", "Attempted to trust a non-string value in a content requiring a string: Context: {0}", type);
+          throw $sceMinErr(
+            "itype",
+            "Attempted to trust a non-string value in a content requiring a string: Context: {0}",
+            type
+          );
         }
         return new Constructor(trustedValue);
       }
@@ -8879,7 +9264,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (isResourceUrlAllowedByPolicy(maybeTrusted)) {
             return maybeTrusted;
           } else {
-            throw $sceMinErr("insecurl", "Blocked loading resource from url not allowed by $sceDelegate policy.  URL: {0}", maybeTrusted.toString());
+            throw $sceMinErr(
+              "insecurl",
+              "Blocked loading resource from url not allowed by $sceDelegate policy.  URL: {0}",
+              maybeTrusted.toString()
+            );
           }
         } else if (type === SCE_CONTEXTS.HTML) {
           return htmlSanitizer(maybeTrusted);
@@ -8903,7 +9292,10 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     };
     this.$get = ["$parse", "$sceDelegate", function($parse, $sceDelegate) {
       if (enabled && msie < 8) {
-        throw $sceMinErr("iequirks", "Strict Contextual Escaping does not support Internet Explorer version < 11 in quirks mode.  You can fix this by adding the text <!doctype html> to the top of your HTML document.  See http://docs.angularjs.org/api/ng.$sce for more information.");
+        throw $sceMinErr(
+          "iequirks",
+          "Strict Contextual Escaping does not support Internet Explorer version < 11 in quirks mode.  You can fix this by adding the text <!doctype html> to the top of your HTML document.  See http://docs.angularjs.org/api/ng.$sce for more information."
+        );
       }
       var sce = shallowCopy(SCE_CONTEXTS);
       sce.isEnabled = function() {
@@ -9078,7 +9470,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           }, handleError);
           function handleError(resp) {
             if (!ignoreRequestError) {
-              resp = $templateRequestMinErr("tpload", "Failed to load template: {0} (HTTP status: {1} {2})", tpl, resp.status, resp.statusText);
+              resp = $templateRequestMinErr(
+                "tpload",
+                "Failed to load template: {0} (HTTP status: {1} {2})",
+                tpl,
+                resp.status,
+                resp.statusText
+              );
               $exceptionHandler(resp);
             }
             return $q.reject(resp);
@@ -9182,7 +9580,10 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           if (!promise)
             return false;
           if (!promise.hasOwnProperty("$$timeoutId")) {
-            throw $timeoutMinErr("badprom", "`$timeout.cancel()` called with a promise that was not generated by `$timeout()`.");
+            throw $timeoutMinErr(
+              "badprom",
+              "`$timeout.cancel()` called with a promise that was not generated by `$timeout()`."
+            );
           }
           if (!deferreds.hasOwnProperty(promise.$$timeoutId))
             return false;
@@ -9457,7 +9858,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
   function numberFilter($locale) {
     var formats = $locale.NUMBER_FORMATS;
     return function(number, fractionSize) {
-      return number == null ? number : formatNumber(number, formats.PATTERNS[0], formats.GROUP_SEP, formats.DECIMAL_SEP, fractionSize);
+      return number == null ? number : formatNumber(
+        number,
+        formats.PATTERNS[0],
+        formats.GROUP_SEP,
+        formats.DECIMAL_SEP,
+        fractionSize
+      );
     };
   }
   function parse(numStr) {
@@ -9640,7 +10047,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     return new Date(year, 0, (dayOfWeekOnFirst <= 4 ? 5 : 12) - dayOfWeekOnFirst);
   }
   function getThursdayThisWeek(datetime) {
-    return new Date(datetime.getFullYear(), datetime.getMonth(), datetime.getDate() + (4 - datetime.getDay()));
+    return new Date(
+      datetime.getFullYear(),
+      datetime.getMonth(),
+      datetime.getDate() + (4 - datetime.getDay())
+    );
   }
   function weekGetter(size) {
     return function(date) {
@@ -10311,11 +10722,31 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
   });
   var inputType = {
     "text": textInputType,
-    "date": createDateInputType("date", DATE_REGEXP, createDateParser(DATE_REGEXP, ["yyyy", "MM", "dd"]), "yyyy-MM-dd"),
-    "datetime-local": createDateInputType("datetimelocal", DATETIMELOCAL_REGEXP, createDateParser(DATETIMELOCAL_REGEXP, ["yyyy", "MM", "dd", "HH", "mm", "ss", "sss"]), "yyyy-MM-ddTHH:mm:ss.sss"),
-    "time": createDateInputType("time", TIME_REGEXP, createDateParser(TIME_REGEXP, ["HH", "mm", "ss", "sss"]), "HH:mm:ss.sss"),
+    "date": createDateInputType(
+      "date",
+      DATE_REGEXP,
+      createDateParser(DATE_REGEXP, ["yyyy", "MM", "dd"]),
+      "yyyy-MM-dd"
+    ),
+    "datetime-local": createDateInputType(
+      "datetimelocal",
+      DATETIMELOCAL_REGEXP,
+      createDateParser(DATETIMELOCAL_REGEXP, ["yyyy", "MM", "dd", "HH", "mm", "ss", "sss"]),
+      "yyyy-MM-ddTHH:mm:ss.sss"
+    ),
+    "time": createDateInputType(
+      "time",
+      TIME_REGEXP,
+      createDateParser(TIME_REGEXP, ["HH", "mm", "ss", "sss"]),
+      "HH:mm:ss.sss"
+    ),
     "week": createDateInputType("week", WEEK_REGEXP, weekParser, "yyyy-Www"),
-    "month": createDateInputType("month", MONTH_REGEXP, createDateParser(MONTH_REGEXP, ["yyyy", "MM"]), "yyyy-MM"),
+    "month": createDateInputType(
+      "month",
+      MONTH_REGEXP,
+      createDateParser(MONTH_REGEXP, ["yyyy", "MM"]),
+      "yyyy-MM"
+    ),
     "number": numberInputType,
     "url": urlInputType,
     "email": emailInputType,
@@ -10875,7 +11306,16 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         link: {
           pre: function(scope, element, attr, ctrls) {
             if (ctrls[0]) {
-              (inputType[lowercase(attr.type)] || inputType.text)(scope, element, attr, ctrls[0], $sniffer, $browser, $filter, $parse);
+              (inputType[lowercase(attr.type)] || inputType.text)(
+                scope,
+                element,
+                attr,
+                ctrls[0],
+                $sniffer,
+                $browser,
+                $filter,
+                $parse
+              );
             }
           }
         }
@@ -11126,12 +11566,15 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     "blur": true,
     "focus": true
   };
-  forEach("click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste".split(" "), function(eventName) {
-    var directiveName = directiveNormalize("ng-" + eventName);
-    ngEventDirectives[directiveName] = ["$parse", "$rootScope", "$exceptionHandler", function($parse, $rootScope, $exceptionHandler) {
-      return createEventDirective($parse, $rootScope, $exceptionHandler, directiveName, eventName, forceAsyncEvents[eventName]);
-    }];
-  });
+  forEach(
+    "click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste".split(" "),
+    function(eventName) {
+      var directiveName = directiveNormalize("ng-" + eventName);
+      ngEventDirectives[directiveName] = ["$parse", "$rootScope", "$exceptionHandler", function($parse, $rootScope, $exceptionHandler) {
+        return createEventDirective($parse, $rootScope, $exceptionHandler, directiveName, eventName, forceAsyncEvents[eventName]);
+      }];
+    }
+  );
   function createEventDirective($parse, $rootScope, $exceptionHandler, directiveName, eventName, forceAsync) {
     return {
       restrict: "A",
@@ -11287,9 +11730,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         link: function(scope, $element, $attr, ctrl) {
           if (toString.call($element[0]).match(/SVG/)) {
             $element.empty();
-            $compile(jqLiteBuildFragment(ctrl.template, window2.document).childNodes)(scope, function namespaceAdaptedClone(clone) {
-              $element.append(clone);
-            }, { futureParentElement: $element });
+            $compile(jqLiteBuildFragment(ctrl.template, window2.document).childNodes)(
+              scope,
+              function namespaceAdaptedClone(clone) {
+                $element.append(clone);
+              },
+              { futureParentElement: $element }
+            );
             return;
           }
           $element.html(ctrl.template);
@@ -11407,7 +11854,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           }
         };
       } else if (!this.$$parsedNgModel.assign) {
-        throw ngModelMinErr("nonassign", "Expression '{0}' is non-assignable. Element: {1}", this.$$attr.ngModel, startingTag(this.$$element));
+        throw ngModelMinErr(
+          "nonassign",
+          "Expression '{0}' is non-assignable. Element: {1}",
+          this.$$attr.ngModel,
+          startingTag(this.$$element)
+        );
       }
     },
     $render: noop,
@@ -11522,7 +11974,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         forEach(that.$asyncValidators, function(validator, name) {
           var promise = validator(modelValue, viewValue);
           if (!isPromiseLike(promise)) {
-            throw ngModelMinErr("nopromise", "Expected asynchronous validator to return a promise but got '{0}' instead.", promise);
+            throw ngModelMinErr(
+              "nopromise",
+              "Expected asynchronous validator to return a promise but got '{0}' instead.",
+              promise
+            );
           }
           setValidity(name, void 0);
           validatorPromises.push(promise.then(function() {
@@ -11826,7 +12282,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     function parseOptionsExpression(optionsExp, selectElement, scope) {
       var match = optionsExp.match(NG_OPTIONS_REGEXP);
       if (!match) {
-        throw ngOptionsMinErr("iexp", "Expected expression in form of '_select_ (as _label_)? for (_key_,)?_value_ in _collection_' but got '{0}'. Element: {1}", optionsExp, startingTag(selectElement));
+        throw ngOptionsMinErr(
+          "iexp",
+          "Expected expression in form of '_select_ (as _label_)? for (_key_,)?_value_ in _collection_' but got '{0}'. Element: {1}",
+          optionsExp,
+          startingTag(selectElement)
+        );
       }
       var valueName = match[5] || match[7];
       var keyName = match[6];
@@ -11986,11 +12447,14 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
           return null;
         };
         if (ngOptions.trackBy) {
-          scope.$watch(function() {
-            return ngOptions.getTrackByValue(ngModelCtrl.$viewValue);
-          }, function() {
-            ngModelCtrl.$render();
-          });
+          scope.$watch(
+            function() {
+              return ngOptions.getTrackByValue(ngModelCtrl.$viewValue);
+            },
+            function() {
+              ngModelCtrl.$render();
+            }
+          );
         }
       } else {
         selectCtrl.writeValue = function writeNgOptionsMultiple(values) {
@@ -12184,7 +12648,12 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
             } else {
               refValue = element.data("$" + attrs.ngRefRead + "Controller");
               if (!refValue) {
-                throw ngRefMinErr("noctrl", 'The controller for ngRefRead="{0}" could not be found on ngRef="{1}"', attrs.ngRefRead, tAttrs.ngRef);
+                throw ngRefMinErr(
+                  "noctrl",
+                  'The controller for ngRefRead="{0}" could not be found on ngRef="{1}"',
+                  attrs.ngRefRead,
+                  tAttrs.ngRef
+                );
               }
             }
           } else {
@@ -12238,7 +12707,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         var ngRepeatEndComment = $compile.$$createComment("end ngRepeat", expression);
         var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+track\s+by\s+([\s\S]+?))?\s*$/);
         if (!match) {
-          throw ngRepeatMinErr("iexp", "Expected expression in form of '_item_ in _collection_[ track by _id_]' but got '{0}'.", expression);
+          throw ngRepeatMinErr(
+            "iexp",
+            "Expected expression in form of '_item_ in _collection_[ track by _id_]' but got '{0}'.",
+            expression
+          );
         }
         var lhs = match[1];
         var rhs = match[2];
@@ -12246,12 +12719,20 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         var trackByExp = match[4];
         match = lhs.match(/^(?:(\s*[$\w]+)|\(\s*([$\w]+)\s*,\s*([$\w]+)\s*\))$/);
         if (!match) {
-          throw ngRepeatMinErr("iidexp", "'_item_' in '_item_ in _collection_' should be an identifier or '(_key_, _value_)' expression, but got '{0}'.", lhs);
+          throw ngRepeatMinErr(
+            "iidexp",
+            "'_item_' in '_item_ in _collection_' should be an identifier or '(_key_, _value_)' expression, but got '{0}'.",
+            lhs
+          );
         }
         var valueIdentifier = match[3] || match[1];
         var keyIdentifier = match[2];
         if (aliasAs && (!/^[$a-zA-Z_][$a-zA-Z0-9_]*$/.test(aliasAs) || /^(null|undefined|this|\$index|\$first|\$middle|\$last|\$even|\$odd|\$parent|\$root|\$id)$/.test(aliasAs))) {
-          throw ngRepeatMinErr("badident", "alias '{0}' is invalid --- must be a valid JS identifier which is not a reserved name.", aliasAs);
+          throw ngRepeatMinErr(
+            "badident",
+            "alias '{0}' is invalid --- must be a valid JS identifier which is not a reserved name.",
+            aliasAs
+          );
         }
         var trackByIdExpFn;
         if (trackByExp) {
@@ -12300,7 +12781,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
                   if (block2 && block2.scope)
                     lastBlockMap[block2.id] = block2;
                 });
-                throw ngRepeatMinErr("dupes", "Duplicates in a repeater are not allowed. Use 'track by' expression to specify unique keys. Repeater: {0}, Duplicate key: {1}, Duplicate value: {2}", expression, trackById, value);
+                throw ngRepeatMinErr(
+                  "dupes",
+                  "Duplicates in a repeater are not allowed. Use 'track by' expression to specify unique keys. Repeater: {0}, Duplicate key: {1}, Duplicate value: {2}",
+                  expression,
+                  trackById,
+                  value
+                );
               } else {
                 nextBlockOrder[index] = { id: trackById, scope: void 0, clone: void 0 };
                 nextBlockMap[trackById] = true;
@@ -12441,9 +12928,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     require: "^ngSwitch",
     multiElement: true,
     link: function(scope, element, attrs, ctrl, $transclude) {
-      var cases = attrs.ngSwitchWhen.split(attrs.ngSwitchWhenSeparator).sort().filter(function(element2, index, array) {
-        return array[index - 1] !== element2;
-      });
+      var cases = attrs.ngSwitchWhen.split(attrs.ngSwitchWhenSeparator).sort().filter(
+        function(element2, index, array) {
+          return array[index - 1] !== element2;
+        }
+      );
       forEach(cases, function(whenCase) {
         ctrl.cases["!" + whenCase] = ctrl.cases["!" + whenCase] || [];
         ctrl.cases["!" + whenCase].push({ transclude: $transclude, element });
@@ -12469,7 +12958,11 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
         tElement.empty();
         return function ngTranscludePostLink($scope, $element, $attrs, controller, $transclude) {
           if (!$transclude) {
-            throw ngTranscludeMinErr("orphan", "Illegal use of ngTransclude directive in the template! No parent directive that requires a transclusion found. Element: {0}", startingTag($element));
+            throw ngTranscludeMinErr(
+              "orphan",
+              "Illegal use of ngTransclude directive in the template! No parent directive that requires a transclusion found. Element: {0}",
+              startingTag($element)
+            );
           }
           if ($attrs.ngTransclude === $attrs.$attr.ngTransclude) {
             $attrs.ngTransclude = "";
@@ -12937,7 +13430,13 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
       regex = new RegExp("^" + regex + "$");
     }
     if (!regex.test) {
-      throw minErr("ngPattern")("noregexp", "Expected {0} to be a RegExp but was {1}. Element: {2}", patternExp, regex, startingTag(elm));
+      throw minErr("ngPattern")(
+        "noregexp",
+        "Expected {0} to be a RegExp but was {1}. Element: {2}",
+        patternExp,
+        regex,
+        startingTag(elm)
+      );
     }
     return regex;
   }
@@ -12962,7 +13461,7 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
     }
     function getVF(n, opt_precision) {
       var v = opt_precision;
-      if (v === void 0) {
+      if (void 0 === v) {
         v = Math.min(getDecimals(n), 3);
       }
       var base = Math.pow(10, v);
@@ -13105,21 +13604,7 @@ import { g as createApp, r as ref, i as onMounted, j as h, f as resolveDirective
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend(window.angular.element("<style>").text('@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}'));
 var angular_1 = angular;
 var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
 var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
@@ -13368,7 +13853,7 @@ function createAppInstance(Component, html, state, events, ngVueDirectives) {
         }
       });
       return () => {
-        let node = h(Component, __spreadValues(__spreadValues(__spreadValues(__spreadValues({}, state.props), state.attrs), state.special), events), () => [h("span", { ref: slot })]);
+        let node = h(Component, { ...state.props, ...state.attrs, ...state.special, ...events }, () => [h("span", { ref: slot })]);
         if (ngVueDirectives.length > 0) {
           const directives = ngVueDirectives.filter((d) => !!resolveDirective(d.name)).map((d) => {
             const directive = resolveDirective(d.name);

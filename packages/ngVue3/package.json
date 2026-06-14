@@ -69,5 +69,9 @@
     "vite": "^6.2.0",
     "vue": "^3.5.0",
     "vue-tsc": "^2.2.0"
+  },
+  "peerDependencies": {
+    "angular": "^1.8.0",
+    "vue": "^3.2.25"
   }
 }

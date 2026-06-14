@@ -9,6 +9,7 @@ const resolvePath = (str: string) => resolve(__dirname, str);
 export default defineConfig({
   plugins: [vue()],
   build: {
+    sourcemap: true,
     lib: {
       entry: resolvePath("lib/main.ts"),
       name: "ngVue3",
@@ -36,7 +37,6 @@ export default defineConfig({
           vue: "Vue",
           angular: "angular",
         },
-        sourcemap: true,
       },
       plugins: [
         typescriptPlugin({

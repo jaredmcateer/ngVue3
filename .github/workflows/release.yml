@@ -89,9 +89,17 @@ jobs:
       - name: Build 🛠
         run: pnpm build
 
+      # setup-node's registry-url writes an empty _authToken placeholder that
+      # prevents npm from using OIDC; remove it so trusted publishing can run.
+      - name: Prepare npm for OIDC trusted publishing
+        run: |
+          npm config delete //registry.npmjs.org/:_authToken --location=user 2>/dev/null || true
+          npm config delete always-auth --location=user 2>/dev/null || true
+
       - name: Create Release Pull Request or Publish to npm 🚢
         uses: changesets/action@v1
         with:
           publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ""

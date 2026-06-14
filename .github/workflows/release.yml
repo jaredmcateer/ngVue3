@@ -60,6 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test]
     permissions:
+      contents: write # required for changesets to push release branches
+      pull-requests: write # required for changesets to open Version Packages PRs
       id-token: write # required for npm OIDC trusted publishing
     steps:
       - name: Checkout 🛎
@@ -92,4 +94,4 @@ jobs:
         with:
           publish: pnpm run release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # Ensure to have this set up under GitHub secrets
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

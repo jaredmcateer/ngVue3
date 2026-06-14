@@ -1,5 +1,12 @@
 # demo
 
+## 0.1.19
+
+### Patch Changes
+
+- Updated dependencies [[`f4edece`](https://github.com/jaredmcateer/ngVue3/commit/f4edece08d7b01f192c29893ac0dc506a1e50f7b), [`2f337b0`](https://github.com/jaredmcateer/ngVue3/commit/2f337b0b08439a9921a26ddfe4633bb99f53be68)]:
+  - @jaredmcateer/ngvue3@0.5.1
+
 ## 0.1.18
 
 ### Patch Changes
